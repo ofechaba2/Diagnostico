@@ -5,7 +5,7 @@
       <h2>Datos del negocio</h2>
     </v-stepper-step>
     <v-stepper-content step="1">
-      <v-card color="grey lighten-5" class="mb-10" height="260px">
+      <v-card color="grey lighten-5" class="mb-10" height="280px">
         <br />
         <v-row>
           <v-col cols="6" md="3">
@@ -25,51 +25,42 @@
               required
             ></v-text-field>
           </v-col>
-
           <v-col cols="6" md="2">
-            <v-text-field
-              v-model="fecha"
-              label="Año de Creación"
-              required
-            ></v-text-field>
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+              cols="6"
+              md="2"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="fecha"
+                  label="Año de creacion"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="fecha"
+                :max="new Date().toISOString().substr(0, 10)"
+                min="1950-01-01"
+                @click="save"
+              ></v-date-picker>
+            </v-menu>
           </v-col>
 
-          <!-- <v-col cols="6" md="2">
-            <div>
-              <v-menu
-                ref="menu"
-                v-model="fecha"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="date"
-                    label="Año de Creación"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="date"
-                  :active-picker.sync="activePicker"
-                  :max="new Date().toISOString().substr(0, 10)"
-                  min="1950-01-01"
-                  @change="save"
-                ></v-date-picker>
-              </v-menu>
-            </div>
-          </v-col> -->
           <v-col class="flex" cols="6" sm="3">
             <v-select
               :items="formaJuridicaSel"
               v-model="formaJuridica"
               label="Forma Juridica"
-              dense
+              required
             ></v-select>
           </v-col>
           <!-- aqui empieza la segunda linea -->
@@ -78,7 +69,7 @@
               :items="departamentoSel"
               v-model="departamento"
               label="Departamento"
-              dense
+              required
             ></v-select>
             <!-- <v-text-field
               v-model="departamento"
@@ -110,7 +101,9 @@
             ></v-text-field>
           </v-col>
           <v-col cols="6" md="3">
-            <v-text-field v-model="pbx" label="PBX/Fax" required></v-text-field>
+            <v-text-field v-model="pbx" 
+            label="PBX/Fax" 
+            required></v-text-field>
           </v-col>
           <!-- aqui empieza la tercera linea -->
           <v-col class="flex" cols="6" sm="3">
@@ -118,7 +111,7 @@
               :items="sectorEconomiaSel"
               v-model="sectorEconomia"
               label="Sector de la Economía"
-              dense
+              required
             ></v-select>
           </v-col>
           <v-col class="flex" cols="6" sm="3">
@@ -126,7 +119,7 @@
               :items="cuentanInstalacionesSel"
               v-model="cuentanInstalaciones"
               label="Cuentan con las Instalaciones Propias"
-              dense
+              required
             ></v-select>
           </v-col>
           <v-col class="flex" cols="6" sm="6">
@@ -134,7 +127,7 @@
               :items="actividadEconomicaSel"
               v-model="actividadEconomica"
               label="Actividad Económica"
-              dense
+              required
             ></v-select>
           </v-col>
         </v-row>
@@ -176,7 +169,7 @@
           <v-col cols="6" md="3">
             <v-text-field
               v-model="profesion"
-              label="PBX/Fax"
+              label="Profesion"
               required
             ></v-text-field>
           </v-col>
@@ -1134,11 +1127,11 @@ export default {
 
     razonsocial: "",
     nit: "",
+    direccion: "",
     formaJuridica: "",
     sectorEconomia: "",
     cuentanInstalaciones: "",
     actividadEconomica: "",
-    direccion: "",
     departamento: "",
     ciudadOperacion: "",
     cantidadEmpleados: "",
@@ -1152,8 +1145,8 @@ export default {
     profesion: "",
 
     // activePicker: null,
-    // date: null,
     fecha: "",
+    menu: false,
   }),
   // watch: {
   //   menu(val) {
@@ -1161,55 +1154,56 @@ export default {
   //   },
   // },
   methods: {
-    //   save(date) {
-    //     this.$refs.fecha.save(date);
-    //   },
+    save(fecha) {
+      this.$refs.fecha.save(fecha);
+    },
+
     guardar() {
       if (
-        this.razonsocial.value == "" &&
-        this.nit.value == "" &&
-        this.direccion.value == ""
-        // this.fecha.value != "" &&
-        // this.formaJuridica.value != "" &&
-        // this.departamento.value != "" &&
-        // this.ciudadOperacion.value != "" &&
-        // this.cantidadEmpleados.value != "" &&
-        // this.productoEstrella.value != "" &&
-        // this.sectorEconomia.value != "" &&
-        // this.cuentanInstalaciones.value != "" &&
-        // this.actividadEconomica.value != "" &&
-        // this.nombreApellido.value != "" &&
-        // this.cargo.value != "" &&
-        // this.correo.value != "" &&
-        // this.contacto.value != "" &&
-        // this.profesion.value != ""
+        this.razonsocial != "" &&
+        this.nit != "" &&
+        this.direccion != "" &&
+        this.fecha != "" &&
+        this.formaJuridica != "" &&
+        this.departamento != "" &&
+        this.ciudadOperacion != "" &&
+        this.cantidadEmpleados != "" &&
+        this.productoEstrella != "" &&
+        this.sectorEconomia != "" &&
+        this.cuentanInstalaciones != "" &&
+        this.actividadEconomica != "" &&
+        this.nombreApellido != "" &&
+        this.cargo != "" &&
+        this.correo != "" &&
+        this.contacto != "" &&
+        this.profesion != ""
       ) {
         const persona = {
           razonsocial: this.razonsocial,
           nit: this.nit,
           direccion: this.direccion,
-          // fecha: this.fecha,
-          // formaJuridica: this.formaJuridica,
-          // departamento: this.departamento,
-          // ciudadOperacion: this.ciudadOperacion,
-          // cantidadEmpleados: this.cantidadEmpleados,
-          // productoEstrella: this.productoEstrella,
-          // sectorEconomia: this.sectorEconomia,
-          // cuentanInstalaciones: this.cuentanInstalaciones,
-          // actividadEconomica: this.actividadEconomica,
-          // nombreApellido: this.nombreApellido,
-          // cargo: this.cargo,
-          // correo: this.correo,
-          // contacto: this.contacto,
-          // profesion: this.profesion,
+          fecha: this.fecha,
+          formaJuridica: this.formaJuridica,
+          departamento: this.departamento,
+          ciudadOperacion: this.ciudadOperacion,
+          cantidadEmpleados: this.cantidadEmpleados,
+          productoEstrella: this.productoEstrella,
+          sectorEconomia: this.sectorEconomia,
+          cuentanInstalaciones: this.cuentanInstalaciones,
+          actividadEconomica: this.actividadEconomica,
+          nombreApellido: this.nombreApellido,
+          cargo: this.cargo,
+          correo: this.correo,
+          contacto: this.contacto,
+          profesion: this.profesion
         };
         this.$store.dispatch("addUsuario", persona);
       } else {
         alert("Todos los campos son requeridos");
         // (
-        //   <v-alert border="left" color="red" type="error">
-        //     Todos los campos son requeridos
-        //   </v-alert>
+        // <v-alert border="left" color="red" type="error">
+        //   Todos los campos son requeridos
+        // </v-alert>;
         // );
       }
     },
