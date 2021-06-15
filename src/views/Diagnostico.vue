@@ -71,11 +71,6 @@
               label="Departamento"
               required
             ></v-select>
-            <!-- <v-text-field
-              v-model="departamento"
-              label="Departamento"
-              required
-            ></v-text-field> -->
           </v-col>
 
           <v-col cols="6" md="2">
@@ -101,9 +96,7 @@
             ></v-text-field>
           </v-col>
           <v-col cols="6" md="3">
-            <v-text-field v-model="pbx" 
-            label="PBX/Fax" 
-            required></v-text-field>
+            <v-text-field v-model="pbx" label="PBX/Fax" required></v-text-field>
           </v-col>
           <!-- aqui empieza la tercera linea -->
           <v-col class="flex" cols="6" sm="3">
@@ -139,7 +132,7 @@
       <h2>Datos del representante o grupo de trabajo</h2>
     </v-stepper-step>
     <v-stepper-content step="2">
-      <v-card color="grey lighten-5" class="mb-12" height="560px">
+      <v-card color="grey lighten-5" class="mb-12" height="200px">
         <v-row>
           <v-col cols="6" md="3">
             <v-text-field
@@ -173,184 +166,11 @@
               required
             ></v-text-field>
           </v-col>
-          <!-- <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.nombreAp"
-              label="Nombre y Apellido"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.cargo"
-              label="Cargo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.correo"
-              label="Correo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.contacto"
-              label="Contacto"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.profesion"
-              label="PBX/Fax"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.nombreAp"
-              label="Nombre y Apellido"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.cargo"
-              label="Cargo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.correo"
-              label="Correo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.contacto"
-              label="Contacto"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.profesion"
-              label="PBX/Fax"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.nombreAp"
-              label="Nombre y Apellido"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.cargo"
-              label="Cargo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.correo"
-              label="Correo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.contacto"
-              label="Contacto"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.profesion"
-              label="PBX/Fax"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.nombreAp"
-              label="Nombre y Apellido"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.cargo"
-              label="Cargo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.correo"
-              label="Correo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.contacto"
-              label="Contacto"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.profesion"
-              label="PBX/Fax"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.nombreAp"
-              label="Nombre y Apellido"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.cargo"
-              label="Cargo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.correo"
-              label="Correo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="representante.contacto"
-              label="Contacto"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="representante.profesion"
-              label="PBX/Fax"
-              required
-            ></v-text-field>
-          </v-col> -->
         </v-row>
       </v-card>
-      <v-btn color="primary" @click="guardar"> Iniciar Diagnostico </v-btn>
+      <v-btn color="primary" @click="guardar" href="./diagostico">
+        Iniciar Diagnostico
+      </v-btn>
       <v-btn @click="e6 = 1"> Atras </v-btn>
     </v-stepper-content>
   </v-stepper>
@@ -1138,21 +958,18 @@ export default {
     productoEstrella: "",
     pbx: "",
     // segunda linea
-    nombreApellido: "",
-    cargo: "",
-    correo: "",
-    contacto: "",
-    profesion: "",
+    representante: [
+      'nombreApellido: ""',
+      'cargo: ""',
+      'correo: ""',
+      'contacto: ""',
+      'profesion: ""',
+    ],
 
-    // activePicker: null,
     fecha: "",
     menu: false,
   }),
-  // watch: {
-  //   menu(val) {
-  //     val && setTimeout(() => (this.activePicker = "YEAR"));
-  //   },
-  // },
+
   methods: {
     save(fecha) {
       this.$refs.fecha.save(fecha);
@@ -1172,11 +989,11 @@ export default {
         this.sectorEconomia != "" &&
         this.cuentanInstalaciones != "" &&
         this.actividadEconomica != "" &&
-        this.nombreApellido != "" &&
-        this.cargo != "" &&
-        this.correo != "" &&
-        this.contacto != "" &&
-        this.profesion != ""
+        this.representante.nombreApellido != "" &&
+        this.representante.cargo != "" &&
+        this.representante.correo != "" &&
+        this.representante.contacto != "" &&
+        this.representante.profesion != ""
       ) {
         const persona = {
           razonsocial: this.razonsocial,
@@ -1191,11 +1008,13 @@ export default {
           sectorEconomia: this.sectorEconomia,
           cuentanInstalaciones: this.cuentanInstalaciones,
           actividadEconomica: this.actividadEconomica,
-          nombreApellido: this.nombreApellido,
-          cargo: this.cargo,
-          correo: this.correo,
-          contacto: this.contacto,
-          profesion: this.profesion
+          representante: [
+            this.nombreApellido,
+            this.cargo,
+            this.correo,
+            this.contacto,
+            this.profesion,
+          ],
         };
         this.$store.dispatch("addUsuario", persona);
       } else {

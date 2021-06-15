@@ -19,7 +19,7 @@
           For help and collaboration with other Vuetify developers,
           <br>please join our online
           <a
-            href="./about"
+            href="./caracterizacion"
             target="_blank"
           >Formulario</a>
         </p>

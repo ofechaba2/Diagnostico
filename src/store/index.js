@@ -11,7 +11,7 @@ export default new Vuex.Store({
             //context.commit('addPersona', payload)
             console.log(context)
                 //  return new promise((resolve,reject)=>{
-            db.collection("proceso de caracterizacion")
+            db.collection("Caracterizacion")
                 .add(
                     payload
                 )
