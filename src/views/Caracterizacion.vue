@@ -116,12 +116,12 @@
             ></v-select>
           </v-col>
           <v-col class="flex" cols="6" sm="6">
-            <v-select
+            <v-autocomplete
               :items="actividadEconomicaSel"
               v-model="actividadEconomica"
               label="Actividad Económica"
               required
-            ></v-select>
+            ></v-autocomplete>
           </v-col>
         </v-row>
       </v-card>
@@ -136,32 +136,36 @@
         <v-row>
           <v-col cols="6" md="3">
             <v-text-field
-              v-model="nombreApellido"
+              v-model="representante.nombreAp"
               label="Nombre y Apellido"
               required
             ></v-text-field>
           </v-col>
           <v-divider></v-divider>
           <v-col cols="6" md="2">
-            <v-text-field v-model="cargo" label="Cargo" required></v-text-field>
+            <v-text-field
+              v-model="representante.cargo"
+              label="Cargo"
+              required
+            ></v-text-field>
           </v-col>
           <v-col cols="6" md="2">
             <v-text-field
-              v-model="correo"
+              v-model="representante.correo"
               label="Correo"
               required
             ></v-text-field>
           </v-col>
           <v-col cols="6" md="2">
             <v-text-field
-              v-model="contacto"
+              v-model="representante.contacto"
               label="Contacto"
               required
             ></v-text-field>
           </v-col>
           <v-col cols="6" md="3">
             <v-text-field
-              v-model="profesion"
+              v-model="representante.profesion"
               label="Profesion"
               required
             ></v-text-field>
@@ -343,7 +347,8 @@
           </v-col> -->
         </v-row>
       </v-card>
-      <v-btn color="primary" @click="guardar" href="./diagostico">
+      <v-btn color="primary" @click="guardar">
+        <!-- href="./diagnostico" -->
         Iniciar Diagnostico
       </v-btn>
       <v-btn @click="e6 = 1"> Atras </v-btn>
@@ -1134,71 +1139,72 @@ export default {
     pbx: "",
     // segunda linea
     representante: [
-      'nombreApellido: ""',
+      'nombreAp: ""',
       'cargo: ""',
       'correo: ""',
       'contacto: ""',
       'profesion: ""',
     ],
-
     fecha: "",
     menu: false,
   }),
-
   methods: {
     save(fecha) {
       this.$refs.fecha.save(fecha);
     },
-
     guardar() {
+
+      global.GsectorEconomia = this.sectorEconomia;
+      global.Grazonsocial = this.razonsocial;
+      global.Gnit = this.nit;
+      global.Gformajuridica = this.formaJuridica;
+      global.Gdepartamento = this.departamento;
+
       if (
-        this.razonsocial != "" &&
-        this.nit != "" &&
-        this.direccion != "" &&
-        this.fecha != "" &&
-        this.formaJuridica != "" &&
-        this.departamento != "" &&
-        this.ciudadOperacion != "" &&
-        this.cantidadEmpleados != "" &&
-        this.productoEstrella != "" &&
-        this.sectorEconomia != "" &&
-        this.cuentanInstalaciones != "" &&
-        this.actividadEconomica != "" &&
-        this.representante.nombreApellido != "" &&
-        this.representante.cargo != "" &&
-        this.representante.correo != "" &&
-        this.representante.contacto != "" &&
-        this.representante.profesion != ""
+        this.razonsocial != "" 
+        // this.nit != "" &&
+        // this.direccion != "" &&
+        // this.fecha != "" &&
+        // this.formaJuridica != "" &&
+        // this.departamento != "" &&
+        // this.ciudadOperacion != "" &&
+        // this.cantidadEmpleados != "" &&
+        // this.productoEstrella != "" &&
+        // this.sectorEconomia != "" &&
+        // this.cuentanInstalaciones != "" &&
+        // this.actividadEconomica != "" &&
+        // this.representante.nombreAp != "" &&
+        // this.representante.cargo != "" &&
+        // this.representante.correo != "" &&
+        // this.representante.contacto != "" &&
+        // this.representante.profesion != ""
       ) {
         const persona = {
-          razonsocial: this.razonsocial,
-          nit: this.nit,
-          direccion: this.direccion,
-          fecha: this.fecha,
-          formaJuridica: this.formaJuridica,
-          departamento: this.departamento,
-          ciudadOperacion: this.ciudadOperacion,
-          cantidadEmpleados: this.cantidadEmpleados,
-          productoEstrella: this.productoEstrella,
-          sectorEconomia: this.sectorEconomia,
-          cuentanInstalaciones: this.cuentanInstalaciones,
-          actividadEconomica: this.actividadEconomica,
-          representante: [
-            this.nombreApellido,
-            this.cargo,
-            this.correo,
-            this.contacto,
-            this.profesion,
-          ],
+          razonsocial: this.razonsocial
+          // nit: this.nit,
+          // direccion: this.direccion,
+          // fecha: this.fecha,
+          // formaJuridica: this.formaJuridica,
+          // departamento: this.departamento,
+          // ciudadOperacion: this.ciudadOperacion,
+          // cantidadEmpleados: this.cantidadEmpleados,
+          // productoEstrella: this.productoEstrella,
+          // sectorEconomia: this.sectorEconomia,
+          // cuentanInstalaciones: this.cuentanInstalaciones,
+          // actividadEconomica: this.actividadEconomica,
+          // representante: [
+          //   this.representante.nombreAp,
+          //   this.representante.cargo,
+          //   this.representante.correo,
+          //   this.representante.contacto,
+          //   this.representante.profesion,
+          
         };
-        this.$store.dispatch("addUsuario", persona);
+        this.$store.dispatch("addCaracterizacion", persona);
+        this.$router.push("./diagnostico");
       } else {
-        alert("Todos los campos son requeridos");
-        // (
-        // <v-alert border="left" color="red" type="error">
-        //   Todos los campos son requeridos
-        // </v-alert>;
-        // );
+        alert("Todos los campos son requeridos");  
+        
       }
     },
   },

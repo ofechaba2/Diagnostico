@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import diagnostico from '../views/Diagnostico.vue'
+import Caracterizacion from '../views/Caracterizacion.vue'
+import grafico from '../views/Grafico.vue'
+import login from '../views/login.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -12,20 +18,22 @@ const routes = [{
     {
         path: '/caracterizacion',
         name: 'Caracterizacion',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/Caracterizacion.vue')
+        component: Caracterizacion
     },
     {
         path: '/diagnostico',
-        name: 'Diagnostico',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/Diagnostico.vue')
+        name: 'diagnostico',
+        component: diagnostico
+    },
+    {
+        path: '/grafico',
+        name: 'grafico',
+        component: grafico
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: login
     }
 ]
 
@@ -33,6 +41,14 @@ const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
-})
+});
+
+// router.beforeEach((to, from, next) => {
+//     if ('/login') {
+//         next({ name: 'Login' })
+//     } else {
+//         next();
+//     }
+// });
 
 export default router

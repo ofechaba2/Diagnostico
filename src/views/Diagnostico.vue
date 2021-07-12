@@ -1,1030 +1,1793 @@
 <template>
   <v-stepper v-model="e6" vertical>
-    <h1 class="text-center">PROCESO DE CARACTERIZACION</h1>
+    <h1 class="text-center" v-if="this.valor == 'Agropecuario'">
+      DIAGNOSTICO EMPRESARIAL-SECTOR AGROPECUARIO
+    </h1>
+    <h1 class="text-center" v-if="this.valor == 'Comercio'">
+      DIAGNOSTICO EMPRESARIAL-SECTOR COMERCIO
+    </h1>
+    <h1 class="text-center" v-if="this.valor == 'Industrial'">
+      DIAGNOSTICO EMPRESARIAL-SECTOR INDUSTRIAL
+    </h1>
+    <h1 class="text-center" v-if="this.valor == 'Servicio'">
+      DIAGNOSTICO EMPRESARIAL-SECTOR SERVICIO
+    </h1>
     <v-stepper-step :complete="e6 > 1" step="1">
-      <h2>Datos del negocio</h2>
+      <h2>Estrategia</h2>
     </v-stepper-step>
+
     <v-stepper-content step="1">
-      <v-card color="grey lighten-5" class="mb-10" height="280px">
-        <br />
-        <v-row>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="razonsocial"
-              label="Razón Social"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field v-model="nit" label="NIT" required></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="direccion"
-              label="Dirección"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-              min-width="auto"
-              cols="6"
-              md="2"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="fecha"
-                  label="Año de creacion"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="fecha"
-                :max="new Date().toISOString().substr(0, 10)"
-                min="1950-01-01"
-                @click="save"
-              ></v-date-picker>
-            </v-menu>
-          </v-col>
-
-          <v-col class="flex" cols="6" sm="3">
-            <v-select
-              :items="formaJuridicaSel"
-              v-model="formaJuridica"
-              label="Forma Juridica"
-              required
-            ></v-select>
-          </v-col>
-          <!-- aqui empieza la segunda linea -->
-          <v-col cols="6" md="3">
-            <v-select
-              :items="departamentoSel"
-              v-model="departamento"
-              label="Departamento"
-              required
-            ></v-select>
-          </v-col>
-
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="ciudadOperacion"
-              label="Ciudad(es) de Operación"
-              required
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="cantidadEmpleados"
-              label="Cantidad de Empleados"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="productoEstrella"
-              label="Producto Estrella"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field v-model="pbx" label="PBX/Fax" required></v-text-field>
-          </v-col>
-          <!-- aqui empieza la tercera linea -->
-          <v-col class="flex" cols="6" sm="3">
-            <v-select
-              :items="sectorEconomiaSel"
-              v-model="sectorEconomia"
-              label="Sector de la Economía"
-              required
-            ></v-select>
-          </v-col>
-          <v-col class="flex" cols="6" sm="3">
-            <v-select
-              :items="cuentanInstalacionesSel"
-              v-model="cuentanInstalaciones"
-              label="Cuentan con las Instalaciones Propias"
-              required
-            ></v-select>
-          </v-col>
-          <v-col class="flex" cols="6" sm="6">
-            <v-select
-              :items="actividadEconomicaSel"
-              v-model="actividadEconomica"
-              label="Actividad Económica"
-              required
-            ></v-select>
-          </v-col>
-        </v-row>
+      <v-card color="grey lighten-5" class="mb-12" height="540px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">1.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con un analísis de contexto organizacional?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="estrategia.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">1.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Tiene establecido y documentado los objetivos
+                    organizacionales?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="estrategia.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">1.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Tiene establecida una misión y la comunica periodicamente?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="estrategia.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">1.4</td>
+                  <td></td>
+                  <td>
+                    ¿Tiene establecida una visión y la recuerda periódicamente?
+                  </td>
+                  <th colspan="150"></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="estrategia.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">1.5</td>
+                  <td></td>
+                  <td colspan="150">¿Cuenta con una estrategia de negocio?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="estrategia.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">1.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Sabe que hace mejor que la competencia?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="estrategia.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">1.7</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Sabe que caracteristica(s) diferenciadora(s) tiene(n) su(s)
+                    producto(s)?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="estrategia.n7"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
       </v-card>
-      <v-btn color="primary" @click="e6 = 2"> Continuar </v-btn>
-      <v-btn href="./"> Cancelar </v-btn>
+
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 11"> Continue </v-btn>
+        <v-btn text col-3> Cancel </v-btn>
+      </div>
     </v-stepper-content>
+
     <v-stepper-step :complete="e6 > 2" step="2">
-      <h2>Datos del representante o grupo de trabajo</h2>
+      <h2>Capital Humano</h2>
     </v-stepper-step>
+
     <v-stepper-content step="2">
-      <v-card color="grey lighten-5" class="mb-12" height="200px">
-        <v-row>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="nombreApellido"
-              label="Nombre y Apellido"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-divider></v-divider>
-          <v-col cols="6" md="2">
-            <v-text-field v-model="cargo" label="Cargo" required></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="correo"
-              label="Correo"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="2">
-            <v-text-field
-              v-model="contacto"
-              label="Contacto"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col cols="6" md="3">
-            <v-text-field
-              v-model="profesion"
-              label="Profesion"
-              required
-            ></v-text-field>
-          </v-col>
-        </v-row>
+      <v-card color="grey lighten-5" class="mb-12" height="470px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">2.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Planea la capacidad del recurso humano para la producción?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="capitalHumano.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">2.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Realiza actividades de formación y educación o patrocina a
+                    sus empleados para realizarlas?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="capitalHumano.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">2.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Los empleados tienen asignadas sus funciones y tareas de
+                    forma documentada?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="capitalHumano.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">2.4</td>
+                  <td></td>
+                  <td>
+                    ¿Motiva sus empleados a través de incentivos o
+                    reconocimientos?
+                  </td>
+                  <th colspan="150"></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="capitalHumano.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">2.5</td>
+                  <td></td>
+                  <td colspan="150">¿Evalua el desempeño del personal?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="capitalHumano.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">2.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Asegura los casos de éxito o los conocimientos de sus
+                    empleados?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="capitalHumano.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
       </v-card>
-      <v-btn color="primary" @click="guardar" href="./diagostico">
-        Iniciar Diagnostico
-      </v-btn>
-      <v-btn @click="e6 = 1"> Atras </v-btn>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 3"> Continue </v-btn>
+        <v-btn @click="e6 = 1"> Cancel </v-btn>
+      </div>
+    </v-stepper-content>
+
+    <v-stepper-step :complete="e6 > 3" step="3">
+      <h2>Mercadotecnia</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="3">
+      <v-card color="grey lighten-5" class="mb-12" height="670px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="750px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">3.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Tiene segmentado o clasificado a sus clientes?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Tiene identificada las caracteristicas de los clientes que
+                    le dejan la mayor parte de sus ingresos?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Reconoce las principales necesidades de sus clientes?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.4</td>
+                  <td></td>
+                  <td>¿Conoce a sus competidores directos e indirectos?</td>
+                  <th colspan="150"></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.5</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Evalua a la competencia para tomar decisiones en cuanto a
+                    su servicio o producto?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con estrategias o programas de promoción?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.7</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Se mide el impacto o se analiza el costo-beneficio cuando
+                    se hace un descuento o promoción?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n7"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.8</td>
+                  <td></td>
+                  <td colspan="150">¿Evalua la satisfacción del cliente?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n8"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">3.9</td>
+                  <td></td>
+                  <td colspan="150">¿Cuenta con un servicio post-venta?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="mercadotecnia.n9"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 4"> Continuar </v-btn>
+        <v-btn @click="e6 = 2"> Atras </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 4" step="4">
+      <h2>Ventas</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="4">
+      <v-card color="grey lighten-5" class="mb-12" height="460px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">4.1</td>
+                  <td></td>
+                  <td colspan="150">¿Cuenta con una política de ventas?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="ventas.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">4.2</td>
+                  <td></td>
+                  <td colspan="150">¿Tiene un objetivo de ventas?</td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="ventas.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">4.3</td>
+                  <td></td>
+                  <td colspan="150">¿Hace una planificación de las ventas?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="ventas.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">4.4</td>
+                  <td></td>
+                  <td>¿Evalua el nivel de sus ventas periodicamente?</td>
+                  <th colspan="150"></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="ventas.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">4.5</td>
+                  <td></td>
+                  <td colspan="150">¿Cuenta con una estrategia de negocio?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="ventas.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">4.6</td>
+                  <td></td>
+                  <td colspan="150">¿Conoce el costo de vender un producto?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="ventas.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 5"> Continuar </v-btn>
+        <v-btn @click="e6 = 3"> Atras </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 5" step="5">
+      <h2>Compras</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="5">
+      <v-card color="grey lighten-5" class="mb-12" height="470px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">5.1</td>
+                  <td></td>
+                  <td colspan="150">¿Cuenta con una política de compras?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="compras.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">5.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Compara y evalua a diferentes proveedores antes de hacer
+                    sus compras?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="compras.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">5.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce o audita a su proveedor para conocer la calidad de
+                    sus productos?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="compras.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">5.4</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Registra sus insumos en un inventario cada vez que los
+                    recibe?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="compras.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="text-center">5.5</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Tiene clasificado o categorizado sus insumos?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="compras.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">5.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce el volumen de compra adecuado para tener poco
+                    inventario de materiales?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="compras.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 6"> Continuar </v-btn>
+        <v-btn @click="e6 = 4"> Atras </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 6" step="6">
+      <h2>Finanzas</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="6">
+      <v-card color="grey lighten-5" class="mb-12" height="540px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">6.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce el punto de equilibro financiero?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con un presupuesto financiero (Flujo de fondos
+                    proyectados)
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Diseña estrategias o realiza acciones para la optimización
+                    de recursos?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.4</td>
+                  <td></td>
+                  <td>¿Cuenta con estrategias de financiamiento?</td>
+                  <th colspan="150"></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.5</td>
+                  <td></td>
+                  <td colspan="150">¿Cuenta con estrategias de inversión?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce los costos directos de su(s) servicio(s)?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.7</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce los costos indirectos de su(s) servicio(s)?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n7"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.8</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce cual es su nivel de endeudamiento?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n8"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.9</td>
+                  <td></td>
+                  <td colspan="150">¿Conoce como esta su flujo de caja?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n9"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">6.10</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce como esta su rotación de cartera?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="finanzas.n10"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 7"> Continue </v-btn>
+        <v-btn @click="e6 = 5"> Cancel </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 7" step="7">
+      <h2>Produccion</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="7">
+      <v-card color="grey lighten-5" class="mb-12" height="540px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">7.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Calcula cual es su capacidad de producción periodicamente?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="produccion.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">7.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Calcula los tiempo que le lleva producir un producto?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="produccion.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">7.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Tiene identificado que proceso o actividad es el cuello de
+                    botella en la producción?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="produccion.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">7.4</td>
+                  <td></td>
+                  <td>¿Calcula el tiempo de hora-hombre en la producción?</td>
+                  <th colspan="150"></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="produccion.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">7.5</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Calcula el tiempo de hora-maquina en la producción?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="produccion.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">7.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce la cantidad máxima de bienes o servicios que puede
+                    producir?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="produccion.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">7.7</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce el costo que le lleva fabricar un producto?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="produccion.n7"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 8"> Continuar </v-btn>
+        <v-btn @click="e6 = 6"> Atras </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 8" step="8">
+      <h2>Logística</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="8">
+      <v-card color="grey lighten-5" class="mb-12" height="400px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">8.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Conoce los productos, materiales o materias primas
+                    recibidas de forma puntual por parte de los proveedores al
+                    igual que la calidad de lo recibido?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="logistica.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">8.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Calcula periodicamente o en tiempo real el valor economico
+                    del inventario?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="logistica.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">8.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Considera que cuenta con una adecuada distribución en
+                    planta?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="logistica.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">8.4</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Calcula el costo de almacenamiento del producto terminado?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="logistica.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="text-center">8.5</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Calcula el costo de distribución o entrega de productos?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="logistica.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 9"> Continuar </v-btn>
+        <v-btn @click="e6 = 7"> Atras </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 9" step="9">
+      <h2>Tecnología</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="9">
+      <v-card color="grey lighten-5" class="mb-12" height="340px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">9.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Considera que cuenta con equipos y maquinas necesarias para
+                    la generación de valor a los clientes?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="tecnologia.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">9.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Tiene una base de datos con la información de las partes
+                    interesadas o la crea en el desarrollo de la actividad
+                    economica?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="tecnologia.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">9.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con un Sistema de Información gerencial "ERP"?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="tecnologia.n3"
+                      label="Sector de la Economía"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">9.4</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con tecnología Cloud Computing para almacenar o
+                    gestionar información en la nube?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="tecnologia.n4"
+                      label="Sector de la Economía"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 10"> Continuar </v-btn>
+        <v-btn @click="e6 = 8"> Atras </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 10" step="10">
+      <h2>Control y medición</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="10">
+      <v-card color="grey lighten-5" class="mb-12" height="470px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">10.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con Indicadores clave de desempeño?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="controlymedicion.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">10.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Mide la productividad de su organización?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="controlymedicion.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">10.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con procesos de inpección y control de calidad?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="controlymedicion.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">10.4</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Mide la rentabilidad de la organización?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="controlymedicion.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">10.5</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Mide la productividad del Capital de Trabajo Neto?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="controlymedicion.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">10.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿En caso de tener un prestamo, mide el impacto de la carga
+                    financiera?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="controlymedicion.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="e6 = 11"> Continuar </v-btn>
+        <v-btn @click="e6 = 9"> Atras </v-btn>
+      </div>
+    </v-stepper-content>
+    <v-stepper-step :complete="e6 > 11" step="11">
+      <h2>Comunicación</h2>
+    </v-stepper-step>
+
+    <v-stepper-content step="11">
+      <v-card color="grey lighten-5" class="mb-12" height="540px">
+        <div>
+          <v-simple-table
+            color="grey lighten-5"
+            class="mb-1"
+            height="550px"
+            fixed-header
+          >
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">SISTEMA</th>
+                  <th></th>
+                  <th class="text-center" colspan="150">EVALUACIÓN</th>
+                  <th></th>
+                  <th class="text-center">SELECCIONAR RESPUESTA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">11.1</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con canales de comunicación establecidos y
+                    organizados?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n1"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">11.2</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con los suficientes medios y canales de información
+                    para estar enterado de lo que sucede en el contexto interno
+                    de la organización?
+                  </td>
+                  <td></td>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n2"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">11.3</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Cuenta con los suficientes medios y canales de información
+                    para estar enterado de lo que sucede en el contexto externo
+                    de la organización?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n3"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">11.4</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Considera que se canaliza la información que la
+                    organización requiere?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n4"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">11.5</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Se considera pertinente y oportuna la entrega de
+                    información a las partes interesadas?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n5"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">11.6</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Pertenece a algun grupo empresarial o Holding?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n6"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">11.7</td>
+                  <td></td>
+                  <td colspan="150">
+                    ¿Forma parte de alguna Cámara de Comercio?
+                  </td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n7"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center">11.8</td>
+                  <td></td>
+                  <td colspan="150">¿Pertenece a algun Clúster?</td>
+                  <th></th>
+                  <td>
+                    <v-select
+                      :items="seleccion"
+                      v-model="comunicacion.n8"
+                      label="Seleccione una opcion"
+                      required
+                    ></v-select>
+                  </td>
+                </tr>
+                <tr></tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </div>
+      </v-card>
+      <div style="text-align: right">
+        <v-btn color="primary" @click="guardar"> Ver Resultados </v-btn>
+        <v-btn @click="e6 = 10"> Atras </v-btn>
+      </div>
     </v-stepper-content>
   </v-stepper>
 </template>
 
 
+
 <script>
 export default {
   data: () => ({
+    valor: global.GsectorEconomia,
+
     e6: 1,
-    formaJuridicaSel: [
-      "Cooperativa",
-      "Empresa Asociativa de Trabajo",
-      "Persona Natural Comerciante",
-      "S.A",
-      "S.A.S",
-      "Sociedad Colectiva",
-      "Sociedad Comandita por Acciones",
-      "Sociedad Comandita Simple",
-      "Sociedad Limitada",
-      "Sociedad Agrarias de Transformación",
-      "Unipersonal",
-    ],
-    sectorEconomiaSel: ["Agropecuario", "Comercio", "Industrial", "Servicio"],
-    departamentoSel: [
-      "Amazonas",
-      "Antioquía",
-      "Arauca",
-      "Atlántico",
-      "Bolívar",
-      "Boyacá",
-      "Caldas",
-      "Caquetá",
-      "Casanare",
-      "Cauca",
-      "Cesar",
-      "Chocó",
-      "Córdoba",
-      "Cundinamarca",
-      "Guainía",
-      "Guaviare",
-      "Huila",
-      "La Guajira",
-      "Magdalena",
-      "Meta",
-      "Nariño",
-      "Norte de Santander",
-      "Putumayo",
-      "Quindío",
-      "Risaralda",
-      "San Andrés y Providencia",
-      "Santander",
-      "Sucre",
-      "Tolima",
-      "Valle del Cauca",
-      "Vaupés",
-      "Vichada",
-    ],
-    cuentanInstalacionesSel: ["Si", "No"],
-    actividadEconomicaSel: [
-      "01 Agricultura, ganadería, caza y actividades de servicios conexas",
-      "01 Agricultura, ganadería, caza y actividades de servicios conexas",
-      "011 Cultivos agrícolas transitorios",
-      "0111 Cultivo de cereales (excepto arroz), legumbres y semillas oleaginosas",
-      "0112 Cultivo de arroz",
-      "0113 Cultivo de hortalizas, raíces y tubérculos",
-      "0114 Cultivo de tabaco",
-      "0115 Cultivo de plantas textiles",
-      "0119 Otros cultivos transitorios n.c.p.",
-      "012 Cultivos agrícolas permanentes",
-      "0121 Cultivo de frutas tropicales y subtropicales",
-      "0122 Cultivo de plátano y banano",
-      "0123 Cultivo de café",
-      "0124 Cultivo de caña de azúcar",
-      "0125 Cultivo de flor de corte",
-      "0126 Cultivo de palma para aceite (palma africana) y otros frutos oleaginosos",
-      "0127 Cultivo de plantas con las que se preparan bebidas",
-      "0128 Cultivo de especias y de plantas aromáticas y medicinales",
-      "0129 Otros cultivos permanentes n.c.p.",
-      "013 0130 Propagación de plantas (actividades de los viveros, excepto viveros forestales)",
-      "014 Ganadería",
-      "0141 Cría de ganado bovino y bufalino",
-      "0142 Cría de caballos y otros equinos",
-      "0143 Cría de ovejas y cabras",
-      "0144 Cría de ganado porcino",
-      "0145 Cría de aves de corral",
-      "0149 Cría de otros animales n.c.p.",
-      "015 0150 Explotación mixta (agrícola y pecuaria)",
-      "016 Actividades de apoyo a la agricultura y la ganadería, y actividades posteriores a la cosecha",
-      "0161 Actividades de apoyo a la agricultura",
-      "0162 Actividades de apoyo a la ganadería",
-      "0163 Actividades posteriores a la cosecha",
-      "0164 Tratamiento de semillas para propagación",
-      "017 0170 Caza ordinaria y mediante trampas y actividades de servicios conexas",
-      "02 Silvicultura y extracción de madera",
-      "021 0210 Silvicultura y otras actividades forestales",
-      "022 0220 Extracción de madera",
-      "023 0230 Recolección de productos forestales diferentes a la madera",
-      "024 0240 Servicios de apoyo a la silvicultura",
-      "03 Pesca y acuicultura",
-      "031 Pesca",
-      "0311 Pesca marítima",
-      "0312 Pesca de agua dulce",
-      "032 Acuicultura",
-      "0321 Acuicultura marítima",
-      "0322 Acuicultura de agua dulce",
-      "SECCIÓN B EXPLOTACIÓN DE MINAS Y CANTERAS",
-      "05 Extracción de carbón de piedra y lignito",
-      "051 0510 Extracción de hulla (carbón de piedra)",
-      "052 0520 Extracción de carbón lignito",
-      "06 Extracción de petróleo crudo y gas natural",
-      "061 0610 Extracción de petróleo crudo",
-      "062 0620 Extracción de gas natural",
-      "07 Extracción de minerales metalíferos",
-      "071 0710 Extracción de minerales de hierro",
-      "072 Extracción de minerales metalíferos no ferrosos",
-      "0721 Extracción de minerales de uranio y de torio",
-      "0722 Extracción de oro y otros metales preciosos",
-      "0723 Extracción de minerales de níquel",
-      "0729 Extracción de otros minerales metalíferos no ferrosos n.c.p.",
-      "08 Extracción de otras minas y canteras",
-      "081 Extracción de piedra, arena, arcillas, cal, yeso, caolín, bentonitas y similares",
-      "0811 Extracción de piedra, arena, arcillas comunes, yeso y anhidrita",
-      "0812 Extracción de arcillas de uso industrial, caliza, caolín y bentonitas",
-      "082 0820 Extracción de esmeraldas, piedras preciosas y semipreciosas",
-      "089 Extracción de otros minerales no metálicos n.c.p.",
-      "0891 Extracción de minerales para la fabricación de abonos y productos químicos",
-      "0892 Extracción de halita (sal)",
-      "0899 Extracción de otros minerales no metálicos n.c.p.",
-      "09 Actividades de servicios de apoyo para la explotación de minas",
-      "091 0910 Actividades de apoyo para la extracción de petróleo y de gas natural",
-      "099 0990 Actividades de apoyo para otras actividades de explotación de minas y canteras",
-      "SECCIÓN C INDUSTRIAS MANUFACTURERAS",
-      "10 Elaboración de productos alimenticios",
-      "101 Procesamiento y conservación de carne, pescado, crustáceos y moluscos",
-      "1011 Procesamiento y conservación de carne y productos cárnicos",
-      "1012 Procesamiento y conservación de pescados, crustáceos y moluscos",
-      "102 1020 Procesamiento y conservación de frutas, legumbres, hortalizas y tubérculos",
-      "103 1030 Elaboración de aceites y grasas de origen vegetal y animal",
-      "104 1040 Elaboración de productos lácteos",
-      "105 Elaboración de productos de molinería, almidones y productos derivados del almidón",
-      "1051 Elaboración de productos de molinería",
-      "1052 Elaboración de almidones y productos derivados del almidón",
-      "106 Elaboración de productos de café",
-      "1061 Trilla de café",
-      "1062 Descafeinado, tostión y molienda del café",
-      "1063 Otros derivados del café",
-      "107 Elaboración de azúcar y panela",
-      "1071 Elaboración y refinación de azúcar",
-      "1072 Elaboración de panela",
-      "108 Elaboración de otros productos alimenticios",
-      "1081 Elaboración de productos de panadería",
-      "1082 Elaboración de cacao, chocolate y productos de confitería",
-      "1083 Elaboración de macarrones, fideos, alcuzcuz y productos farináceos similares",
-      "1084 Elaboración de comidas y platos preparados",
-      "1089 Elaboración de otros productos alimenticios n.c.p.",
-      "109 1090 Elaboración de alimentos preparados para animales",
-      "11 Elaboración de bebidas",
-      "110 Elaboración de bebidas",
-      "1101 Destilación, rectificación y mezcla de bebidas alcohólicas",
-      "1102 Elaboración de bebidas fermentadas no destiladas",
-      "1103 Producción de malta, elaboración de cervezas y otras bebidas malteadas",
-      "1104 Elaboración de bebidas no alcohólicas, producción de aguas minerales y de otras aguas embotelladas",
-      "12 Elaboración de productos de tabaco",
-      "120 1200 Elaboración de productos de tabaco",
-      "13 Fabricación de productos textiles",
-      "131 Preparación, hilatura, tejeduría y acabado de productos textiles",
-      "1311 Preparación e hilatura de fibras textiles",
-      "1312 Tejeduría de productos textiles",
-      "1313 Acabado de productos textiles",
-      "139 Fabricación de otros productos textiles",
-      "1391 Fabricación de tejidos de punto y ganchillo",
-      "1392 Confección de artículos con materiales textiles, excepto prendas de vestir",
-      "1393 Fabricación de tapetes y alfombras para pisos",
-      "1394 Fabricación de cuerdas, cordeles, cables, bramantes y redes",
-      "1399 Fabricación de otros artículos textiles n.c.p.",
-      "14 Confección de prendas de vestir",
-      "141 1410 Confección de prendas de vestir, excepto prendas de piel",
-      "142 1420 Fabricación de artículos de piel",
-      "143 1430 Fabricación de artículos de punto y ganchillo",
-      "15 Curtido y recurtido de cueros; fabricación de calzado; fabricación de artículos de viaje, maletas, bolsos de mano y artículos similares, y fabricación de artículos de talabartería y guarnicionería; adobo y teñido de pieles",
-      "151 Curtido y recurtido de cueros; fabricación de artículos de viaje, bolsos de mano y artículos similares, y fabricación de artículos de talabartería y guarnicionería, adobo y teñido de pieles",
-      "1511 Curtido y recurtido de cueros; recurtido y teñido de pieles",
-      "1512 Fabricación de artículos de viaje, bolsos de mano y artículos similares elaborados en cuero, y fabricación de artículos de talabartería y guarnicionería",
-      "1513 Fabricación de artículos de viaje, bolsos de mano y artículos similares; artículos de talabartería y guarnicionería elaborados en otros materiales",
-      "152 Fabricación de calzado",
-      "1521 Fabricación de calzado de cuero y piel, con cualquier tipo de suela",
-      "1522 Fabricación de otros tipos de calzado, excepto calzado de cuero y piel",
-      "1523 Fabricación de partes del calzado",
-      "16 Transformación de la madera y fabricación de productos de madera y de corcho, excepto muebles; fabricación de artículos de cestería y espartería",
-      "161 1610 Aserrado, acepillado e impregnación de la madera",
-      "162 1620 Fabricación de hojas de madera para enchapado; fabricación de tableros contrachapados, tableros laminados, tableros de partículas y otros tableros y paneles",
-      "163 1630 Fabricación de partes y piezas de madera, de carpintería y ebanistería para la construcción",
-      "164 1640 Fabricación de recipientes de madera",
-      "169 1690 Fabricación de otros productos de madera; fabricación de artículos de corcho, cestería y espartería",
-      "17 Fabricación de papel, cartón y productos de papel y cartón",
-      "170 Fabricación de papel, cartón y productos de papel y cartón",
-      "1701 Fabricación de pulpas (pastas) celulósicas; papel y cartón",
-      "1702 Fabricación de papel y cartón ondulado (corrugado); fabricación de envases, empaques y de embalajes de papel y cartón.",
-      "1709 Fabricación de otros artículos de papel y cartón",
-      "18 Actividades de impresión y de producción de copias a partir de grabaciones originales",
-      "181 Actividades de impresión y actividades de servicios relacionados con la impresión",
-      "1811 Actividades de impresión",
-      "1812 Actividades de servicios relacionados con la impresión",
-      "182 1820 Producción de copias a partir de grabaciones originales",
-      "19 Coquización, fabricación de productos de la refinación del petróleo y actividad de mezcla de combustibles",
-      "191 1910 Fabricación de productos de hornos de coque",
-      "192 Fabricación de productos de la refinación del petróleo",
-      "1921 Fabricación de productos de la refinación del petróleo",
-      "1922 Actividad de mezcla de combustibles",
-      "20 Fabricación de sustancias y productos químicos",
-      "201 Fabricación de sustancias químicas básicas, abonos y compuestos inorgánicos nitrogenados, plásticos y caucho sintético en formas primarias",
-      "2011 Fabricación de sustancias y productos químicos básicos",
-      "2012 Fabricación de abonos y compuestos inorgánicos nitrogenados",
-      "2013 Fabricación de plásticos en formas primarias",
-      "2014 Fabricación de caucho sintético en formas primarias",
-      "202 Fabricación de otros productos químicos",
-      "2021 Fabricación de plaguicidas y otros productos químicos de uso agropecuario",
-      "2022 Fabricación de pinturas, barnices y revestimientos similares, tintas para impresión y masillas",
-      "2023 Fabricación de jabones y detergentes, preparados para limpiar y pulir; perfumes y preparados de tocador",
-      "2029 Fabricación de otros productos químicos n.c.p.",
-      "203 2030 Fabricación de fibras sintéticas y artificiales",
-      "21 Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico",
-      "210 2100 Fabricación de productos farmacéuticos, sustancias químicas medicinales y productos botánicos de uso farmacéutico",
-      "22 Fabricación de productos de caucho y de plástico",
-      "221 Fabricación de productos de caucho",
-      "2211 Fabricación de llantas y neumáticos de caucho",
-      "2212 Reencauche de llantas usadas",
-      "2219 Fabricación de formas básicas de caucho y otros productos de caucho n.c.p.",
-      "222 Fabricación de productos de plástico",
-      "2221 Fabricación de formas básicas de plástico",
-      "2229 Fabricación de artículos de plástico n.c.p.",
-      "23 Fabricación de otros productos minerales no metálicos",
-      "231 2310 Fabricación de vidrio y productos de vidrio",
-      "239 Fabricación de productos minerales no metálicos n.c.p.",
-      "2391 Fabricación de productos refractarios",
-      "2392 Fabricación de materiales de arcilla para la construcción",
-      "2393 Fabricación de otros productos de cerámica y porcelana",
-      "2394 Fabricación de cemento, cal y yeso",
-      "2395 Fabricación de artículos de hormigón, cemento y yeso",
-      "2396 Corte, tallado y acabado de la piedra",
-      "2399 Fabricación de otros productos minerales no metálicos n.c.p.",
-      "24 Fabricación de productos metalúrgicos básicos",
-      "241 2410 Industrias básicas de hierro y de acero",
-      "242 Industrias básicas de metales preciosos y de metales no ferrosos",
-      "2421 Industrias básicas de metales preciosos",
-      "2429 Industrias básicas de otros metales no ferrosos",
-      "243 Fundición de metales",
-      "2431 Fundición de hierro y de acero",
-      "2432 Fundición de metales no ferrosos",
-      "25 Fabricación de productos elaborados de metal, excepto maquinaria y equipo",
-      "251 Fabricación de productos metálicos para uso estructural, tanques, depósitos y generadores de vapor",
-      "2511 Fabricación de productos metálicos para uso estructural",
-      "2512 Fabricación de tanques, depósitos y recipientes de metal, excepto los utilizados para el envase o transporte de mercancías",
-      "2513 Fabricación de generadores de vapor, excepto calderas de agua caliente para calefacción central",
-      "252 2520 Fabricación de armas y municiones",
-      "259 Fabricación de otros productos elaborados de metal y actividades de servicios relacionadas con el trabajo de metales",
-      "2591 Forja, prensado, estampado y laminado de metal; pulvimetalurgia",
-      "2592 Tratamiento y revestimiento de metales; mecanizado",
-      "2593 Fabricación de artículos de cuchillería, herramientas de mano y artículos de ferretería",
-      "2599 Fabricación de otros productos elaborados de metal n.c.p.",
-      "26 Fabricación de productos informáticos, electrónicos y ópticos",
-      "261 2610 Fabricación de componentes y tableros electrónicos",
-      "262 2620 Fabricación de computadoras y de equipo periférico",
-      "263 2630 Fabricación de equipos de comunicación",
-      "264 2640 Fabricación de aparatos electrónicos de consumo",
-      "265 Fabricación de equipo de medición, prueba, navegación y control; fabricación de relojes",
-      "2651 Fabricación de equipo de medición, prueba, navegación y control",
-      "2652 Fabricación de relojes",
-      "266 2660 Fabricación de equipo de irradiación y equipo electrónico de uso médico y terapéutico",
-      "267 2670 Fabricación de instrumentos ópticos y equipo fotográfico",
-      "268 2680 Fabricación de medios magnéticos y ópticos para almacenamiento de datos",
-      "27 Fabricación de aparatos y equipo eléctrico",
-      "271 Fabricación de motores, generadores y transformadores eléctricos y de aparatos de distribución y control de la energía eléctrica",
-      "2711 Fabricación de motores, generadores y transformadores eléctricos",
-      "2712 Fabricación de aparatos de distribución y control de la energía eléctrica",
-      "272 2720 Fabricación de pilas, baterías y acumuladores eléctricos",
-      "273 Fabricación de hilos y cables aislados y sus dispositivos",
-      "2731 Fabricación de hilos y cables eléctricos y de fibra óptica",
-      "2732 Fabricación de dispositivos de cableado",
-      "274 2740 Fabricación de equipos eléctricos de iluminación",
-      "275 2750 Fabricación de aparatos de uso doméstico",
-      "279 2790 Fabricación de otros tipos de equipo eléctrico n.c.p.",
-      "28 Fabricación de maquinaria y equipo n.c.p.",
-      "281 Fabricación de maquinaria y equipo de uso general",
-      "2811 Fabricación de motores, turbinas, y partes para motores de combustión interna",
-      "2812 Fabricación de equipos de potencia hidráulica y neumática",
-      "2813 Fabricación de otras bombas, compresores, grifos y válvulas",
-      "2814 Fabricación de cojinetes, engranajes, trenes de engranajes y piezas de transmisión",
-      "2815 Fabricación de hornos, hogares y quemadores industriales",
-      "2816 Fabricación de equipo de elevación y manipulación",
-      "2817 Fabricación de maquinaria y equipo de oficina (excepto computadoras y equipo periférico)",
-      "2818 Fabricación de herramientas manuales con motor",
-      "2819 Fabricación de otros tipos de maquinaria y equipo de uso general n.c.p.",
-      "282 Fabricación de maquinaria y equipo de uso especial",
-      "2821 Fabricación de maquinaria agropecuaria y forestal",
-      "2822 Fabricación de máquinas formadoras de metal y de máquinas herramienta",
-      "2823 Fabricación de maquinaria para la metalurgia",
-      "2824 Fabricación de maquinaria para explotación de minas y canteras y para obras de construcción",
-      "2825 Fabricación de maquinaria para la elaboración de alimentos, bebidas y tabaco",
-      "2826 Fabricación de maquinaria para la elaboración de productos textiles, prendas de vestir y cueros",
-      "2829 Fabricación de otros tipos de maquinaria y equipo de uso especial n.c.p.",
-      "29 Fabricación de vehículos automotores, remolques y semirremolques",
-      "291 2910 Fabricación de vehículos automotores y sus motores",
-      "292 2920 Fabricación de carrocerías para vehículos automotores; fabricación de remolques y semirremolques",
-      "293 2930 Fabricación de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores",
-      "30 Fabricación de otros tipos de equipo de transporte",
-      "301 Construcción de barcos y otras embarcaciones",
-      "3011 Construcción de barcos y de estructuras flotantes",
-      "3012 Construcción de embarcaciones de recreo y deporte",
-      "302 3020 Fabricación de locomotoras y de material rodante para ferrocarriles",
-      "303 3030 Fabricación de aeronaves, naves espaciales y de maquinaria conexa",
-      "304 3040 Fabricación de vehículos militares de combate",
-      "309 Fabricación de otros tipos de equipo de transporte n.c.p.",
-      "3091 Fabricación de motocicletas",
-      "3092 Fabricación de bicicletas y de sillas de ruedas para personas con discapacidad",
-      "3099 Fabricación de otros tipos de equipo de transporte n.c.p.",
-      "31 Fabricación de muebles, colchones y somieres",
-      "311 3110 Fabricación de muebles",
-      "312 3120 Fabricación de colchones y somieres",
-      "32 Otras industrias manufactureras",
-      "321 3210 Fabricación de joyas, bisutería y artículos conexos",
-      "322 3220 Fabricación de instrumentos musicales",
-      "323 3230 Fabricación de artículos y equipo para la práctica del deporte",
-      "324 3240 Fabricación de juegos, juguetes y rompecabezas",
-      "325 3250 Fabricación de instrumentos, aparatos y materiales médicos y odontológicos (incluido mobiliario)",
-      "329 3290 Otras industrias manufactureras n.c.p.",
-      "33 Instalación, mantenimiento y reparación especializado de maquinaria y equipo",
-      "331 Mantenimiento y reparación especializado de productos elaborados en metal y de maquinaria y equipo",
-      "3311 Mantenimiento y reparación especializado de productos elaborados en metal",
-      "3312 Mantenimiento y reparación especializado de maquinaria y equipo",
-      "3313 Mantenimiento y reparación especializado de equipo electrónico y óptico",
-      "3314 Mantenimiento y reparación especializado de equipo eléctrico",
-      "3315 Mantenimiento y reparación especializado de equipo de transporte, excepto los vehículos automotores, motocicletas y bicicletas",
-      "3319 Mantenimiento y reparación de otros tipos de equipos y sus componentes n.c.p.",
-      "332 3320 Instalación especializada de maquinaria y equipo industrial",
-      "SECCIÓN D SUMINISTRO DE ELECTRICIDAD, GAS, VAPOR Y AIRE ACONDICIONADO",
-      "35 Suministro de electricidad, gas, vapor y aire acondicionado",
-      "351 Generación, transmisión, distribución y comercialización de energía eléctrica",
-      "3511 Generación de energía eléctrica",
-      "3512 Transmisión de energía eléctrica",
-      "3513 Distribución de energía eléctrica",
-      "3514 Comercialización de energía eléctrica",
-      "352 3520 Producción de gas; distribución de combustibles gaseosos por tuberías",
-      "353 3530 Suministro de vapor y aire acondicionado",
-      "SECCIÓN E DISTRIBUCIÓN DE AGUA; EVACUACIÓN Y TRATAMIENTO DE AGUAS RESIDUALES, GESTIÓN DE DESECHOS Y ACTIVIDADES DE SANEAMIENTO AMBIENTAL",
-      "36 Captación, tratamiento y distribución de agua",
-      "360 3600 Captación, tratamiento y distribución de agua",
-      "37 Evacuación y tratamiento de aguas residuales",
-      "38 Recolección, tratamiento y disposición de desechos, recuperación de materiales",
-      "370 3700 Evacuación y tratamiento de aguas residuales",
-      "381 Recolección de desechos",
-      "3811 Recolección de desechos no peligrosos",
-      "3812 Recolección de desechos peligrosos",
-      "382 Tratamiento y disposición de desechos",
-      "3821 Tratamiento y disposición de desechos no peligrosos",
-      "3822 Tratamiento y disposición de desechos peligrosos",
-      "383 3830 Recuperación de materiales",
-      "39 Actividades de saneamiento ambiental y otros servicios de gestión de desechos",
-      "390 3900 Actividades de saneamiento ambiental y otros servicios de gestión de desechos",
-      "SECCIÓN F CONSTRUCCIÓN",
-      "41 Construcción de edificios",
-      "411 Construcción de edificios",
-      "4111 Construcción de edificios residenciales",
-      "4112 Construcción de edificios no residenciales",
-      "42 Obras de ingeniería civil",
-      "421 4210 Construcción de carreteras y vías de ferrocarril",
-      "422 4220 Construcción de proyectos de servicio público",
-      "429 4290 Construcción de otras obras de ingeniería civil",
-      "43 Actividades especializadas para la construcción de edificios y obras de ingeniería civil",
-      "431 Demolición y preparación del terreno",
-      "4311 Demolición",
-      "4312 Preparación del terreno",
-      "432 Instalaciones eléctricas, de fontanería y otras instalaciones especializadas",
-      "4321 Instalaciones eléctricas",
-      "4322 Instalaciones de fontanería, calefacción y aire acondicionado",
-      "4329 Otras instalaciones especializadas",
-      "433 4330 Terminación y acabado de edificios y obras de ingeniería civil",
-      "439 4390 Otras actividades especializadas para la construcción de edificios y obras de ingeniería civil",
-      "SECCIÓN G COMERCIO AL POR MAYOR Y AL POR MENOR; REPARACIÓN DE VEHÍCULOS AUTOMOTORES Y MOTOCICLETAS",
-      "45 Comercio, mantenimiento y reparación de vehículos automotores y motocicletas, sus partes, piezas y accesorios",
-      "451 Comercio de vehículos automotores",
-      "4511 Comercio de vehículos automotores nuevos",
-      "4512 Comercio de vehículos automotores usados",
-      "452 4520 Mantenimiento y reparación de vehículos automotores",
-      "453 4530 Comercio de partes, piezas (autopartes) y accesorios (lujos) para vehículos automotores",
-      "454 Comercio, mantenimiento y reparación de motocicletas y de sus partes, piezas y accesorios",
-      "4541 Comercio de motocicletas y de sus partes, piezas y accesorios",
-      "4542 Mantenimiento y reparación de motocicletas y de sus partes y piezas",
-      "46 Comercio al por mayor y en comisión o por contrata, excepto el comercio de vehículos automotores y motocicletas",
-      "461 4610 Comercio al por mayor a cambio de una retribución o por contrata",
-      "462 4620 Comercio al por mayor de materias primas agropecuarias; animales vivos",
-      "463 Comercio al por mayor de alimentos, bebidas y tabaco",
-      "4631 Comercio al por mayor de productos alimenticios",
-      "4632 Comercio al por mayor de bebidas y tabaco",
-      "464 Comercio al por mayor de artículos y enseres domésticos (incluidas prendas de vestir)",
-      "4641 Comercio al por mayor de productos textiles, productos confeccionados para uso doméstico",
-      "4642 Comercio al por mayor de prendas de vestir",
-      "4643 Comercio al por mayor de calzado",
-      "4644 Comercio al por mayor de aparatos y equipo de uso doméstico",
-      "4645 Comercio al por mayor de productos farmacéuticos, medicinales, cosméticos y de tocador",
-      "4649 Comercio al por mayor de otros utensilios domésticos n.c.p.",
-      "465 Comercio al por mayor de maquinaria y equipo",
-      "4651 Comercio al por mayor de computadores, equipo periférico y programas de informática",
-      "4652 Comercio al por mayor de equipo, partes y piezas electrónicos y de telecomunicaciones",
-      "4653 Comercio al por mayor de maquinaria y equipo agropecuarios",
-      "4659 Comercio al por mayor de otros tipos de maquinaria y equipo n.c.p.",
-      "466 Comercio al por mayor especializado de otros productos",
-      "4661 Comercio al por mayor de combustibles sólidos, líquidos, gaseosos y productos conexos",
-      "4662 Comercio al por mayor de metales y productos metalíferos",
-      "4663 Comercio al por mayor de materiales de construcción, artículos de ferretería, pinturas, productos de vidrio, equipo y materiales de fontanería y calefacción",
-      "4664 Comercio al por mayor de productos químicos básicos, cauchos y plásticos en formas primarias y productos químicos de uso agropecuario",
-      "4665 Comercio al por mayor de desperdicios, desechos y chatarra",
-      "4669 Comercio al por mayor de otros productos n.c.p.",
-      "469 4690 Comercio al por mayor no especializado",
-      "47 Comercio al por menor (incluso el comercio al por menor de combustibles), excepto el de vehículos automotores y motocicletas",
-      "471 Comercio al por menor en establecimientos no especializados",
-      "4711 Comercio al por menor en establecimientos no especializados con surtido compuesto principalmente por alimentos, bebidas o tabaco",
-      "4719 Comercio al por menor en establecimientos no especializados, con surtido compuesto principalmente por productos diferentes de alimentos (víveres en general), bebidas y tabaco",
-      "472 Comercio al por menor de alimentos (víveres en general), bebidas y tabaco, en establecimientos especializados",
-      "4721 Comercio al por menor de productos agrícolas para el consumo en establecimientos especializados",
-      "4722 Comercio al por menor de leche, productos lácteos y huevos, en establecimientos especializados",
-      "4723 Comercio al por menor de carnes (incluye aves de corral), productos cárnicos, pescados y productos de mar, en establecimientos especializados",
-      "4724 Comercio al por menor de bebidas y productos del tabaco, en establecimientos especializados",
-      "4729 Comercio al por menor de otros productos alimenticios n.c.p., en establecimientos especializados",
-      "473 Comercio al por menor de combustible, lubricantes, aditivos y productos de limpieza para automotores, en establecimientos especializados",
-      "4731 Comercio al por menor de combustible para automotores",
-      "4732 Comercio al por menor de lubricantes (aceites, grasas), aditivos y productos de limpieza para vehículos automotores",
-      "474 Comercio al por menor de equipos de informática y de comunicaciones, en establecimientos especializados",
-      "4741 Comercio al por menor de computadores, equipos periféricos, programas de informática y equipos de telecomunicaciones en establecimientos especializados",
-      "4742 Comercio al por menor de equipos y aparatos de sonido y de video, en establecimientos especializados",
-      "475 Comercio al por menor de otros enseres domésticos en establecimientos especializados",
-      "4751 Comercio al por menor de productos textiles en establecimientos especializados",
-      "4752 Comercio al por menor de artículos de ferretería, pinturas y productos de vidrio en establecimientos especializados",
-      "4753 Comercio al por menor de tapices, alfombras y cubrimientos para paredes y pisos en establecimientos especializados",
-      "4754 Comercio al por menor de electrodomésticos y gasodomésticos de uso doméstico, muebles y equipos de iluminación",
-      "4755 Comercio al por menor de artículos y utensilios de uso doméstico",
-      "4759 Comercio al por menor de otros artículos domésticos en establecimientos especializados",
-      "476 Comercio al por menor de artículos culturales y de entretenimiento, en establecimientos especializados",
-      "4761 Comercio al por menor de libros, periódicos, materiales y artículos de papelería y escritorio, en establecimientos especializados",
-      "4762 Comercio al por menor de artículos deportivos, en establecimientos especializados",
-      "4769 Comercio al por menor de otros artículos culturales y de entretenimiento n.c.p. en establecimientos especializados",
-      "477 Comercio al por menor de otros productos en establecimientos especializados",
-      "4771 Comercio al por menor de prendas de vestir y sus accesorios (incluye artículos de piel) en establecimientos especializados",
-      "4772 Comercio al por menor de todo tipo de calzado y artículos de cuero y sucedáneos del cuero en establecimientos especializados.",
-      "4773 Comercio al por menor de productos farmacéuticos y medicinales, cosméticos y artículos de tocador en establecimientos especializados",
-      "4774 Comercio al por menor de otros productos nuevos en establecimientos especializados",
-      "4775 Comercio al por menor de artículos de segunda mano",
-      "478 Comercio al por menor en puestos de venta móviles",
-      "4781 Comercio al por menor de alimentos, bebidas y tabaco, en puestos de venta móviles",
-      "4782 Comercio al por menor de productos textiles, prendas de vestir y calzado, en puestos de venta móviles",
-      "4789 Comercio al por menor de otros productos en puestos de venta móviles",
-      "479 Comercio al por menor no realizado en establecimientos, puestos de venta o mercados",
-      "4791 Comercio al por menor realizado a través de Internet",
-      "4792 Comercio al por menor realizado a través de casas de venta o por correo",
-      "4799 Otros tipos de comercio al por menor no realizado en establecimientos, puestos de venta o mercados.",
-      "SECCIÓN H TRANSPORTE Y ALMACENAMIENTO",
-      "49 Transporte terrestre; transporte por tuberías",
-      "491 Transporte férreo",
-      "4911 Transporte férreo de pasajeros",
-      "4912 Transporte férreo de carga",
-      "492 Transporte terrestre público automotor",
-      "4921 Transporte de pasajeros",
-      "4922 Transporte mixto",
-      "4923 Transporte de carga por carretera",
-      "493 4930 Transporte por tuberías",
-      "50 Transporte acuático",
-      "501 Transporte marítimo y de cabotaje",
-      "5011 Transporte de pasajeros marítimo y de cabotaje",
-      "5012 Transporte de carga marítimo y de cabotaje",
-      "502 Transporte fluvial",
-      "5021 Transporte fluvial de pasajeros",
-      "5022 Transporte fluvial de carga",
-      "51 Transporte aéreo",
-      "511 Transporte aéreo de pasajeros",
-      "5111 Transporte aéreo nacional de pasajeros",
-      "5112 Transporte aéreo internacional de pasajeros",
-      "512 Transporte aéreo de carga",
-      "5121 Transporte aéreo nacional de carga",
-      "5122 Transporte aéreo internacional de carga",
-      "52 Almacenamiento y actividades complementarias al transporte",
-      "521 5210 Almacenamiento y depósito",
-      "522 Actividades de las estaciones, vías y servicios complementarios para el transporte",
-      "5221 Actividades de estaciones, vías y servicios complementarios para el transporte terrestre",
-      "5222 Actividades de puertos y servicios complementarios para el transporte acuático",
-      "5223 Actividades de aeropuertos, servicios de navegación aérea y demás actividades conexas al transporte aéreo",
-      "5224 Manipulación de carga",
-      "5229 Otras actividades complementarias al transporte",
-      "53 Correo y servicios de mensajería",
-      "531 5310 Actividades postales nacionales",
-      "532 5320 Actividades de mensajería",
-      "SECCIÓN I ALOJAMIENTO Y SERVICIOS DE COMIDA",
-      "55 Alojamiento",
-      "551 Actividades de alojamiento de estancias cortas",
-      "5511 Alojamiento en hoteles",
-      "5512 Alojamiento en apartahoteles",
-      "5513 Alojamiento en centros vacacionales",
-      "5514 Alojamiento rural",
-      "5519 Otros tipos de alojamientos para visitantes",
-      "552 5520 Actividades de zonas de camping y parques para vehículos recreacionales",
-      "553 5530 Servicio por horas",
-      "559 5590 Otros tipos de alojamiento n.c.p.",
-      "56 Actividades de servicios de comidas y bebidas",
-      "561 Actividades de restaurantes, cafeterías y servicio móvil de comidas",
-      "5611 Expendio a la mesa de comidas preparadas",
-      "5612 Expendio por autoservicio de comidas preparadas",
-      "5613 Expendio de comidas preparadas en cafeterías",
-      "5619 Otros tipos de expendio de comidas preparadas n.c.p.",
-      "562 Actividades de catering para eventos y otros servicios de comidas",
-      "5621 Catering para eventos",
-      "5629 Actividades de otros servicios de comidas",
-      "563 5630 Expendio de bebidas alcohólicas para el consumo dentro del establecimiento",
-      "SECCIÓN J INFORMACIÓN Y COMUNICACIONES",
-      "58 Actividades de edición",
-      "581 Edición de libros, publicaciones periódicas y otras actividades de edición",
-      "5811 Edición de libros",
-      "5812 Edición de directorios y listas de correo",
-      "5813 Edición de periódicos, revistas y otras publicaciones periódicas",
-      "5819 Otros trabajos de edición",
-      "582 5820 Edición de programas de informática (software)",
-      "59 Actividades cinematográficas, de video y producción de programas de televisión, grabación de sonido y edición de música",
-      "591 Actividades de producción de películas cinematográficas, video y producción de programas, anuncios y comerciales de televisión",
-      "5911 Actividades de producción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",
-      "5912 Actividades de posproducción de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",
-      "5913 Actividades de distribución de películas cinematográficas, videos, programas, anuncios y comerciales de televisión",
-      "5914 Actividades de exhibición de películas cinematográficas y videos",
-      "592 5920 Actividades de grabación de sonido y edición de música",
-      "60 Actividades de programación, transmisión y/o difusión",
-      "601 6010 Actividades de programación y transmisión en el servicio de radiodifusión sonora",
-      "602 6020 Actividades de programación y transmisión de televisión",
-      "61 Telecomunicaciones",
-      "611 6110 Actividades de telecomunicaciones alámbricas",
-      "612 6120 Actividades de telecomunicaciones inalámbricas",
-      "613 6130 Actividades de telecomunicación satelital",
-      "619 6190 Otras actividades de telecomunicaciones",
-      "62 Desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas), consultoría informática y actividades relacionadas",
-      "620 Desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas), consultoría informática y actividades relacionadas",
-      "6201 Actividades de desarrollo de sistemas informáticos (planificación, análisis, diseño, programación, pruebas)",
-      "6202 Actividades de consultoría informática y actividades de administración de instalaciones informáticas",
-      "6209 Otras actividades de tecnologías de información y actividades de servicios informáticos",
-      "63 Actividades de servicios de información",
-      "631 Procesamiento de datos, alojamiento (hosting) y actividades relacionadas; portales web",
-      "6311 Procesamiento de datos, alojamiento (hosting) y actividades relacionadas",
-      "6312 Portales web",
-      "639 Otras actividades de servicio de información",
-      "6391 Actividades de agencias de noticias",
-      "6399 Otras actividades de servicio de información n.c.p.",
-      "SECCIÓN K ACTIVIDADES FINANCIERAS Y DE SEGUROS",
-      "64 Actividades de servicios financieros, excepto las de seguros y de pensiones",
-      "641 Intermediación monetaria",
-      "6411 Banco Central",
-      "6412 Bancos comerciales",
-      "642 Otros tipos de intermediación monetaria",
-      "6421 Actividades de las corporaciones financieras",
-      "6422 Actividades de las compañías de financiamiento",
-      "6423 Banca de segundo piso",
-      "6424 Actividades de las cooperativas financieras",
-      "643 Fideicomisos, fondos (incluye fondos de cesantías) y entidades financieras similares",
-      "6431 Fideicomisos, fondos y entidades financieras similares",
-      "6432 Fondos de cesantías",
-      "649 Otras actividades de servicio financiero, excepto las de seguros y pensiones",
-      "6491 Leasing financiero (arrendamiento financiero)",
-      "6492 Actividades financieras de fondos de empleados y otras formas asociativas del sector solidario",
-      "6493 Actividades de compra de cartera o factoring",
-      "6494 Otras actividades de distribución de fondos",
-      "6495 Instituciones especiales oficiales",
-      "6499 Otras actividades de servicio financiero, excepto las de seguros y pensiones n.c.p.",
-      "65 Seguros (incluso el reaseguro), seguros sociales y fondos de pensiones, excepto la seguridad social",
-      "651 Seguros y capitalización",
-      "6511 Seguros generales",
-      "6512 Seguros de vida",
-      "6513 Reaseguros",
-      "6514 Capitalización",
-      "652 Servicios de seguros sociales de salud y riesgos profesionales",
-      "6521 Servicios de seguros sociales de salud",
-      "6522 Servicios de seguros sociales de riesgos profesionales",
-      "653 Servicios de seguros sociales de pensiones",
-      "6531 Régimen de prima media con prestación definida (RPM)",
-      "6532 Régimen de ahorro individual (RAI)",
-      "66 Actividades auxiliares de las actividades de servicios financieros",
-      "661 Actividades auxiliares de las actividades de servicios financieros, excepto las de seguros y pensiones",
-      "6611 Administración de mercados financieros",
-      "6612 Corretaje de valores y de contratos de productos básicos",
-      "6613 Otras actividades relacionadas con el mercado de valores",
-      "6614 Actividades de las casas de cambio",
-      "6615 Actividades de los profesionales de compra y venta de divisas",
-      "6619 Otras actividades auxiliares de las actividades de servicios financieros n.c.p.",
-      "662 Actividades de servicios auxiliares de los servicios de seguros y pensiones",
-      "6621 Actividades de agentes y corredores de seguros",
-      "6629 Evaluación de riesgos y daños, y otras actividades de servicios auxiliares",
-      "663 6630 Actividades de administración de fondos",
-      "SECCIÓN L ACTIVIDADES INMOBILIARIAS",
-      "68 Actividades inmobiliarias",
-      "681 6810 Actividades inmobiliarias realizadas con bienes propios o arrendados",
-      "682 6820 Actividades inmobiliarias realizadas a cambio de una retribución o por contrata",
-      "SECCIÓN M ACTIVIDADES PROFESIONALES, CIENTÍFICAS Y TÉCNICAS",
-      "69 Actividades jurídicas y de contabilidad",
-      "691 6910 Actividades jurídicas",
-      "692 6920 Actividades de contabilidad, teneduría de libros, auditoría financiera y asesoría tributaria",
-      "70 Actividades de administración empresarial; actividades de consultoría de gestión",
-      "701 7010 Actividades de administración empresarial",
-      "702 7020 Actividades de consultaría de gestión",
-      "71 Actividades de arquitectura e ingeniería; ensayos y análisis técnicos",
-      "711 7110 Actividades de arquitectura e ingeniería y otras actividades conexas de consultoría técnica",
-      "712 7120 Ensayos y análisis técnicos",
-      "72 Investigación científica y desarrollo",
-      "721 7210 Investigaciones y desarrollo experimental en el campo de las ciencias naturales y la ingeniería",
-      "722 7220 Investigaciones y desarrollo experimental en el campo de las ciencias sociales y las humanidades",
-      "73 Publicidad y estudios de mercado",
-      "731 7310 Publicidad",
-      "732 7320 Estudios de mercado y realización de encuestas de opinión pública",
-      "74 Otras actividades profesionales, científicas y técnicas",
-      "741 7410 Actividades especializadas de diseño",
-      "742 7420 Actividades de fotografía",
-      "749 7490 Otras actividades profesionales, científicas y técnicas n.c.p.",
-      "75 Actividades veterinarias",
-      "750 7500 Actividades veterinarias",
-      "SECCIÓN N ACTIVIDADES DE SERVICIOS ADMINISTRATIVOS Y DE APOYO",
-      "77 Actividades de alquiler y arrendamiento",
-      "771 7710 Alquiler y arrendamiento de vehículos automotores",
-      "772 Alquiler y arrendamiento de efectos personales y enseres domésticos",
-      "7721 Alquiler y arrendamiento de equipo recreativo y deportivo",
-      "7722 Alquiler de videos y discos",
-      "7729 Alquiler y arrendamiento de otros efectos personales y enseres domésticos n.c.p.",
-      "773 7730 Alquiler y arrendamiento de otros tipos de maquinaria, equipo y bienes tangibles n.c.p.",
-      "774 7740 Arrendamiento de propiedad intelectual y productos similares, excepto obras protegidas por derechos de autor",
-      "78 Actividades de empleo",
-      "781 7810 Actividades de agencias de empleo",
-      "782 7820 Actividades de agencias de empleo temporal",
-      "783 7830 Otras actividades de suministro de recurso humano",
-      "79 Actividades de las agencias de viajes, operadores turísticos, servicios de reserva y actividades relacionadas",
-      "791 Actividades de las agencias de viajes y operadores turísticos",
-      "7911 Actividades de las agencias de viaje",
-      "7912 Actividades de operadores turísticos",
-      "799 7990 Otros servicios de reserva y actividades relacionadas",
-      "80 Actividades de seguridad e investigación privada",
-      "801 8010 Actividades de seguridad privada",
-      "802 8020 Actividades de servicios de sistemas de seguridad",
-      "803 8030 Actividades de detectives e investigadores privados",
-      "81 Actividades de servicios a edificios y paisajismo (jardines, zonas verdes)",
-      "811 8110 Actividades combinadas de apoyo a instalaciones",
-      "812 Actividades de limpieza",
-      "8121 Limpieza general interior de edificios",
-      "8129 Otras actividades de limpieza de edificios e instalaciones industriales",
-      "813 8130 Actividades de paisajismo y servicios de mantenimiento conexos",
-      "82 Actividades administrativas y de apoyo de oficina y otras actividades de apoyo a las empresas",
-      "821 Actividades administrativas y de apoyo de oficina",
-      "8211 Actividades combinadas de servicios administrativos de oficina",
-      "8219 Fotocopiado, preparación de documentos y otras actividades especializadas de apoyo a oficina",
-      "822 8220 Actividades de centros de llamadas (Call center)",
-      "823 8230 Organización de convenciones y eventos comerciales",
-      "829 Actividades de servicios de apoyo a las empresas n.c.p.",
-      "8291 Actividades de agencias de cobranza y oficinas de calificación crediticia",
-      "8292 Actividades de envase y empaque",
-      "8299 Otras actividades de servicio de apoyo a las empresas n.c.p.",
-      "SECCIÓN O ADMINISTRACIÓN PÚBLICA Y DEFENSA; PLANES DE SEGURIDAD SOCIAL DE AFILIACIÓN OBLIGATORIA",
-      "84 Administración pública y defensa; planes de seguridad social de afiliación obligatoria",
-      "841 Administración del Estado y aplicación de la política económica y social de la comunidad",
-      "8411 Actividades legislativas de la administración pública",
-      "8412 Actividades ejecutivas de la administración pública",
-      "8413 Regulación de las actividades de organismos que prestan servicios de salud, educativos, culturales y otros servicios sociales, excepto servicios de seguridad social",
-      "8414 Actividades reguladoras y facilitadoras de la actividad económica",
-      "8415 Actividades de los otros órganos de control",
-      "842 Prestación de servicios a la comunidad en general",
-      "8421 Relaciones exteriores",
-      "8422 Actividades de defensa",
-      "8423 Orden público y actividades de seguridad",
-      "8424 Administración de justicia",
-      "843 8430 Actividades de planes de seguridad social de afiliación obligatoria",
-      "SECCIÓN P EDUCACIÓN",
-      "85 Educación",
-      "851 Educación de la primera infancia, preescolar y básica primaria",
-      "8511 Educación de la primera infancia",
-      "8512 Educación preescolar",
-      "8513 Educación básica primaria",
-      "852 Educación secundaria y de formación laboral",
-      "8521 Educación básica secundaria",
-      "8522 Educación media académica",
-      "8523 Educación media técnica y de formación laboral",
-      "853 8530 Establecimientos que combinan diferentes niveles de educación",
-      "854 Educación superior",
-      "8541 Educación técnica profesional",
-      "8542 Educación tecnológica",
-      "8543 Educación de instituciones universitarias o de escuelas tecnológicas",
-      "8544 Educación de universidades",
-      "855 Otros tipos de educación",
-      "8551 Formación académica no formal",
-      "8552 Enseñanza deportiva y recreativa",
-      "8553 Enseñanza cultural",
-      "8559 Otros tipos de educación n.c.p.",
-      "856 8560 Actividades de apoyo a la educación",
-      "SECCIÓN Q ACTIVIDADES DE ATENCIÓN DE LA SALUD HUMANA Y DE ASISTENCIA SOCIAL",
-      "86 Actividades de atención de la salud humana",
-      "861 8610 Actividades de hospitales y clínicas, con internación",
-      "862 Actividades de práctica médica y odontológica, sin internación",
-      "8621 Actividades de la práctica médica, sin internación",
-      "8622 Actividades de la práctica odontológica",
-      "869 Otras actividades de atención relacionadas con la salud humana",
-      "8691 Actividades de apoyo diagnóstico",
-      "8692 Actividades de apoyo terapéutico",
-      "8699 Otras actividades de atención de la salud humana",
-      "87 Actividades de atención residencial medicalizada",
-      "871 8710 Actividades de atención residencial medicalizada de tipo general",
-      "872 8720 Actividades de atención residencial, para el cuidado de pacientes con retardo mental, enfermedad mental y consumo de sustancias psicoactivas",
-      "873 8730 Actividades de atención en instituciones para el cuidado de personas mayores y/o discapacitadas",
-      "879 8790 Otras actividades de atención en instituciones con alojamiento",
-      "88 Actividades de asistencia social sin alojamiento",
-      "881 8810 Actividades de asistencia social sin alojamiento para personas mayores y discapacitadas",
-      "889 8890 Otras actividades de asistencia social sin alojamiento",
-      "SECCIÓN R ACTIVIDADES ARTÍSTICAS, DE ENTRETENIMIENTO Y RECREACIÓN",
-      "90 Actividades creativas, artísticas y de entretenimiento",
-      "900 Actividades creativas, artísticas y de entretenimiento",
-      "9001 Creación literaria",
-      "9002 Creación musical",
-      "9003 Creación teatral",
-      "9004 Creación audiovisual",
-      "9005 Artes plásticas y visuales",
-      "9006 Actividades teatrales",
-      "9007 Actividades de espectáculos musicales en vivo",
-      "9008 Otras actividades de espectáculos en vivo",
-      "91 Actividades de bibliotecas, archivos, museos y otras actividades culturales",
-      "910 Actividades de bibliotecas, archivos, museos y otras actividades culturales",
-      "9101 Actividades de bibliotecas y archivos",
-      "9102 Actividades y funcionamiento de museos, conservación de edificios y sitios históricos",
-      "9103 Actividades de jardines botánicos, zoológicos y reservas naturales",
-      "92 Actividades de juegos de azar y apuestas",
-      "920 9200 Actividades de juegos de azar y apuestas",
-      "93 Actividades deportivas y actividades recreativas y de esparcimiento",
-      "931 Actividades deportivas",
-      "9311 Gestión de instalaciones deportivas",
-      "9312 Actividades de clubes deportivos",
-      "9319 Otras actividades deportivas",
-      "932 Otras actividades recreativas y de esparcimiento",
-      "9321 Actividades de parques de atracciones y parques temáticos",
-      "9329 Otras actividades recreativas y de esparcimiento n.c.p.",
-      "SECCIÓN S OTRAS ACTIVIDADES DE SERVICIOS",
-      "94 Actividades de asociaciones",
-      "941 Actividades de asociaciones empresariales y de empleadores,",
-      "y asociaciones profesionales",
-      "9411 Actividades de asociaciones empresariales y de empleadores",
-      "9412 Actividades de asociaciones profesionales",
-      "942 9420 Actividades de sindicatos de empleados",
-      "949 Actividades de otras asociaciones",
-      "9491 Actividades de asociaciones religiosas",
-      "9492 Actividades de asociaciones políticas",
-      "9499 Actividades de otras asociaciones n.c.p.",
-      "95 Mantenimiento y reparación de computadores, efectos personales y enseres domésticos",
-      "951 Mantenimiento y reparación de computadores y equipo de comunicaciones",
-      "9511 Mantenimiento y reparación de computadores y de equipo periférico",
-      "9512 Mantenimiento y reparación de equipos de comunicación",
-      "952 Mantenimiento y reparación de efectos personales y enseres domésticos",
-      "9521 Mantenimiento y reparación de aparatos electrónicos de consumo",
-      "9522 Mantenimiento y reparación de aparatos y equipos domésticos y de jardinería",
-      "9523 Reparación de calzado y artículos de cuero",
-      "9524 Reparación de muebles y accesorios para el hogar",
-      "9529 Mantenimiento y reparación de otros efectos personales y enseres domésticos",
-      "96 Otras actividades de servicios personales",
-      "960 Otras actividades de servicios personales",
-      "9601 Lavado y limpieza, incluso la limpieza en seco, de productos textiles y de piel",
-      "9602 Peluquería y otros tratamientos de belleza",
-      "9603 Pompas fúnebres y actividades relacionadas",
-      "9609 Otras actividades de servicios personales n.c.p.",
-      "SECCIÓN T ACTIVIDADES DE LOS HOGARES INDIVIDUALES EN CALIDAD DE EMPLEADORES; ACTIVIDADES NO DIFERENCIADAS DE LOS HOGARES INDIVIDUALES COMO PRODUCTORES DE BIENES Y SERVICIOS PARA USO PROPIO",
-      "97 Actividades de los hogares individuales como empleadores de personal doméstico",
-      "970 9700 Actividades de los hogares individuales como empleadores de personal doméstico",
-      "98 Actividades no diferenciadas de los hogares individuales como productores de bienes y servicios para uso propio",
-      "981 9810 Actividades no diferenciadas de los hogares individuales como productores de bienes para uso propio",
-      "982 9820 Actividades no diferenciadas de los hogares individuales como productores de servicios para uso propio",
-      "SECCIÓN U ACTIVIDADES DE ORGANIZACIONES Y ENTIDADES EXTRATERRITORIALES",
-      "99 Actividades de organizaciones y entidades extraterritoriales",
-      "990 9900 Actividades de organizaciones y entidades extraterritoriales",
-    ],
     valid: false,
-
-    razonsocial: "",
-    nit: "",
-    direccion: "",
-    formaJuridica: "",
-    sectorEconomia: "",
-    cuentanInstalaciones: "",
-    actividadEconomica: "",
-    departamento: "",
-    ciudadOperacion: "",
-    cantidadEmpleados: "",
-    productoEstrella: "",
-    pbx: "",
-    // segunda linea
-    representante: [
-      'nombreApellido: ""',
-      'cargo: ""',
-      'correo: ""',
-      'contacto: ""',
-      'profesion: ""',
+    seleccion: ["Si", "No", "No Aplica"],
+    estrategia: [
+      'n1: ""',
+      'n2: ""',
+      'n3: ""',
+      'n4: ""',
+      'n5: ""',
+      'n6: ""',
+      'n7: ""',
     ],
 
-    fecha: "",
-    menu: false,
+    capitalHumano: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""', 'n6: ""'],
+    mercadotecnia: [
+      'n1: ""',
+      'n2: ""',
+      'n3: ""',
+      'n4: ""',
+      'n5: ""',
+      'n6: ""',
+      'n7: ""',
+      'n8: ""',
+      'n9: ""',
+    ],
+    ventas: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""', 'n6: ""'],
+    compras: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""', 'n6: ""'],
+    finanzas: [
+      'n1: ""',
+      'n2: ""',
+      'n3: ""',
+      'n4: ""',
+      'n5: ""',
+      'n6: ""',
+      'n7: ""',
+      'n8: ""',
+      'n9: ""',
+      'n10: ""',
+    ],
+    produccion: [
+      'n1: ""',
+      'n2: ""',
+      'n3: ""',
+      'n4: ""',
+      'n5: ""',
+      'n6: ""',
+      'n7: ""',
+    ],
+    logistica: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""'],
+    tecnologia: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""'],
+    controlymedicion: [
+      'n1: ""',
+      'n2: ""',
+      'n3: ""',
+      'n4: ""',
+      'n5: ""',
+      'n6: ""',
+    ],
+    comunicacion: [
+      'n1: ""',
+      'n2: ""',
+      'n3: ""',
+      'n4: ""',
+      'n5: ""',
+      'n6: ""',
+      'n7: ""',
+      'n8: ""',
+    ],
   }),
-
   methods: {
-    save(fecha) {
-      this.$refs.fecha.save(fecha);
-    },
-
     guardar() {
-      if (
-        this.razonsocial != "" &&
-        this.nit != "" &&
-        this.direccion != "" &&
-        this.fecha != "" &&
-        this.formaJuridica != "" &&
-        this.departamento != "" &&
-        this.ciudadOperacion != "" &&
-        this.cantidadEmpleados != "" &&
-        this.productoEstrella != "" &&
-        this.sectorEconomia != "" &&
-        this.cuentanInstalaciones != "" &&
-        this.actividadEconomica != "" &&
-        this.representante.nombreApellido != "" &&
-        this.representante.cargo != "" &&
-        this.representante.correo != "" &&
-        this.representante.contacto != "" &&
-        this.representante.profesion != ""
-      ) {
-        const persona = {
-          razonsocial: this.razonsocial,
-          nit: this.nit,
-          direccion: this.direccion,
-          fecha: this.fecha,
-          formaJuridica: this.formaJuridica,
-          departamento: this.departamento,
-          ciudadOperacion: this.ciudadOperacion,
-          cantidadEmpleados: this.cantidadEmpleados,
-          productoEstrella: this.productoEstrella,
-          sectorEconomia: this.sectorEconomia,
-          cuentanInstalaciones: this.cuentanInstalaciones,
-          actividadEconomica: this.actividadEconomica,
-          representante: [
-            this.nombreApellido,
-            this.cargo,
-            this.correo,
-            this.contacto,
-            this.profesion,
-          ],
-        };
-        this.$store.dispatch("addUsuario", persona);
-      } else {
-        alert("Todos los campos son requeridos");
-        // (
-        // <v-alert border="left" color="red" type="error">
-        //   Todos los campos son requeridos
-        // </v-alert>;
-        // );
-      }
+      // if (
+      //   this.estrategia != "" &&
+      //   this.capitalHumano != "" &&
+      //   this.mercadotecnia != "" &&
+      //   this.ventas != "" &&
+      //   this.compras != "" &&
+      //   this.finanzas != "" &&
+      //   this.produccion != "" &&
+      //   this.logistica != "" &&
+      //   this.tecnologia != "" &&
+      //   this.controlymedicion != "" &&
+      //   this.comunicacion != ""
+      // ) {
+      //   const formulario = {
+      //     estrategia: [
+      //       this.estrategia.n1,
+      //       this.estrategia.n2,
+      //       this.estrategia.n3,
+      //       this.estrategia.n4,
+      //       this.estrategia.n5,
+      //       this.estrategia.n6,
+      //       this.estrategia.n7,
+      //     ],
+      //     capitalHumano: [
+      //       this.capitalHumano.n1,
+      //       this.capitalHumano.n2,
+      //       this.capitalHumano.n3,
+      //       this.capitalHumano.n4,
+      //       this.capitalHumano.n5,
+      //       this.capitalHumano.n6,
+      //     ],
+      //     mercadotecnia: [
+      //       this.mercadotecnia.n1,
+      //       this.mercadotecnia.n2,
+      //       this.mercadotecnia.n3,
+      //       this.mercadotecnia.n4,
+      //       this.mercadotecnia.n5,
+      //       this.mercadotecnia.n6,
+      //       this.mercadotecnia.n7,
+      //       this.mercadotecnia.n8,
+      //       this.mercadotecnia.n9,
+      //     ],
+      //     ventas: [
+      //       this.ventas.n1,
+      //       this.ventas.n2,
+      //       this.ventas.n3,
+      //       this.ventas.n4,
+      //       this.ventas.n5,
+      //       this.ventas.n6,
+      //     ],
+      //     compras: [
+      //       this.compras.n1,
+      //       this.compras.n2,
+      //       this.compras.n3,
+      //       this.compras.n4,
+      //       this.compras.n5,
+      //       this.compras.n6,
+      //     ],
+      //     finanzas: [
+      //       this.finanzas.n1,
+      //       this.finanzas.n2,
+      //       this.finanzas.n3,
+      //       this.finanzas.n4,
+      //       this.finanzas.n5,
+      //       this.finanzas.n6,
+      //       this.finanzas.n7,
+      //       this.finanzas.n8,
+      //       this.finanzas.n9,
+      //       this.finanzas.n10,
+      //     ],
+      //     produccion: [
+      //       this.produccion.n1,
+      //       this.produccion.n2,
+      //       this.produccion.n3,
+      //       this.produccion.n4,
+      //       this.produccion.n5,
+      //       this.produccion.n6,
+      //       this.produccion.n7,
+      //     ],
+      //     logistica: [
+      //       this.logistica.n1,
+      //       this.logistica.n2,
+      //       this.logistica.n3,
+      //       this.logistica.n4,
+      //       this.logistica.n5,
+      //     ],
+      //     tecnologia: [
+      //       this.tecnologia.n1,
+      //       this.tecnologia.n2,
+      //       this.tecnologia.n3,
+      //       this.tecnologia.n4,
+      //     ],
+      //     controlymedicion: [
+      //       this.controlymedicion.n1,
+      //       this.controlymedicion.n2,
+      //       this.controlymedicion.n3,
+      //       this.controlymedicion.n4,
+      //       this.controlymedicion.n5,
+      //       this.controlymedicion.n6,
+      //     ],
+      //     comunicacion: [
+      //       this.comunicacion.n1,
+      //       this.comunicacion.n2,
+      //       this.comunicacion.n3,
+      //       this.comunicacion.n4,
+      //       this.comunicacion.n5,
+      //       this.comunicacion.n6,
+      //       this.comunicacion.n7,
+      //       this.comunicacion.n8,
+      //     ],
+      //   };    
+        
+      //   this.$store.dispatch("addDiagnostico", formulario);
+        this.$router.push("./grafico");
+      // } else {
+      //   alert("Todos los campos son requeridos");
+      //   // (
+      //   // <v-alert border="left" color="red" type="error">
+      //   //   Todos los campos son requeridos
+      //   // </v-alert>;
+      //   // );
+      // }
     },
   },
 };

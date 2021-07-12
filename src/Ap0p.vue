@@ -1,7 +1,12 @@
+
 <template>
   <v-app>
-    <v-app-bar app fluid clipped-left class="pink darken-4" dark >
-      <div class="d-flex align-center white--text">
+    <v-app-bar
+      app
+      color="pink darken-4"
+      dark
+    >
+      <div class="d-flex align-center text-light">
         <v-img
           alt=""
           class="shrink mr-2"
@@ -10,29 +15,26 @@
           transition="scale-transition"
           width="40"
         />
+
+        
       </div><h1>Diagnóstico y Gestión Empresarial</h1>
+
       <v-spacer></v-spacer>
+
       <v-btn
         @click="login"
         target="_blank"
-        text      >
+        text
+      >
         <span class="mr-2">Login</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
-    <navegacion v-if="estado == true"></navegacion>
-<footer/>
-    <v-main class="light">
-      <v-container>
-        <router-view></router-view>
-        <asd />
-        <footer></footer> 
-        
-      </v-container>
-      
+    <v-main>
+      <router-view/>
     </v-main>
-    <v-footer
+     <v-footer
     dark
     padless
   >
@@ -43,8 +45,10 @@
       tile
     >
 
+
         <v-spacer></v-spacer>
    
+
       <v-card-text class="py-2 white--text text-center">
         <v-btn
           v-for="icon in icons"
@@ -61,54 +65,41 @@
       </v-card-text>
     </v-card>
   </v-footer>
-  
   </v-app>
   
+ 
 </template>
 
+
 <script>
-import navegacion from "@/components/Navgacion.vue";
-import asd from "@/components/asd.vue";
-// import footer from "@/components/footer.vue";
+
+import navegacion from './components/navegacion.vue';
+
 
 export default {
-  name: "App",
-
-  components: {
-    asd,
-    // footer,
+  component:{
     navegacion,
   },
-  methods: {
-    inicioSesion() {
-      this.$store.dispatch("inicioSesion");
-    },
-    login() {
+  name: 'App',
 
-        this.$router.push("./login");
-
-      }
-  },
-  computed: {
-    // curame() {
-// const user = firebase.auth().currentUser;
-
-// return user
-    // },
-  },
   data: () => ({
-    drawer: null,
-    
     icons: [
         'mdi-facebook',
         'mdi-twitter',
         'mdi-linkedin',
         'mdi-instagram',
       ],
-      estado: global.estado,
-
-    
   }),
+    
+    
+    methods: {
+
+      login() {
+
+        this.$router.push("./login");
+
+      }
+    },
+  
 };
 </script>
-
