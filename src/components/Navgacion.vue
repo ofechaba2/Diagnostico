@@ -9,8 +9,8 @@
 
       <v-list-item link>
         <v-list-item-content>
-          <v-list-item-title class="title"> </v-list-item-title>
-          <v-list-item-subtitle></v-list-item-subtitle>
+          <v-list-item-title class="title">Sandra Adams </v-list-item-title>
+          <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -59,7 +59,7 @@
         <v-list-item-icon>
           <v-icon>mdi-star</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>Starred</v-list-item-title>
+        <v-list-item-title>Cerrar sesion</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>

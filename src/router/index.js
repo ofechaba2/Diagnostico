@@ -5,6 +5,7 @@ import diagnostico from '../views/Diagnostico.vue'
 import Caracterizacion from '../views/Caracterizacion.vue'
 import grafico from '../views/Grafico.vue'
 import login from '../views/login.vue'
+import ho from '../views/Ho.vue'
 
 
 
@@ -34,6 +35,11 @@ const routes = [{
         path: '/login',
         name: 'login',
         component: login
+    },
+    {
+        path: '/ho',
+        name: 'ho',
+        component: ho
     }
 ]
 
@@ -42,13 +48,13 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 });
-
-// router.beforeEach((to, from, next) => {
-//     if ('/login') {
-//         next({ name: 'Login' })
-//     } else {
-//         next();
-//     }
-// });
+import { db } from "../Db";
+router.beforeEach((to, from, next) => {
+    if (db.user && to.path != '/login') {
+        next({ name: 'login' })
+    } else {
+        next();
+    }
+})
 
 export default router

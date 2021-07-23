@@ -1,141 +1,47 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar app color="primary" flat>
-      <v-avatar
-        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-5' : 'transparent'"
-        size="32"
-      ></v-avatar>
-
-      <v-tabs centered class="ml-n9" color="grey darken-5">
-        <v-tab v-for="link in links" :key="link">
-          <button class="guardar"></button>
-          {{ link }}
-        </v-tab>
-      </v-tabs>
-
-      <v-avatar
-        @click="guardar"
-        class="hidden-sm-and-down"
-        color="grey darken-1 shrink"
-        size="32"
-      ></v-avatar>
-    </v-app-bar>
-
-    <v-main class="grey lighten-5">
-      <v-container>
+<v-card color="lighten-5" class="mb-5" height="1500px">
+        <br />
         <v-row>
-          <v-col style="text-align: center" cols="12" sm="8">
-            <v-sheet rounded="lg" min-height="150">
-              <!--  -->
-              <formComponenete />
-            </v-sheet>
-          </v-col>
-          <v-col style="text-align: center" cols="12" sm="4">
-            <v-sheet rounded="lg" min-height="150">
-              <!--  --><form3 />
-            </v-sheet>
+       
+         
+
+      
+          <v-col  cols="6" md="6">
+            <formDatos/>
           </v-col>
 
-          <v-col cols="12" sm="2">
-            <v-sheet rounded="lg" min-height="268">
-              <!--  --><form2 />
-            </v-sheet>
+          <v-col cols="6" md="6">
+            <graficoPie/>
+            
           </v-col>
-
-          <v-col cols="12" sm="8">
-            <v-sheet min-height="70vh" rounded="lg">
-              <!--  --><v-data-table
-                :headers="headers"
-                :items="desserts"
-                hide-default-footer
-                class="elevation-1"
-              ></v-data-table>
-            </v-sheet>
+        
+          <v-col  cols="4" sm="4">
+           <formResultados/> 
           </v-col>
-         
-          <v-col cols="12" sm="2">
-            <v-sheet rounded="lg" min-height="268"> <!--  -->4{{this.valor}} {{this.nit}} </v-sheet>
+          <v-col  cols="8" sm="8">
+            <graficoRadar/>
           </v-col>
-         
         </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+      </v-card>
+
 </template>
+
+
 <script>
-import formComponenete from "../components/formComponente";
-import form2 from "../components/form2";
-import form3 from "../components/form3";
+  // import HelloWorld from '../components/HelloWorld'
+  import graficoRadar from '../components/graficoRadar.vue'
+  // import graficoPie from '../components/graficoPie.vue'
+  import formDatos from '../components/formDatos.vue'
+  import formResultados from '../components/formResultados.vue'
 
-export default {
-  components: {
-    formComponenete,
-    form2,
-    form3,
-  },
-  data: () => ({
-    links: ["Dashboard", "Messages", "Profile", "Updates"],
+  export default {
+    name: 'Home',
 
-    valor: global.GsectorEconomia,
-    sector: global.GsectorEconomia,
-    razon: global.Grazonsocial,
-    nit: global.Gnit,
-    departamento: global.Gdepartamento,
-    forma: global.Gformajuridica,
-    
-
-     headers: [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'start',
-            value: 'name',
-          },
-          { text: 'Calories', value: 'valor' },
-        ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            valor: this.valor,
-
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-          },
-        ],
-
-    e6: 1,
-    valid: false,
-  }),
-  methods: {
-    guardar() {
-        console.log(this.valor),
-        console.log(this.sector),
-        console.log(this.nit),
-        console.log(this.departamento),
-        console.log(this.forma),
-        console.log(this.razon);
+    components: {
+      graficoRadar,
+      // graficoPie,
+      formDatos,
+      formResultados,
     },
-  },
-};
+  }
 </script>
-
-
-  
-  

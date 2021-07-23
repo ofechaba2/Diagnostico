@@ -12,12 +12,12 @@
     <h1 class="text-center" v-if="this.valor == 'Servicio'">
       DIAGNOSTICO EMPRESARIAL-SECTOR SERVICIO
     </h1>
-    <v-stepper-step :complete="e6 > 1" step="1">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 1" step="1">
       <h2>Estrategia</h2>
     </v-stepper-step>
 
-    <v-stepper-content step="1">
-      <v-card color="grey lighten-5" class="mb-12" height="540px">
+    <v-stepper-content  step="1">
+      <v-card class="mb-12" height="540px">
         <div>
           <v-simple-table
             color="grey lighten-5"
@@ -156,12 +156,12 @@
       </v-card>
 
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 11"> Continue </v-btn>
-        <v-btn text col-3> Cancel </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 2"> Continuar </v-btn>
+        <v-btn text col-3> Atras </v-btn>
       </div>
     </v-stepper-content>
 
-    <v-stepper-step :complete="e6 > 2" step="2">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 2" step="2">
       <h2>Capital Humano</h2>
     </v-stepper-step>
 
@@ -290,12 +290,12 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 3"> Continue </v-btn>
-        <v-btn @click="e6 = 1"> Cancel </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 3"> Continuar </v-btn>
+        <v-btn @click="e6 = 1"> Atras </v-btn>
       </div>
     </v-stepper-content>
 
-    <v-stepper-step :complete="e6 > 3" step="3">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 3" step="3">
       <h2>Mercadotecnia</h2>
     </v-stepper-step>
 
@@ -467,11 +467,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 4"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 4"> Continuar </v-btn>
         <v-btn @click="e6 = 2"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 4" step="4">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 4" step="4">
       <h2>Ventas</h2>
     </v-stepper-step>
 
@@ -586,11 +586,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 5"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 5"> Continuar </v-btn>
         <v-btn @click="e6 = 3"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 5" step="5">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 5" step="5">
       <h2>Compras</h2>
     </v-stepper-step>
 
@@ -720,11 +720,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 6"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 6"> Continuar </v-btn>
         <v-btn @click="e6 = 4"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 6" step="6">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 6" step="6">
       <h2>Finanzas</h2>
     </v-stepper-step>
 
@@ -911,11 +911,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 7"> Continue </v-btn>
-        <v-btn @click="e6 = 5"> Cancel </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 7"> Continuar </v-btn>
+        <v-btn @click="e6 = 5"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 7" step="7">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 7" step="7">
       <h2>Produccion</h2>
     </v-stepper-step>
 
@@ -1058,11 +1058,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 8"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 8"> Continuar </v-btn>
         <v-btn @click="e6 = 6"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 8" step="8">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 8" step="8">
       <h2>Logística</h2>
     </v-stepper-step>
 
@@ -1178,11 +1178,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 9"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 9"> Continuar </v-btn>
         <v-btn @click="e6 = 7"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 9" step="9">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 9" step="9">
       <h2>Tecnología</h2>
     </v-stepper-step>
 
@@ -1281,11 +1281,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 10"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 10"> Continuar </v-btn>
         <v-btn @click="e6 = 8"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 10" step="10">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 10" step="10">
       <h2>Control y medición</h2>
     </v-stepper-step>
 
@@ -1413,11 +1413,11 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="e6 = 11"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="e6 = 11"> Continuar </v-btn>
         <v-btn @click="e6 = 9"> Atras </v-btn>
       </div>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 11" step="11">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 11" step="11">
       <h2>Comunicación</h2>
     </v-stepper-step>
 
@@ -1581,7 +1581,7 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="primary" @click="guardar"> Ver Resultados </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardar"> Ver Resultados </v-btn>
         <v-btn @click="e6 = 10"> Atras </v-btn>
       </div>
     </v-stepper-content>

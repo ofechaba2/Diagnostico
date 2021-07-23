@@ -1,7 +1,7 @@
 <template>
   <v-stepper v-model="e6" vertical>
     <h1 class="text-center">PROCESO DE CARACTERIZACION</h1>
-    <v-stepper-step :complete="e6 > 1" step="1">
+    <v-stepper-step color="deep-purple accent-2"  :complete="e6 > 1" step="1">
       <h2>Datos del negocio</h2>
     </v-stepper-step>
     <v-stepper-content step="1">
@@ -125,10 +125,10 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-btn color="primary" @click="e6 = 2"> Continuar </v-btn>
+      <v-btn color="deep-purple accent-2" @click="e6 = 2"> Continuar </v-btn>
       <v-btn href="./"> Cancelar </v-btn>
     </v-stepper-content>
-    <v-stepper-step :complete="e6 > 2" step="2">
+    <v-stepper-step color="deep-purple accent-2" :complete="e6 > 2" step="2">
       <h2>Datos del representante o grupo de trabajo</h2>
     </v-stepper-step>
     <v-stepper-content step="2">
@@ -347,7 +347,7 @@
           </v-col> -->
         </v-row>
       </v-card>
-      <v-btn color="primary" @click="guardar">
+      <v-btn color="deep-purple accent-2" @click="guardar">
         <!-- href="./diagnostico" -->
         Iniciar Diagnostico
       </v-btn>
@@ -358,6 +358,7 @@
 
 
 <script>
+import Swal from "sweetalert2";
 export default {
   data: () => ({
     e6: 1,
@@ -1161,49 +1162,55 @@ export default {
       global.Gdepartamento = this.departamento;
 
       if (
-        this.razonsocial != "" 
-        // this.nit != "" &&
-        // this.direccion != "" &&
-        // this.fecha != "" &&
-        // this.formaJuridica != "" &&
-        // this.departamento != "" &&
-        // this.ciudadOperacion != "" &&
-        // this.cantidadEmpleados != "" &&
-        // this.productoEstrella != "" &&
-        // this.sectorEconomia != "" &&
-        // this.cuentanInstalaciones != "" &&
-        // this.actividadEconomica != "" &&
-        // this.representante.nombreAp != "" &&
-        // this.representante.cargo != "" &&
-        // this.representante.correo != "" &&
-        // this.representante.contacto != "" &&
-        // this.representante.profesion != ""
+        this.razonsocial != "" &&
+        this.nit != "" &&
+        this.direccion != "" &&
+        this.fecha != "" &&
+        this.formaJuridica != "" &&
+        this.departamento != "" &&
+        this.ciudadOperacion != "" &&
+        this.cantidadEmpleados != "" &&
+        this.productoEstrella != "" &&
+        this.sectorEconomia != "" &&
+        this.cuentanInstalaciones != "" &&
+        this.actividadEconomica != "" &&
+        this.representante.nombreAp != "" &&
+        this.representante.cargo != "" &&
+        this.representante.correo != "" &&
+        this.representante.contacto != "" &&
+        this.representante.profesion != ""
       ) {
         const persona = {
-          razonsocial: this.razonsocial
-          // nit: this.nit,
-          // direccion: this.direccion,
-          // fecha: this.fecha,
-          // formaJuridica: this.formaJuridica,
-          // departamento: this.departamento,
-          // ciudadOperacion: this.ciudadOperacion,
-          // cantidadEmpleados: this.cantidadEmpleados,
-          // productoEstrella: this.productoEstrella,
-          // sectorEconomia: this.sectorEconomia,
-          // cuentanInstalaciones: this.cuentanInstalaciones,
-          // actividadEconomica: this.actividadEconomica,
-          // representante: [
-          //   this.representante.nombreAp,
-          //   this.representante.cargo,
-          //   this.representante.correo,
-          //   this.representante.contacto,
-          //   this.representante.profesion,
+          razonsocial: this.razonsocial,
+          nit: this.nit,
+          direccion: this.direccion,
+          fecha: this.fecha,
+          formaJuridica: this.formaJuridica,
+          departamento: this.departamento,
+          ciudadOperacion: this.ciudadOperacion,
+          cantidadEmpleados: this.cantidadEmpleados,
+          productoEstrella: this.productoEstrella,
+          sectorEconomia: this.sectorEconomia,
+          cuentanInstalaciones: this.cuentanInstalaciones,
+          actividadEconomica: this.actividadEconomica,
+          representante: [
+            this.representante.nombreAp,
+            this.representante.cargo,
+            this.representante.correo,
+            this.representante.contacto,
+            this.representante.profesion
+        ]
           
         };
         this.$store.dispatch("addCaracterizacion", persona);
         this.$router.push("./diagnostico");
       } else {
-        alert("Todos los campos son requeridos");  
+         Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        )
+        // alert("Todos los campos son requeridos");  
         
       }
     },
