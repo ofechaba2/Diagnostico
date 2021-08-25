@@ -1,7 +1,7 @@
 <template>
   <div >
     <!-- <app-grafica :chartdata="chartdata" :options="options"></app-grafica> -->
-    <canvas id="myChart"></canvas>
+    <canvas id="myChart1"></canvas>
 </div>
 </template>
 
@@ -40,7 +40,7 @@ mounted() {
             me.stock.push(doc.data().stock);           
           })
         }) 
-      let ctx = document.getElementById('myChart');
+      let ctx = document.getElementById('myChart1');
      /* eslint-disable no-unused-vars */
       const myChart = new Chart(ctx, {
           type: 'pie',

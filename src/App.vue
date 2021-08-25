@@ -13,13 +13,14 @@
       </div>
       <h1>Diagnóstico y Gestión Empresarial</h1>
       <v-spacer></v-spacer>
-      <v-btn @click="login" target="_blank" text>
+      <!-- to.path != '/login' -->
+      <v-btn @click="login"  v-if="currentRouteName =='Home'" target="_blank" text>
         <span class="mr-2">Login</span>
-        <v-icon @click="inicioSesion">mdi-open-in-new</v-icon>
+        <v-icon >mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-
-    <navegacion v-if="this.estado == true"></navegacion>
+de manera general y se hace la pregunta en las dos
+    <navegacion></navegacion>
     <footer />
     <v-main class="light">
       <v-container>
@@ -52,6 +53,7 @@ import navegacion from "@/components/Navgacion.vue";
 import firebase from "firebase";
 import "firebase/app";
 import "firebase/auth";
+// import firebase from 'firebase/app'
 // import footer from "@/components/footer.vue";
 
 export default {
@@ -62,7 +64,17 @@ export default {
     // footer,
     navegacion,
   },
-  computed: {},
+  computed:{
+     currentRouteName(){
+       return this.$route.name
+       
+     },
+     esAdministrador(){
+       
+      return this.$store.state.usuario && this.$store.state.usuario.rol == 'ADMIN_ROL';
+    },
+
+   },
   
 
   data: () => ({

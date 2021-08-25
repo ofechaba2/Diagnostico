@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index'
 import { db } from '../Db';
-
 // import Swal from "sweetalert2";
 
 
@@ -11,8 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         token: null,
-        usuario: null,
-        nombre: "josefina"
+        usuario: null
 
     },
     mutations: {
@@ -21,42 +19,10 @@ export default new Vuex.Store({
         },
         setUsuario(state, usuario) {
             state.usuario = usuario;
-        },
-        setNombre(state, nombre) {
-            state.nombre = nombre;
         }
     },
 
     actions: {
-
-        addCaracterizacion(context, payload) {
-            //context.commit('addPersona', payload)
-            console.log(context)
-                //  return new promise((resolve,reject)=>{
-            db.collection("Caracterizacion")
-                .add(
-                    payload
-                )
-                .then((res) => {
-                    console.log(res);
-                }).catch((error) => console.log(error));
-            //     })
-
-        },
-        addDiagnostico(context, payload) {
-
-            console.log(context)
-
-            db.collection("Diagnostico")
-                .add(
-                    payload
-                )
-                .then((res) => {
-                    console.log(res);
-                }).catch((error) => console.log(error));
-
-
-        },
         guardarInicio({ commit }, data) {
             commit("setUsuario", data)
         },
@@ -109,56 +75,22 @@ export default new Vuex.Store({
 
         },
 
-        add(context, payload) {
-            //context.commit('addPersona', payload)
-            console.log(context)
-                //  return new promise((resolve,reject)=>{
-            db.collection("areas")
-                .add(
-                    payload
-                )
-                .then((res) => {
-                    console.log(res);
-                    /* nombre.value="";
-                    email.value="";
-                    aporte.value="";   */
 
-
-                }).catch((error) => console.log(error));
-            //     })    
-        },
-        addProyecto(context, payload) {
-            //context.commit('addPersona', payload)
-            console.log(context)
-                //  return new promise((resolve,reject)=>{
-            db.collection("proyectos")
-                .add(
-                    payload
-                )
-                .then((res) => {
-                    console.log(res);
-                    /* nombre.value="";
-                    email.value="";
-                    aporte.value="";   */
-
-
-                }).catch((error) => console.log(error));
-            //     })    
-        },
 
         getLogin(context, payload) {
             //context.commit('addPersona', payload)
             console.log(context)
 
             db.collection("usuarios")
-                .where('email', "==", payload.email)
-                .where('password', "==", payload.password).get().then((querySnapshot) => {
+                .where('correoCreacion', "==", payload.email)
+                .where('claveCreacion', "==", payload.password).get().then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         console.log(`${doc.id} => ${doc.data.length}`)
                         console.log("datos" + doc.data().rol);
                         if (doc.data.length >= 1) {
                             router.push("/usuario");
                         }
+
 
                     });
 

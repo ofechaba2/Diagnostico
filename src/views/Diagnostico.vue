@@ -1662,132 +1662,140 @@ export default {
       'n6: ""',
       'n7: ""',
       'n8: ""',
+      
     ],
+    // if (estrategia=) {
+      
+    // }
   }),
+  // computed:{
+  //   if(seleccion = si) 
+  // },
+
   methods: {
     guardar() {
-      // if (
-      //   this.estrategia != "" &&
-      //   this.capitalHumano != "" &&
-      //   this.mercadotecnia != "" &&
-      //   this.ventas != "" &&
-      //   this.compras != "" &&
-      //   this.finanzas != "" &&
-      //   this.produccion != "" &&
-      //   this.logistica != "" &&
-      //   this.tecnologia != "" &&
-      //   this.controlymedicion != "" &&
-      //   this.comunicacion != ""
-      // ) {
-      //   const formulario = {
-      //     estrategia: [
-      //       this.estrategia.n1,
-      //       this.estrategia.n2,
-      //       this.estrategia.n3,
-      //       this.estrategia.n4,
-      //       this.estrategia.n5,
-      //       this.estrategia.n6,
-      //       this.estrategia.n7,
-      //     ],
-      //     capitalHumano: [
-      //       this.capitalHumano.n1,
-      //       this.capitalHumano.n2,
-      //       this.capitalHumano.n3,
-      //       this.capitalHumano.n4,
-      //       this.capitalHumano.n5,
-      //       this.capitalHumano.n6,
-      //     ],
-      //     mercadotecnia: [
-      //       this.mercadotecnia.n1,
-      //       this.mercadotecnia.n2,
-      //       this.mercadotecnia.n3,
-      //       this.mercadotecnia.n4,
-      //       this.mercadotecnia.n5,
-      //       this.mercadotecnia.n6,
-      //       this.mercadotecnia.n7,
-      //       this.mercadotecnia.n8,
-      //       this.mercadotecnia.n9,
-      //     ],
-      //     ventas: [
-      //       this.ventas.n1,
-      //       this.ventas.n2,
-      //       this.ventas.n3,
-      //       this.ventas.n4,
-      //       this.ventas.n5,
-      //       this.ventas.n6,
-      //     ],
-      //     compras: [
-      //       this.compras.n1,
-      //       this.compras.n2,
-      //       this.compras.n3,
-      //       this.compras.n4,
-      //       this.compras.n5,
-      //       this.compras.n6,
-      //     ],
-      //     finanzas: [
-      //       this.finanzas.n1,
-      //       this.finanzas.n2,
-      //       this.finanzas.n3,
-      //       this.finanzas.n4,
-      //       this.finanzas.n5,
-      //       this.finanzas.n6,
-      //       this.finanzas.n7,
-      //       this.finanzas.n8,
-      //       this.finanzas.n9,
-      //       this.finanzas.n10,
-      //     ],
-      //     produccion: [
-      //       this.produccion.n1,
-      //       this.produccion.n2,
-      //       this.produccion.n3,
-      //       this.produccion.n4,
-      //       this.produccion.n5,
-      //       this.produccion.n6,
-      //       this.produccion.n7,
-      //     ],
-      //     logistica: [
-      //       this.logistica.n1,
-      //       this.logistica.n2,
-      //       this.logistica.n3,
-      //       this.logistica.n4,
-      //       this.logistica.n5,
-      //     ],
-      //     tecnologia: [
-      //       this.tecnologia.n1,
-      //       this.tecnologia.n2,
-      //       this.tecnologia.n3,
-      //       this.tecnologia.n4,
-      //     ],
-      //     controlymedicion: [
-      //       this.controlymedicion.n1,
-      //       this.controlymedicion.n2,
-      //       this.controlymedicion.n3,
-      //       this.controlymedicion.n4,
-      //       this.controlymedicion.n5,
-      //       this.controlymedicion.n6,
-      //     ],
-      //     comunicacion: [
-      //       this.comunicacion.n1,
-      //       this.comunicacion.n2,
-      //       this.comunicacion.n3,
-      //       this.comunicacion.n4,
-      //       this.comunicacion.n5,
-      //       this.comunicacion.n6,
-      //       this.comunicacion.n7,
-      //       this.comunicacion.n8,
-      //     ],
-      //   };    
+      if (
+        this.estrategia != "" &&
+        this.capitalHumano != "" &&
+        this.mercadotecnia != "" &&
+        this.ventas != "" &&
+        this.compras != "" &&
+        this.finanzas != "" &&
+        this.produccion != "" &&
+        this.logistica != "" &&
+        this.tecnologia != "" &&
+        this.controlymedicion != "" &&
+        this.comunicacion != ""
+      ) {
+        const formulario = {
+          estrategia: [
+            this.estrategia.n1,
+            this.estrategia.n2,
+            this.estrategia.n3,
+            this.estrategia.n4,
+            this.estrategia.n5,
+            this.estrategia.n6,
+            this.estrategia.n7,
+          ],
+          capitalHumano: [
+            this.capitalHumano.n1,
+            this.capitalHumano.n2,
+            this.capitalHumano.n3,
+            this.capitalHumano.n4,
+            this.capitalHumano.n5,
+            this.capitalHumano.n6,
+          ],
+          mercadotecnia: [
+            this.mercadotecnia.n1,
+            this.mercadotecnia.n2,
+            this.mercadotecnia.n3,
+            this.mercadotecnia.n4,
+            this.mercadotecnia.n5,
+            this.mercadotecnia.n6,
+            this.mercadotecnia.n7,
+            this.mercadotecnia.n8,
+            this.mercadotecnia.n9,
+          ],
+          ventas: [
+            this.ventas.n1,
+            this.ventas.n2,
+            this.ventas.n3,
+            this.ventas.n4,
+            this.ventas.n5,
+            this.ventas.n6,
+          ],
+          compras: [
+            this.compras.n1,
+            this.compras.n2,
+            this.compras.n3,
+            this.compras.n4,
+            this.compras.n5,
+            this.compras.n6,
+          ],
+          finanzas: [
+            this.finanzas.n1,
+            this.finanzas.n2,
+            this.finanzas.n3,
+            this.finanzas.n4,
+            this.finanzas.n5,
+            this.finanzas.n6,
+            this.finanzas.n7,
+            this.finanzas.n8,
+            this.finanzas.n9,
+            this.finanzas.n10,
+          ],
+          produccion: [
+            this.produccion.n1,
+            this.produccion.n2,
+            this.produccion.n3,
+            this.produccion.n4,
+            this.produccion.n5,
+            this.produccion.n6,
+            this.produccion.n7,
+          ],
+          logistica: [
+            this.logistica.n1,
+            this.logistica.n2,
+            this.logistica.n3,
+            this.logistica.n4,
+            this.logistica.n5,
+          ],
+          tecnologia: [
+            this.tecnologia.n1,
+            this.tecnologia.n2,
+            this.tecnologia.n3,
+            this.tecnologia.n4,
+          ],
+          controlymedicion: [
+            this.controlymedicion.n1,
+            this.controlymedicion.n2,
+            this.controlymedicion.n3,
+            this.controlymedicion.n4,
+            this.controlymedicion.n5,
+            this.controlymedicion.n6,
+          ],
+          comunicacion: [
+            this.comunicacion.n1,
+            this.comunicacion.n2,
+            this.comunicacion.n3,
+            this.comunicacion.n4,
+            this.comunicacion.n5,
+            this.comunicacion.n6,
+            this.comunicacion.n7,
+            this.comunicacion.n8,
+          ],
+        };    
         
-      //   this.$store.dispatch("addDiagnostico", formulario);
+        this.$store.dispatch("addDiagnostico", formulario);
         this.$router.push("./grafico");
-      // } else {
-      //   alert("Todos los campos son requeridos");
-      //   // (
-      //   // <v-alert border="left" color="red" type="error">
-      //   //   Todos los campos son requeridos
-      //   // </v-alert>;
-      //   // );
-      // }
+      } else {
+        alert("Todos los campos son requeridos");
+        // (
+        // <v-alert border="left" color="red" type="error">
+        //   Todos los campos son requeridos
+        // </v-alert>;
+        // );
+      }
     },
   },
 };

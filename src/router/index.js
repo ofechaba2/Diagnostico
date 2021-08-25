@@ -5,7 +5,8 @@ import diagnostico from '../views/Diagnostico.vue'
 import Caracterizacion from '../views/Caracterizacion.vue'
 import grafico from '../views/Grafico.vue'
 import login from '../views/login.vue'
-import ho from '../views/Ho.vue'
+import Categorias from '../views/Categorias.vue'
+import store from '../store/index'
 
 
 
@@ -37,10 +38,11 @@ const routes = [{
         component: login
     },
     {
-        path: '/ho',
-        name: 'ho',
-        component: ho
+        path: '/Categorias',
+        name: 'Categorias',
+        component: Categorias
     }
+
 ]
 
 const router = new VueRouter({
@@ -48,13 +50,22 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 });
-import { db } from "../Db";
+
 router.beforeEach((to, from, next) => {
-    if (db.user && to.path != '/login') {
-        next({ name: 'login' })
+    if (store.state.usuario && to.path != '/login') {
+        next()
     } else {
         next();
     }
 })
+
+// import firebase from 'firebase/app'
+// router.beforeEach((to, from, next) => {
+//     if (firebase.apps.length && to.path != '/login') {
+//         next()
+//     } else {
+//         next();
+//     }
+// })
 
 export default router

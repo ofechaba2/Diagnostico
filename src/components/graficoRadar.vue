@@ -7,85 +7,87 @@
 
 <script>
 // import axios from "axios";
-import Chart from 'chart.js'
+import Chart from "chart.js";
 // import firebase from "firebase/app";
 import "firebase/firestore";
 import { db } from "../Db";
 
 export default {
   data() {
-    return { 
-      datos:[],
-      stock:[],
-      
+    return {
+      datos: [],
+      stock: [],
     };
   },
-  
-   
-mounted() {
-  this.selectArticulo()
-},
+
+  mounted() {
+    this.selectArticulo();
+  },
 
   methods: {
     //se debe dejar el async y el await para axios para que la grafica salga de una vez con los datos
     async selectArticulo() {
       let me = this;
-       await db.collection('articulo')
+      await db
+        .collection("articulo")
         .get()
-        .then((querySnapshot)=>{
-          me.datos=[];
-          me.stock=[];
-          querySnapshot.forEach((doc)=>{
-            me.datos.push(doc.data().datos); 
-            me.stock.push(doc.data().stock);           
-          })
-        }) 
-      let ctx = document.getElementById('myChart');
-     /* eslint-disable no-unused-vars */
+        .then((querySnapshot) => {
+          me.datos = [];
+          me.nombre = [];
+          querySnapshot.forEach((doc) => {
+            me.datos.push(doc.data().datos);
+            me.nombre.push(doc.data().nombre);
+          });
+        });
+      let ctx = document.getElementById("myChart");
+      /* eslint-disable no-unused-vars */
       const myChart = new Chart(ctx, {
-          type: 'radar',
-          data: {
-              labels: me.datos,
-              datasets: [{
-                  label: 'Articulos',
-                  data: me.stock,
-                  backgroundColor: [
-                      'rgba(255, 99, 132, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(255, 206, 86, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(25, 80, 130, 0.2)',
-                      'rgba(25, 255, 12, 0.2)',                    
-                  ],
-                  borderColor: [
-                      'rgba(255, 99, 132, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(255, 206, 86, 1)',
-                      'rgba(75, 192, 192, 1)',
-                      'rgba(25, 80, 130, 0.2)',
-                      'rgba(25, 255, 12, 0.2)',
-                  ],
-                  borderWidth: 3
-              }]
+        type: "radar",
+        data: {
+          labels: me.nombre,
+          datasets: [
+            {
+              label: "Articulos",
+              data: me.datos,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(25, 80, 130, 0.2)",
+                "rgba(25, 255, 12, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(25, 80, 130, 0.2)",
+                "rgba(25, 255, 12, 0.2)",
+              ],
+              borderWidth: 3,
+            },
+          ],
+        },
+        options: {
+          elements: {
+            line: {
+              borderWidth: 3,
+            },
           },
-         options: {
-           elements: {
-      line: {
-        borderWidth: 3
-      }
-    }}
-          //     scales: {
-          //         yAxes: [{
-          //             ticks: {
-          //                 beginAtZero: true
-          //             }
-          //         }]
-          //     }
-          // }
+        },
+        //     scales: {
+        //         yAxes: [{
+        //             ticks: {
+        //                 beginAtZero: true
+        //             }
+        //         }]
+        //     }
+        // }
       });
-    }
-  },   
-   /* listar() {
+    },
+  },
+  /* listar() {
       let me = this;
       let header = { headers: { "x-token": this.$store.state.token } };
       axios
@@ -104,12 +106,12 @@ mounted() {
         });
         
   }, */
- 
-       /* this.selectArticulo();
+
+  /* this.selectArticulo();
        console.log(this.datos)
        console.log(this.stock)
        console.log(this.chartdata); */
-      
+
   /*      let me = this;
       let categoriaArray = [];
       let header = { headers: { "x-token": this.$store.state.token } };
@@ -136,7 +138,7 @@ mounted() {
         .catch(function (error) {
           console.log(error);
         }); */
-}
+};
 </script>
 
 <style>

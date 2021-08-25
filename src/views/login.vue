@@ -24,7 +24,7 @@
                           v-model="email"
                           label="Correo Electronico"
                           name="Email"
-                          color="teal accent-3"
+                          color="pink darken-4"
                         />
 
                         <v-text-field
@@ -32,13 +32,13 @@
                           v-model="password"
                           label="Password"
                           name="password"
-                          color="teal accent-3"
+                          color="pink darken-4"
                         />
                       </v-form>
                       <h3 class="text-center mt-4">Olvidaste tu contraseña?</h3>
                     </v-card-text>
                     <div class="text-center mt-3">
-                      <v-btn rounded color="pink darken-4" dark @click="ingresar"
+                      <v-btn rounded color="pink darken-4" dark @click="inicioSesion()"
                         >Iniciar Sesión</v-btn
                       >
                       <br />
@@ -58,7 +58,7 @@
                       <br />
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn color="deep-purple accent-2" rounded @click="step++"
+                      <v-btn color="deep-purple accent-2" rounded @click="step++ && limpiar()"
                         >Incribirse</v-btn
                       >
                     </div>
@@ -106,7 +106,7 @@
                         <v-row>
                           <v-col cols="6" md="12">
                             <v-text-field
-                              v-model="emailS"
+                              v-model="correoCreacion"
                               label="Correo Electronico (Usuario)"
                               required
                             ></v-text-field>
@@ -116,7 +116,7 @@
                           <v-col cols="6" md="6">
                             <v-text-field
                               type="password"
-                              v-model="passwordS"
+                              v-model="claveCreacion"
                               label="Contraseña"
                               required
                             ></v-text-field>
@@ -184,7 +184,7 @@
                       </v-form>
                     </v-card-text>
                     <div class="text-center mt-n5">
-                      <v-btn rounded color="pink darken-4" dark @click="nuevoUser"
+                      <v-btn rounded color="pink darken-4" dark @click="guardar()"
                         >INSCRIBIRSE</v-btn
                       >
                       <br />
@@ -204,21 +204,19 @@
 
 <script>
 import Swal from "sweetalert2";
-import firebase from "firebase";
+// import firebase from "firebase";
 import "firebase/app";
 import "firebase/auth";
 // import firebase from "firebase/app";
-// import { db } from "../Db";
+import { db } from "../Db";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
   data: () => ({
     step: 1,
-
     email: "",
     password: "",
-    emailS: "",
-    passwordS: "",
-    error: "",
+    correoCreacion: "",
+    claveCreacion: "",
     passwordConf: "",
     nombres: "",
     apellidos: "",
@@ -227,155 +225,175 @@ export default {
     telefono: "",
     tipoIndustria: "",
     
+    
 
     sectorEconomiaSel: ["Agropecuario", "Comercio", "Industrial", "Servicio"],
     errors: null,
+  
+ validaMensaje: [],
+  
+    estadologin: 0,
+    
+    
+     
+     
+    numdocumento: "",
+     
+      estado: true,
+      
+      
+    rules: {
+      required: (value) => !!value || "Requerido.",
+      email: [
+        (v) => (v || "").match(/@/) || "Por favor ingrese el e-mail de cuenta",
+      ],
+    },
   }),
+
+  methods: {
+     validar() {
+      this.valida = 0;
+      this.validaMensaje = [];
+      if (this.nombres.length < 1) {
+        this.validaMensaje.push(
+          "Ingrese el Nombre"
+        );
+      }
+      if (this.numdocumento.length < 1) {
+        this.validaMensaje.push(
+          "Ingrese el documento "
+        );
+      }
+      if (this.direccion.length < 1) {
+        this.validaMensaje.push(
+          "Ingrese la direccion"
+        );
+      }
+      if (this.telefono.length < 1) {
+        this.validaMensaje.push(
+          "Ingrese un numero de telefono"
+        );
+      }
+      // if (this.emailAdd.length < 1 || this.emailAdd.length > 50) {
+      //   this.validaMensaje.push(
+      //     "El email del usuario debe tener entre 1-50 caracteres."
+      //   );
+      // }
+      //eslint-disable-next-line
+       var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       if (!EMAIL_REGEXP.test(this.correoCreacion)) {
+        this.validaMensaje.push(
+          "La dirección de email " + this.correoCreacion + " está incompleta",
+        )}
+
+      // if (this.editedIndex <= -1) {
+      //   if (this.claveCreacion.length < 1 || this.claveCreacion.length > 64) {
+      //     this.validaMensaje.push(
+      //       "El password del usuario debe tener entre 1-64 caracteres."
+      //     );
+      //   }
+      // }
+      if (this.validaMensaje.length) {
+        this.valida = 1;
+      }
+      return this.valida;
+    },
+     guardar() {
+      
+      let me = this;
+      if (this.nombres == "") {
+        return;
+      }
+       
+    if(this.nombres.value != "" && this.correoCreacion.value != ""){
+        const persona = {
+              email: this.correoCreacion,
+              password: this.claveCreacion,
+              nombres: this.nombres,
+              apellidos: this.apellidos,
+              telefono: this.telefono,
+              nombreEmpresa:this.nombreEmpresa,
+              cargoEmpresa: this.cargoEmpresa,
+              tipoIndustria:this.tipoIndustria,
+
+              rol: this.rol,
+              
+              estado: this.estado,
+        }
+         this.$store.dispatch("addUsuario", persona); 
+        //  firebase.auth().correoCreacion.sendEmailVerification();
+            me.close();
+             Swal.fire(
+              "¡Felicitaciones!",
+              "Usuario creado correctamente, ya puede iniciar secion",
+              "success");
+           
+      }
+      
+    },
+    close() {
+      this.limpiar();
+    },
+     limpiar() {
+   this.correoCreacion= "",
+   this.claveCreacion= "",
+   this.passwordConf= "",
+   this.nombres= "",
+   this.apellidos= "",
+   this.nombreEmpresa= "",
+   this.cargoEmpresa= "",
+   this.telefono= "",
+   this.tipoIndustria= ""
+    },
+  async inicioSesion() {
+    //eslint-disable-next-line
+        var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       if (!EMAIL_REGEXP.test(this.email)) {
+        Swal.fire(
+          "¡Atención!",
+          "La dirección de email " + this.email + " está incompleta",
+          "info"
+        );
+      } else if (this.email == null) {
+        Swal.fire("¡Atención!", "Digite el correo por favor", "info");
+      } else if (this.password == null) {
+        Swal.fire("¡Atención!", "Digite la contraseña por favor", "info");
+      } else {
+    await  db.collection("usuarios")
+    .where('email', "==",this.email)
+    .where('password', "==", this.password)
+    .where('estado', "==", true).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data.length+" cadena");
+        this.estadologin = doc.data.length;
+          if(doc.data.length>=1){
+             this.$store.dispatch("guardarInicio",doc.data());
+             this.$router.push("/caracterizacion");
+          }else{
+            Swal.fire("¡Atención!", "El usuario esta inactivo consulte con el Administrador del sistema", "info");
+          }   
+      }
+      );  
+  }
+   
+  );
+    if(this.estadologin==0){
+            Swal.fire("¡Atención!", "El usuario esta inactivo consulte con el Administrador del sistema", "info")
+      }
+         }                                  
+
+    },
+    resetForm() {
+      this.$refs.form.reset();
+    },
+  },
+
   props: {
     source: String,
   },
-  computed: {},
-
-  methods: {
-    async nuevoUser() {
-      if (this.passwordS != this.passwordConf) {
-        Swal.fire(
-          "¡Error!",
-          "Las contraseñas no coinsiden, por favor verifique e intente nuevamente.",
-          "warning"
-        );
-      } else if (
-        this.nombres != "" &&
-        this.emailS != "" &&
-        this.passwordS != "" &&
-        this.apellidos != "" &&
-        this.nombreEmpresa != "" &&
-        this.cargoEmpresa != "" &&
-        this.telefono != "" &&
-        this.tipoIndustria != ""
-      ) {
-        await firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.emailS, this.passwordS)
-          .then((user) => {
-            (this.nombres = ""),
-              (this.emailS = ""),
-              (this.passwordS = ""),
-              (this.passwordConf = ""),
-              (this.apellidos = ""),
-              (this.nombreEmpresa = ""),
-              (this.cargoEmpresa = ""),
-              (this.telefono = ""),
-              (this.tipoIndustria = ""),
-              console.log(user);
-
-            firebase.auth().currentUser.sendEmailVerification();
-
-            Swal.fire(
-              "¡Felicitaciones!",
-              "La cuenta de a creado satisfactoriamente, Se a enviado un un correo de verificacion",
-              "success"
-            );
-          })
-          // .catch(
-          //   Swal.fire(
-          //     "¡Correo Invalido!",
-          //     "Este correo ya esta en uso, por favor verifique e intentelo nuevamente.",
-          //     "info"
-          //   )
-          // );
-      } else {
-        Swal.fire(
-          "¡!",
-          "Todos los campos son requeridos, Verifique que todos los campos esten completos.",
-          "warning"
-        );
-      }
-    },
-
-async ingresar() {
-      if ( this.email && this.password ) {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(() =>{
-       return firebase.auth().signInWithEmailAndPassword (this.email, this.password)
-        .then(user => {
-         
-          // me.$store.dispatch("setLogin", response.data);
-        this.$router.push("./caracterizacion");          
-          console.log(user)
-          Swal.fire(
-              "¡Felicitaciones!",
-              "A iniciado sesion satisfactoriamente",
-              "success");
-        })
-        })
-        // .catch (
-        //   alert('=(')
-                  //  Swal.fire(
-        //       "¡Error!",
-        //       "La cuenta o la contraseña son invalidas, por favor verifique e intente nuevamente",
-        //       "error")
-        // )                    
-      }
-      else{
-        Swal.fire(
-              "¡VERIFIQUE!",
-              "Verifique que los campos esten completos",
-              "info"
-            );
-      }
-    
-
-    // async ingresar() {
-    //   if (this.email && this.password) {
-    //     await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-    //       .then((user) => {
-    //         this.$router.push("./caracterizacion");
-    //         console.log(user);
-    //         Swal.fire(
-    //             "¡Felicitaciones!",
-    //             "A iniciado sesion satisfactotiamente",
-    //             "success"
-    //           )
-    //       })await
-    //       .catch(
-    //         Swal.fire(
-    //           "¡Error!",
-    //           "La cuenta o la contraseña son invalidas, por favor verifique e intente nuevamente",
-    //           "error"
-    //         )
-    //       )
-
-    //       } else {
-    //       Swal.fire(
-    //         "¡VERIFIQUE!",
-    //         "Verifique que los campos esten completos",
-    //         "info"
-    //       );
-
-          
-
-        //     verificar(){
-        //       firebase.auth().onAuthStateChanged((user) => {
-        //   if (user) {
-        //     // User is signed in, see docs for a list of available properties
-        //     // https://firebase.google.com/docs/reference/js/firebase.User
-        //     var uid = user.uid;
-        //     // ...
-        //   } else {
-        //     // User is signed out
-        //     // ...
-        //   }
-        // });
-        //   //     firebase.auth().currentUser.sendEmailVerification()
-        //   // .then(() => {
-        //   //   // Email verification sent!
-        //   //   // ...
-        //   // });
-        //     // }
-      }
-    },
   
 };
+
+
 </script>
 
