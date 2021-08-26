@@ -38,7 +38,11 @@
                       <h3 class="text-center mt-4">Olvidaste tu contraseña?</h3>
                     </v-card-text>
                     <div class="text-center mt-3">
-                      <v-btn rounded color="pink darken-4" dark @click="inicioSesion()"
+                      <v-btn
+                        rounded
+                        color="pink darken-4"
+                        dark
+                        @click="ingresar()"
                         >Iniciar Sesión</v-btn
                       >
                       <br />
@@ -58,8 +62,11 @@
                       <br />
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn color="deep-purple accent-2" rounded @click="step++ && limpiar()"
-                        >Incribirse</v-btn
+                      <v-btn
+                        color="deep-purple accent-2"
+                        rounded
+                        @click="step++ && close()"
+                        >REGISTRATE</v-btn
                       >
                     </div>
                   </v-col>
@@ -83,7 +90,10 @@
                       <br />
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn color="deep-purple accent-2" rounded @click="step--"
+                      <v-btn
+                        color="deep-purple accent-2"
+                        rounded
+                        @click="step--"
                         >Iniciar Sesión</v-btn
                       >
                     </div>
@@ -184,8 +194,12 @@
                       </v-form>
                     </v-card-text>
                     <div class="text-center mt-n5">
-                      <v-btn rounded color="pink darken-4" dark @click="guardar()"
-                        >INSCRIBIRSE</v-btn
+                      <v-btn
+                        rounded
+                        color="pink darken-4"
+                        dark
+                        @click="nuevoUser()"
+                        >REGISTRARSE</v-btn
                       >
                       <br />
                       <br />
@@ -207,8 +221,8 @@ import Swal from "sweetalert2";
 // import firebase from "firebase";
 import "firebase/app";
 import "firebase/auth";
-// import firebase from "firebase/app";
-import { db } from "../Db";
+import firebase from "firebase/app";
+// import { db } from "../Db";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
   data: () => ({
@@ -228,20 +242,12 @@ export default {
     
 
     sectorEconomiaSel: ["Agropecuario", "Comercio", "Industrial", "Servicio"],
-    errors: null,
-  
+    errors: null, 
  validaMensaje: [],
-  
     estadologin: 0,
-    
-    
-     
-     
     numdocumento: "",
-     
       estado: true,
-      
-      
+ 
     rules: {
       required: (value) => !!value || "Requerido.",
       email: [
@@ -249,7 +255,6 @@ export default {
       ],
     },
   }),
-
   methods: {
      validar() {
       this.valida = 0;
@@ -298,6 +303,94 @@ export default {
       }
       return this.valida;
     },
+
+    nuevoUser() {
+      if (this.claveCreacion != this.passwordConf) {
+        Swal.fire(
+              "¡Error!",
+              "Las contraseñas no coinsiden, por favor verifique e intente nuevamente.",
+              "warning")
+      }else
+       if( 
+        this.nombres != "" && 
+        this.correoCreacion !="" && 
+        this.passwordS !="" &&
+        this.apellidos !="" &&
+        this.nombreEmpresa !="" &&
+        this.cargoEmpresa !="" &&
+        this.telefono !="" &&
+        this.tipoIndustria !=""
+        ) {
+        firebase.auth().createUserWithEmailAndPassword(this.correoCreacion, this.claveCreacion)
+        .then(user => {
+          firebase.auth().currentUser.sendEmailVerification();
+          console.log(user);
+          const nuevoUser = {
+          nombres: this.nombres,
+          email: this.correoCreacion,
+          apellidos: this.apellidos,
+          nombreEmpresa: this.nombreEmpresa,
+          cargoEmpresa: this.cargoEmpresa,
+          telefono: this.telefono,
+          tipoIndustria: this.tipoIndustria,
+          }
+          this.$store.dispatch("addUsuario", nuevoUser);
+         
+         this.close()
+         
+           Swal.fire(
+              "¡Felicitaciones!",
+              "La cuenta de a creado satisfactoriamente, Se a enviado un un correo de verificacion",
+              "success"
+            )
+             
+        
+        
+        
+        }).catch(
+          Swal.fire(
+              "¡Correo Invalido!",
+              "Este correo ya esta en uso, por favor verifique e intentelo nuevamente.",
+              "info")
+        )                    
+      }else{
+         Swal.fire(
+              "¡!",
+              "Todos los campos son requeridos, Verifique que todos los campos esten completos.",
+              "warning")
+  
+      }
+    },
+    
+   
+    
+  async ingresar() {
+      if ( this.email && this.password ) {
+      await firebase.auth().signInWithEmailAndPassword (this.email, this.password)
+        .then(user => {
+        this.$router.push("./caracterizacion");          
+          console.log(user)
+          Swal.fire(
+              "¡Felicitaciones!",
+              "A iniciado sesion satisfactoriamente",
+              "success");
+        }).catch (
+         Swal.fire(
+              "¡Error!",
+              "La cuenta o la contraseña son invalidas, por favor verifique e intente nuevamente",
+              "error")
+        )                    
+      }else{
+        Swal.fire(
+              "¡VERIFIQUE!",
+              "Verifique que los campos esten completos",
+              "info"
+            );
+      }
+    },
+
+
+
      guardar() {
       
       let me = this;
@@ -316,7 +409,6 @@ export default {
               cargoEmpresa: this.cargoEmpresa,
               tipoIndustria:this.tipoIndustria,
 
-              rol: this.rol,
               
               estado: this.estado,
         }
@@ -332,6 +424,7 @@ export default {
       
     },
     close() {
+      
       this.limpiar();
     },
      limpiar() {
@@ -345,44 +438,44 @@ export default {
    this.telefono= "",
    this.tipoIndustria= ""
     },
-  async inicioSesion() {
-    //eslint-disable-next-line
-        var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-       if (!EMAIL_REGEXP.test(this.email)) {
-        Swal.fire(
-          "¡Atención!",
-          "La dirección de email " + this.email + " está incompleta",
-          "info"
-        );
-      } else if (this.email == null) {
-        Swal.fire("¡Atención!", "Digite el correo por favor", "info");
-      } else if (this.password == null) {
-        Swal.fire("¡Atención!", "Digite la contraseña por favor", "info");
-      } else {
-    await  db.collection("usuarios")
-    .where('email', "==",this.email)
-    .where('password', "==", this.password)
-    .where('estado', "==", true).get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.data.length+" cadena");
-        this.estadologin = doc.data.length;
-          if(doc.data.length>=1){
-             this.$store.dispatch("guardarInicio",doc.data());
-             this.$router.push("/caracterizacion");
-          }else{
-            Swal.fire("¡Atención!", "El usuario esta inactivo consulte con el Administrador del sistema", "info");
-          }   
-      }
-      );  
-  }
+  // async inicioSesion() {
+  //   //eslint-disable-next-line
+  //       var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //      if (!EMAIL_REGEXP.test(this.email)) {
+  //       Swal.fire(
+  //         "¡Atención!",
+  //         "La dirección de email " + this.email + " está incompleta",
+  //         "info"
+  //       );
+  //     } else if (this.email == null) {
+  //       Swal.fire("¡Atención!", "Digite el correo por favor", "info");
+  //     } else if (this.password == null) {
+  //       Swal.fire("¡Atención!", "Digite la contraseña por favor", "info");
+  //     } else {
+  //   await  db.collection("usuarios")
+  //   .where('email', "==",this.email)
+  //   .where('password', "==", this.password)
+  //   .where('estado', "==", true).get().then((querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+  //       console.log(doc.data.length+" cadena");
+  //       this.estadologin = doc.data.length;
+  //         if(doc.data.length>=1){
+  //            this.$store.dispatch("guardarInicio",doc.data());
+  //            this.$router.push("/caracterizacion");
+  //         }else{
+  //           Swal.fire("¡Atención!", "El usuario esta inactivo consulte con el Administrador del sistema", "info");
+  //         }   
+  //     }
+  //     );  
+  // }
    
-  );
-    if(this.estadologin==0){
-            Swal.fire("¡Atención!", "El usuario esta inactivo consulte con el Administrador del sistema", "info")
-      }
-         }                                  
+  // );
+  //   if(this.estadologin==0){
+  //           Swal.fire("¡Atención!", "El usuario esta inactivo consulte con el Administrador del sistema", "info")
+  //     }
+  //        }                                  
 
-    },
+  //   },
     resetForm() {
       this.$refs.form.reset();
     },

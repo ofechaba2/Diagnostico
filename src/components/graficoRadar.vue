@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       datos: [],
-      stock: [],
+      nombre: [],
     };
   },
 
@@ -29,7 +29,7 @@ export default {
     async selectArticulo() {
       let me = this;
       await db
-        .collection("articulo")
+        .collection("Diagnostico")
         .get()
         .then((querySnapshot) => {
           me.datos = [];
@@ -47,7 +47,7 @@ export default {
           labels: me.nombre,
           datasets: [
             {
-              label: "Articulos",
+              label: "PUNTAJE POR PROCESO",
               data: me.datos,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",

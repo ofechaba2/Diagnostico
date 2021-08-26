@@ -15,8 +15,7 @@
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 1" step="1">
       <h2>Estrategia</h2>
     </v-stepper-step>
-
-    <v-stepper-content  step="1">
+    <v-stepper-content step="1">
       <v-card class="mb-12" height="540px">
         <div>
           <v-simple-table
@@ -46,7 +45,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="estrategia.n1"
+                      v-model="estrategia1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -63,7 +62,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="estrategia.n2"
+                      v-model="estrategia2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -79,7 +78,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="estrategia.n3"
+                      v-model="estrategia3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -95,7 +94,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="estrategia.n4"
+                      v-model="estrategia4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -109,7 +108,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="estrategia.n5"
+                      v-model="estrategia5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -125,7 +124,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="estrategia.n6"
+                      v-model="estrategia6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -142,7 +141,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="estrategia.n7"
+                      v-model="estrategia7"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -154,9 +153,10 @@
           </v-simple-table>
         </div>
       </v-card>
-
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 2"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarestrategia()">
+          Continuar
+        </v-btn>
         <v-btn text col-3> Atras </v-btn>
       </div>
     </v-stepper-content>
@@ -164,7 +164,6 @@
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 2" step="2">
       <h2>Capital Humano</h2>
     </v-stepper-step>
-
     <v-stepper-content step="2">
       <v-card color="grey lighten-5" class="mb-12" height="470px">
         <div>
@@ -195,7 +194,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="capitalHumano.n1"
+                      v-model="capitalHumano1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -212,7 +211,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="capitalHumano.n2"
+                      v-model="capitalHumano2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -229,7 +228,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="capitalHumano.n3"
+                      v-model="capitalHumano3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -246,7 +245,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="capitalHumano.n4"
+                      v-model="capitalHumano4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -260,7 +259,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="capitalHumano.n5"
+                      v-model="capitalHumano5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -277,7 +276,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="capitalHumano.n6"
+                      v-model="capitalHumano6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -290,7 +289,9 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 3"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarcapitalhumano()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 1"> Atras </v-btn>
       </div>
     </v-stepper-content>
@@ -298,7 +299,6 @@
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 3" step="3">
       <h2>Mercadotecnia</h2>
     </v-stepper-step>
-
     <v-stepper-content step="3">
       <v-card color="grey lighten-5" class="mb-12" height="670px">
         <div>
@@ -329,7 +329,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n1"
+                      v-model="mercadotecnia1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -346,7 +346,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n2"
+                      v-model="mercadotecnia2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -362,7 +362,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n3"
+                      v-model="mercadotecnia3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -376,7 +376,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n4"
+                      v-model="mercadotecnia4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -393,7 +393,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n5"
+                      v-model="mercadotecnia5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -409,7 +409,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n6"
+                      v-model="mercadotecnia6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -426,7 +426,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n7"
+                      v-model="mercadotecnia7"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -440,7 +440,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n8"
+                      v-model="mercadotecnia8"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -454,7 +454,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="mercadotecnia.n9"
+                      v-model="mercadotecnia9"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -467,14 +467,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 4"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarmercadotecnia()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 2"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 4" step="4">
       <h2>Ventas</h2>
     </v-stepper-step>
-
     <v-stepper-content step="4">
       <v-card color="grey lighten-5" class="mb-12" height="460px">
         <div>
@@ -503,7 +504,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="ventas.n1"
+                      v-model="ventas1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -517,7 +518,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="ventas.n2"
+                      v-model="ventas2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -531,7 +532,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="ventas.n3"
+                      v-model="ventas3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -545,7 +546,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="ventas.n4"
+                      v-model="ventas4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -559,7 +560,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="ventas.n5"
+                      v-model="ventas5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -573,7 +574,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="ventas.n6"
+                      v-model="ventas6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -586,14 +587,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 5"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarVentas()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 3"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 5" step="5">
       <h2>Compras</h2>
     </v-stepper-step>
-
     <v-stepper-content step="5">
       <v-card color="grey lighten-5" class="mb-12" height="470px">
         <div>
@@ -622,7 +624,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="compras.n1"
+                      v-model="compras1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -639,7 +641,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="compras.n2"
+                      v-model="compras2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -656,7 +658,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="compras.n3"
+                      v-model="compras3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -673,13 +675,12 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="compras.n4"
+                      v-model="compras4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
                   </td>
                 </tr>
-
                 <tr>
                   <td class="text-center">5.5</td>
                   <td></td>
@@ -690,7 +691,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="compras.n5"
+                      v-model="compras5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -707,7 +708,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="compras.n6"
+                      v-model="compras6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -720,14 +721,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 6"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarCompras()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 4"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 6" step="6">
       <h2>Finanzas</h2>
     </v-stepper-step>
-
     <v-stepper-content step="6">
       <v-card color="grey lighten-5" class="mb-12" height="540px">
         <div>
@@ -758,7 +760,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n1"
+                      v-model="finanzas1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -775,7 +777,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n2"
+                      v-model="finanzas2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -792,7 +794,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n3"
+                      v-model="finanzas3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -806,7 +808,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n4"
+                      v-model="finanzas4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -820,7 +822,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n5"
+                      v-model="finanzas5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -836,7 +838,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n6"
+                      v-model="finanzas6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -852,7 +854,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n7"
+                      v-model="finanzas7"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -868,7 +870,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n8"
+                      v-model="finanzas8"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -882,7 +884,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n9"
+                      v-model="finanzas9"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -898,7 +900,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="finanzas.n10"
+                      v-model="finanzas10"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -911,14 +913,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 7"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarFinanzas()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 5"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 7" step="7">
       <h2>Produccion</h2>
     </v-stepper-step>
-
     <v-stepper-content step="7">
       <v-card color="grey lighten-5" class="mb-12" height="540px">
         <div>
@@ -949,7 +952,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="produccion.n1"
+                      v-model="produccion1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -965,7 +968,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="produccion.n2"
+                      v-model="produccion2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -982,7 +985,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="produccion.n3"
+                      v-model="produccion3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -996,7 +999,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="produccion.n4"
+                      v-model="produccion4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1012,7 +1015,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="produccion.n5"
+                      v-model="produccion5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1029,7 +1032,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="produccion.n6"
+                      v-model="produccion6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1045,7 +1048,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="produccion.n7"
+                      v-model="produccion7"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1058,14 +1061,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 8"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarProduccion()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 6"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 8" step="8">
       <h2>Logística</h2>
     </v-stepper-step>
-
     <v-stepper-content step="8">
       <v-card color="grey lighten-5" class="mb-12" height="400px">
         <div>
@@ -1098,7 +1102,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="logistica.n1"
+                      v-model="logistica1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1115,7 +1119,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="logistica.n2"
+                      v-model="logistica2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1132,7 +1136,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="logistica.n3"
+                      v-model="logistica3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1148,13 +1152,12 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="logistica.n4"
+                      v-model="logistica4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
                   </td>
                 </tr>
-
                 <tr>
                   <td class="text-center">8.5</td>
                   <td></td>
@@ -1165,7 +1168,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="logistica.n5"
+                      v-model="logistica5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1178,14 +1181,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 9"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarLogistica()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 7"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 9" step="9">
       <h2>Tecnología</h2>
     </v-stepper-step>
-
     <v-stepper-content step="9">
       <v-card color="grey lighten-5" class="mb-12" height="340px">
         <div>
@@ -1217,7 +1221,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="tecnologia.n1"
+                      v-model="tecnologia1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1235,7 +1239,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="tecnologia.n2"
+                      v-model="tecnologia2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1251,7 +1255,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="tecnologia.n3"
+                      v-model="tecnologia3"
                       label="Sector de la Economía"
                       required
                     ></v-select>
@@ -1268,7 +1272,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="tecnologia.n4"
+                      v-model="tecnologia4"
                       label="Sector de la Economía"
                       required
                     ></v-select>
@@ -1281,14 +1285,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 10"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarTecnologia()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 8"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 10" step="10">
       <h2>Control y medición</h2>
     </v-stepper-step>
-
     <v-stepper-content step="10">
       <v-card color="grey lighten-5" class="mb-12" height="470px">
         <div>
@@ -1319,7 +1324,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="controlymedicion.n1"
+                      v-model="controlymedicion1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1335,7 +1340,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="controlymedicion.n2"
+                      v-model="controlymedicion2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1351,7 +1356,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="controlymedicion.n3"
+                      v-model="controlymedicion3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1367,7 +1372,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="controlymedicion.n4"
+                      v-model="controlymedicion4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1383,7 +1388,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="controlymedicion.n5"
+                      v-model="controlymedicion5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1400,7 +1405,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="controlymedicion.n6"
+                      v-model="controlymedicion6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1413,14 +1418,15 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="e6 = 11"> Continuar </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarControlymedicion()">
+          Continuar
+        </v-btn>
         <v-btn @click="e6 = 9"> Atras </v-btn>
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 11" step="11">
       <h2>Comunicación</h2>
     </v-stepper-step>
-
     <v-stepper-content step="11">
       <v-card color="grey lighten-5" class="mb-12" height="540px">
         <div>
@@ -1452,7 +1458,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n1"
+                      v-model="comunicacion1"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1470,7 +1476,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n2"
+                      v-model="comunicacion2"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1488,7 +1494,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n3"
+                      v-model="comunicacion3"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1505,7 +1511,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n4"
+                      v-model="comunicacion4"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1522,7 +1528,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n5"
+                      v-model="comunicacion5"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1538,7 +1544,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n6"
+                      v-model="comunicacion6"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1554,7 +1560,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n7"
+                      v-model="comunicacion7"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1568,7 +1574,7 @@
                   <td>
                     <v-select
                       :items="seleccion"
-                      v-model="comunicacion.n8"
+                      v-model="comunicacion8"
                       label="Seleccione una opcion"
                       required
                     ></v-select>
@@ -1581,220 +1587,835 @@
         </div>
       </v-card>
       <div style="text-align: right">
-        <v-btn color="deep-purple accent-2" @click="guardar"> Ver Resultados </v-btn>
+        <v-btn color="deep-purple accent-2" @click="guardarComunicacion()">
+          Ver Resultados
+        </v-btn>
         <v-btn @click="e6 = 10"> Atras </v-btn>
       </div>
     </v-stepper-content>
   </v-stepper>
 </template>
-
-
-
 <script>
+import Swal from "sweetalert2";
 export default {
   data: () => ({
     valor: global.GsectorEconomia,
-
+    nombre: "",
+    datos: "",
     e6: 1,
     valid: false,
     seleccion: ["Si", "No", "No Aplica"],
-    estrategia: [
-      'n1: ""',
-      'n2: ""',
-      'n3: ""',
-      'n4: ""',
-      'n5: ""',
-      'n6: ""',
-      'n7: ""',
-    ],
 
-    capitalHumano: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""', 'n6: ""'],
-    mercadotecnia: [
-      'n1: ""',
-      'n2: ""',
-      'n3: ""',
-      'n4: ""',
-      'n5: ""',
-      'n6: ""',
-      'n7: ""',
-      'n8: ""',
-      'n9: ""',
-    ],
-    ventas: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""', 'n6: ""'],
-    compras: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""', 'n6: ""'],
-    finanzas: [
-      'n1: ""',
-      'n2: ""',
-      'n3: ""',
-      'n4: ""',
-      'n5: ""',
-      'n6: ""',
-      'n7: ""',
-      'n8: ""',
-      'n9: ""',
-      'n10: ""',
-    ],
-    produccion: [
-      'n1: ""',
-      'n2: ""',
-      'n3: ""',
-      'n4: ""',
-      'n5: ""',
-      'n6: ""',
-      'n7: ""',
-    ],
-    logistica: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""', 'n5: ""'],
-    tecnologia: ['n1: ""', 'n2: ""', 'n3: ""', 'n4: ""'],
-    controlymedicion: [
-      'n1: ""',
-      'n2: ""',
-      'n3: ""',
-      'n4: ""',
-      'n5: ""',
-      'n6: ""',
-    ],
-    comunicacion: [
-      'n1: ""',
-      'n2: ""',
-      'n3: ""',
-      'n4: ""',
-      'n5: ""',
-      'n6: ""',
-      'n7: ""',
-      'n8: ""',
-      
-    ],
-    // if (estrategia=) {
-      
-    // }
+    // estrategia:
+    estrategia1: "",
+    estrategia2: "",
+    estrategia3: "",
+    estrategia4: "",
+    estrategia5: "",
+    estrategia6: "",
+    estrategia7: "",
+
+    // capitalHumano:
+    capitalHumano1: "",
+    capitalHumano2: "",
+    capitalHumano3: "",
+    capitalHumano4: "",
+    capitalHumano5: "",
+    capitalHumano6: "",
+
+    // mercadotecnia:
+    mercadotecnia1: "",
+    mercadotecnia2: "",
+    mercadotecnia3: "",
+    mercadotecnia4: "",
+    mercadotecnia5: "",
+    mercadotecnia6: "",
+    mercadotecnia7: "",
+    mercadotecnia8: "",
+    mercadotecnia9: "",
+
+    // ventas:
+    ventas1: "",
+    ventas2: "",
+    ventas3: "",
+    ventas4: "",
+    ventas5: "",
+    ventas6: "",
+
+    // compras:
+    compras1: "",
+    compras2: "",
+    compras3: "",
+    compras4: "",
+    compras5: "",
+    compras6: "",
+
+    // finanzas:
+    finanzas1: "",
+    finanzas2: "",
+    finanzas3: "",
+    finanzas4: "",
+    finanzas5: "",
+    finanzas6: "",
+    finanzas7: "",
+    finanzas8: "",
+    finanzas9: "",
+    finanzas10: "",
+
+    // produccion:
+    produccion1: "",
+    produccion2: "",
+    produccion3: "",
+    produccion4: "",
+    produccion5: "",
+    produccion6: "",
+    produccion7: "",
+
+    // logistica:
+    logistica1: "",
+    logistica2: "",
+    logistica3: "",
+    logistica4: "",
+    logistica5: "",
+
+    // tecnologia:
+    tecnologia1: "",
+    tecnologia2: "",
+    tecnologia3: "",
+    tecnologia4: "",
+
+    // controlymedicion:
+    controlymedicion1: "",
+    controlymedicion2: "",
+    controlymedicion3: "",
+    controlymedicion4: "",
+    controlymedicion5: "",
+    controlymedicion6: "",
+
+    // comunicacion:
+    comunicacion1: "",
+    comunicacion2: "",
+    comunicacion3: "",
+    comunicacion4: "",
+    comunicacion5: "",
+    comunicacion6: "",
+    comunicacion7: "",
+    comunicacion8: "",
   }),
-  // computed:{
-  //   if(seleccion = si) 
-  // },
-
   methods: {
-    guardar() {
+    guardarestrategia() {
       if (
-        this.estrategia != "" &&
-        this.capitalHumano != "" &&
-        this.mercadotecnia != "" &&
-        this.ventas != "" &&
-        this.compras != "" &&
-        this.finanzas != "" &&
-        this.produccion != "" &&
-        this.logistica != "" &&
-        this.tecnologia != "" &&
-        this.controlymedicion != "" &&
-        this.comunicacion != ""
+        (this.estrategia1 != "",
+        this.estrategia2 != "",
+        this.estrategia3 != "",
+        this.estrategia4 != "",
+        this.estrategia5 != "",
+        this.estrategia6 != "",
+        this.estrategia7 != "")
       ) {
-        const formulario = {
-          estrategia: [
-            this.estrategia.n1,
-            this.estrategia.n2,
-            this.estrategia.n3,
-            this.estrategia.n4,
-            this.estrategia.n5,
-            this.estrategia.n6,
-            this.estrategia.n7,
-          ],
-          capitalHumano: [
-            this.capitalHumano.n1,
-            this.capitalHumano.n2,
-            this.capitalHumano.n3,
-            this.capitalHumano.n4,
-            this.capitalHumano.n5,
-            this.capitalHumano.n6,
-          ],
-          mercadotecnia: [
-            this.mercadotecnia.n1,
-            this.mercadotecnia.n2,
-            this.mercadotecnia.n3,
-            this.mercadotecnia.n4,
-            this.mercadotecnia.n5,
-            this.mercadotecnia.n6,
-            this.mercadotecnia.n7,
-            this.mercadotecnia.n8,
-            this.mercadotecnia.n9,
-          ],
-          ventas: [
-            this.ventas.n1,
-            this.ventas.n2,
-            this.ventas.n3,
-            this.ventas.n4,
-            this.ventas.n5,
-            this.ventas.n6,
-          ],
-          compras: [
-            this.compras.n1,
-            this.compras.n2,
-            this.compras.n3,
-            this.compras.n4,
-            this.compras.n5,
-            this.compras.n6,
-          ],
-          finanzas: [
-            this.finanzas.n1,
-            this.finanzas.n2,
-            this.finanzas.n3,
-            this.finanzas.n4,
-            this.finanzas.n5,
-            this.finanzas.n6,
-            this.finanzas.n7,
-            this.finanzas.n8,
-            this.finanzas.n9,
-            this.finanzas.n10,
-          ],
-          produccion: [
-            this.produccion.n1,
-            this.produccion.n2,
-            this.produccion.n3,
-            this.produccion.n4,
-            this.produccion.n5,
-            this.produccion.n6,
-            this.produccion.n7,
-          ],
-          logistica: [
-            this.logistica.n1,
-            this.logistica.n2,
-            this.logistica.n3,
-            this.logistica.n4,
-            this.logistica.n5,
-          ],
-          tecnologia: [
-            this.tecnologia.n1,
-            this.tecnologia.n2,
-            this.tecnologia.n3,
-            this.tecnologia.n4,
-          ],
-          controlymedicion: [
-            this.controlymedicion.n1,
-            this.controlymedicion.n2,
-            this.controlymedicion.n3,
-            this.controlymedicion.n4,
-            this.controlymedicion.n5,
-            this.controlymedicion.n6,
-          ],
-          comunicacion: [
-            this.comunicacion.n1,
-            this.comunicacion.n2,
-            this.comunicacion.n3,
-            this.comunicacion.n4,
-            this.comunicacion.n5,
-            this.comunicacion.n6,
-            this.comunicacion.n7,
-            this.comunicacion.n8,
-          ],
-        };    
-        
-        this.$store.dispatch("addDiagnostico", formulario);
+        if (this.estrategia1 == "Si") {
+          this.estrategia1 = 10;
+        } else {
+          this.estrategia1 = 0;
+        }
+        if (this.estrategia2 == "Si") {
+          this.estrategia2 = 10;
+        } else {
+          this.estrategia2 = 0;
+        }
+        if (this.estrategia3 == "Si") {
+          this.estrategia3 = 10;
+        } else {
+          this.estrategia3 = 0;
+        }
+        if (this.estrategia4 == "Si") {
+          this.estrategia4 = 10;
+        } else {
+          this.estrategia4 = 0;
+        }
+        if (this.estrategia5 == "Si") {
+          this.estrategia5 = 10;
+        } else {
+          this.estrategia5 = 0;
+        }
+        if (this.estrategia6 == "Si") {
+          this.estrategia6 = 10;
+        } else {
+          this.estrategia6 = 0;
+        }
+        if (this.estrategia7 == "Si") {
+          this.estrategia7 = 10;
+        } else {
+          this.estrategia7 = 0;
+        }
+        var sumaEstrategia =
+          this.estrategia1 +
+          this.estrategia2 +
+          this.estrategia3 +
+          this.estrategia4 +
+          this.estrategia5 +
+          this.estrategia6 +
+          this.estrategia7;
+        console.log(this.sumaEstrategia);
+        const formularioEstrategia = {
+          nombre: "Estrategia",
+          datos: sumaEstrategia,
+        };
+        (this.e6 = 2),
+          this.$store.dispatch("addDiagnostico", formularioEstrategia);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarcapitalhumano() {
+      if (
+        (this.capitalHumano1 != "",
+        this.capitalHumano2 != "",
+        this.capitalHumano3 != "",
+        this.capitalHumano4 != "",
+        this.capitalHumano5 != "",
+        this.capitalHumano6 != "")
+      ) {
+        if (this.capitalHumano1 == "Si") {
+          this.capitalHumano1 = 10;
+        } else {
+          this.capitalHumano1 = 0;
+        }
+        if (this.capitalHumano2 == "Si") {
+          this.capitalHumano2 = 10;
+        } else {
+          this.capitalHumano2 = 0;
+        }
+        if (this.capitalHumano3 == "Si") {
+          this.capitalHumano3 = 10;
+        } else {
+          this.capitalHumano3 = 0;
+        }
+        if (this.capitalHumano4 == "Si") {
+          this.capitalHumano4 = 10;
+        } else {
+          this.capitalHumano4 = 0;
+        }
+        if (this.capitalHumano5 == "Si") {
+          this.capitalHumano5 = 10;
+        } else {
+          this.capitalHumano5 = 0;
+        }
+        if (this.capitalHumano6 == "Si") {
+          this.capitalHumano6 = 10;
+        } else {
+          this.capitalHumano6 = 0;
+        }
+        var sumarCapitalhumano =
+          this.capitalHumano1 +
+          this.capitalHumano2 +
+          this.capitalHumano3 +
+          this.capitalHumano4 +
+          this.capitalHumano5 +
+          this.capitalHumano6;
+        const formularioCapitalhumano = {
+          nombre: "Capital Humano",
+          datos: sumarCapitalhumano,
+        };
+        (this.e6 = 3),
+          this.$store.dispatch("addDiagnostico", formularioCapitalhumano);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarmercadotecnia() {
+      if (
+        (this.mercadotecnia1 != "",
+        this.mercadotecnia2 != "",
+        this.mercadotecnia3 != "",
+        this.mercadotecnia4 != "",
+        this.mercadotecnia5 != "",
+        this.mercadotecnia6 != "",
+        this.mercadotecnia7 != "",
+        this.mercadotecnia8 != "",
+        this.mercadotecnia9 != "")
+      ) {
+        if (this.mercadotecnia1 == "Si") {
+          this.mercadotecnia1 = 10;
+        } else {
+          this.mercadotecnia1 = 0;
+        }
+        if (this.mercadotecnia2 == "Si") {
+          this.mercadotecnia2 = 10;
+        } else {
+          this.mercadotecnia2 = 0;
+        }
+        if (this.mercadotecnia3 == "Si") {
+          this.mercadotecnia3 = 10;
+        } else {
+          this.mercadotecnia3 = 0;
+        }
+        if (this.mercadotecnia4 == "Si") {
+          this.mercadotecnia4 = 10;
+        } else {
+          this.mercadotecnia4 = 0;
+        }
+        if (this.mercadotecnia5 == "Si") {
+          this.mercadotecnia5 = 10;
+        } else {
+          this.mercadotecnia5 = 0;
+        }
+        if (this.mercadotecnia6 == "Si") {
+          this.mercadotecnia6 = 10;
+        } else {
+          this.mercadotecnia6 = 0;
+        }
+        if (this.mercadotecnia7 == "Si") {
+          this.mercadotecnia7 = 10;
+        } else {
+          this.mercadotecnia7 = 0;
+        }
+        if (this.mercadotecnia8 == "Si") {
+          this.mercadotecnia8 = 10;
+        } else {
+          this.mercadotecnia8 = 0;
+        }
+        if (this.mercadotecnia9 == "Si") {
+          this.mercadotecnia9 = 10;
+        } else {
+          this.mercadotecnia9 = 0;
+        }
+        var sumarMercadotecnia =
+          this.mercadotecnia1 +
+          this.mercadotecnia2 +
+          this.mercadotecnia3 +
+          this.mercadotecnia4 +
+          this.mercadotecnia5 +
+          this.mercadotecnia6 +
+          this.mercadotecnia7 +
+          this.mercadotecnia8 +
+          this.mercadotecnia9;
+        const formularioMercadotecnia = {
+          nombre: "Mercadotecnia",
+          datos: sumarMercadotecnia,
+        };
+        this.e6 = 4;
+        this.$store.dispatch("addDiagnostico", formularioMercadotecnia);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarVentas() {
+      if (
+        (this.ventas1 != "",
+        this.ventas2 != "",
+        this.ventas3 != "",
+        this.ventas4 != "",
+        this.ventas5 != "",
+        this.ventas6 != "")
+      ) {
+        if (this.ventas1 == "Si") {
+          this.ventas1 = 10;
+        } else {
+          this.ventas1 = 0;
+        }
+        if (this.ventas2 == "Si") {
+          this.ventas2 = 10;
+        } else {
+          this.ventas2 = 0;
+        }
+        if (this.ventas3 == "Si") {
+          this.ventas3 = 10;
+        } else {
+          this.ventas3 = 0;
+        }
+        if (this.ventas4 == "Si") {
+          this.ventas4 = 10;
+        } else {
+          this.ventas4 = 0;
+        }
+        if (this.ventas5 == "Si") {
+          this.ventas5 = 10;
+        } else {
+          this.ventas5 = 0;
+        }
+        if (this.ventas6 == "Si") {
+          this.ventas6 = 10;
+        } else {
+          this.ventas6 = 0;
+        }
+        var sumarVentas =
+          this.ventas1 +
+          this.ventas2 +
+          this.ventas3 +
+          this.ventas4 +
+          this.ventas5 +
+          this.ventas6;
+        const formularioVentas = {
+          nombre: "Ventas",
+          datos: sumarVentas,
+        };
+        this.e6 = 5;
+        this.$store.dispatch("addDiagnostico", formularioVentas);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarCompras() {
+      if (
+        (this.compras1 != "",
+        this.compras2 != "",
+        this.compras3 != "",
+        this.compras4 != "",
+        this.compras5 != "",
+        this.compras6 != "")
+      ) {
+        if (this.compras1 == "Si") {
+          this.compras1 = 10;
+        } else {
+          this.compras1 = 0;
+        }
+        if (this.compras2 == "Si") {
+          this.compras2 = 10;
+        } else {
+          this.compras2 = 0;
+        }
+        if (this.compras3 == "Si") {
+          this.compras3 = 10;
+        } else {
+          this.compras3 = 0;
+        }
+        if (this.compras4 == "Si") {
+          this.compras4 = 10;
+        } else {
+          this.compras4 = 0;
+        }
+        if (this.compras5 == "Si") {
+          this.compras5 = 10;
+        } else {
+          this.compras5 = 0;
+        }
+        if (this.compras6 == "Si") {
+          this.compras6 = 10;
+        } else {
+          this.compras6 = 0;
+        }
+        var sumarCompras =
+          this.compras1 +
+          this.compras2 +
+          this.compras3 +
+          this.compras4 +
+          this.compras5 +
+          this.compras6;
+        const formularioCompras = {
+          nombre: "Compras",
+          datos: sumarCompras,
+        };
+        this.e6 = 6;
+        this.$store.dispatch("addDiagnostico", formularioCompras);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarFinanzas() {
+      if (
+        (this.finanzas1 != "",
+        this.finanzas2 != "",
+        this.finanzas3 != "",
+        this.finanzas4 != "",
+        this.finanzas5 != "",
+        this.finanzas6 != "",
+        this.finanzas7 != "",
+        this.finanzas8 != "",
+        this.finanzas9 != "",
+        this.finanzas10 != "")
+      ) {
+        if (this.finanzas1 == "Si") {
+          this.finanzas1 = 10;
+        } else {
+          this.finanzas1 = 0;
+        }
+        if (this.finanzas2 == "Si") {
+          this.finanzas2 = 10;
+        } else {
+          this.finanzas2 = 0;
+        }
+        if (this.finanzas3 == "Si") {
+          this.finanzas3 = 10;
+        } else {
+          this.finanzas3 = 0;
+        }
+        if (this.finanzas4 == "Si") {
+          this.finanzas4 = 10;
+        } else {
+          this.finanzas4 = 0;
+        }
+        if (this.finanzas5 == "Si") {
+          this.finanzas5 = 10;
+        } else {
+          this.finanzas5 = 0;
+        }
+        if (this.finanzas6 == "Si") {
+          this.finanzas6 = 10;
+        } else {
+          this.finanzas6 = 0;
+        }
+        if (this.finanzas7 == "Si") {
+          this.finanzas7 = 10;
+        } else {
+          this.finanzas7 = 0;
+        }
+        if (this.finanzas8 == "Si") {
+          this.finanzas8 = 10;
+        } else {
+          this.finanzas8 = 0;
+        }
+        if (this.finanzas9 == "Si") {
+          this.finanzas9 = 10;
+        } else {
+          this.finanzas9 = 0;
+        }
+        if (this.finanzas10 == "Si") {
+          this.finanzas10 = 10;
+        } else {
+          this.finanzas10 = 0;
+        }
+        var sumarFinanzas =
+          this.finanzas1 +
+          this.finanzas2 +
+          this.finanzas3 +
+          this.finanzas4 +
+          this.finanzas5 +
+          this.finanzas6 +
+          this.finanzas7 +
+          this.finanzas8 +
+          this.finanzas9 +
+          this.finanzas10;
+
+        const formularioFinanzas = {
+          nombre: "Finanzas",
+          datos: sumarFinanzas,
+        };
+        this.e6 = 7;
+        this.$store.dispatch("addDiagnostico", formularioFinanzas);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarProduccion() {
+      if (
+        (this.produccion1 != "",
+        this.produccion2 != "",
+        this.produccion3 != "",
+        this.produccion4 != "",
+        this.produccion5 != "",
+        this.produccion6 != "",
+        this.produccion7 != "")
+      ) {
+        if (this.produccion1 == "Si") {
+          this.produccion1 = 10;
+        } else {
+          this.produccion1 = 0;
+        }
+        if (this.produccion2 == "Si") {
+          this.produccion2 = 10;
+        } else {
+          this.produccion2 = 0;
+        }
+        if (this.produccion3 == "Si") {
+          this.produccion3 = 10;
+        } else {
+          this.produccion3 = 0;
+        }
+        if (this.produccion4 == "Si") {
+          this.produccion4 = 10;
+        } else {
+          this.produccion4 = 0;
+        }
+        if (this.produccion5 == "Si") {
+          this.produccion5 = 10;
+        } else {
+          this.produccion5 = 0;
+        }
+        if (this.produccion6 == "Si") {
+          this.produccion6 = 10;
+        } else {
+          this.produccion6 = 0;
+        }
+        if (this.produccion7 == "Si") {
+          this.produccion7 = 10;
+        } else {
+          this.produccion7 = 0;
+        }
+        var sumarProduccion =
+          this.produccion1 +
+          this.produccion2 +
+          this.produccion3 +
+          this.produccion4 +
+          this.produccion5 +
+          this.produccion6 +
+          this.produccion7;
+        const formularioProduccion = {
+          nombre: "Produccion",
+          datos: sumarProduccion,
+        };
+        (this.e6 = 8),
+          this.$store.dispatch("addDiagnostico", formularioProduccion);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarLogistica() {
+      if (
+        (this.logistica1 != "",
+        this.logistica2 != "",
+        this.logistica3 != "",
+        this.logistica4 != "",
+        this.logistica5 != "")
+      ) {
+        if (this.logistica1 == "Si") {
+          this.logistica1 = 10;
+        } else {
+          this.logistica1 = 0;
+        }
+        if (this.logistica2 == "Si") {
+          this.logistica2 = 10;
+        } else {
+          this.logistica2 = 0;
+        }
+        if (this.logistica3 == "Si") {
+          this.logistica3 = 10;
+        } else {
+          this.logistica3 = 0;
+        }
+        if (this.logistica4 == "Si") {
+          this.logistica4 = 10;
+        } else {
+          this.logistica4 = 0;
+        }
+        if (this.logistica5 == "Si") {
+          this.logistica5 = 10;
+        } else {
+          this.logistica5 = 0;
+        }
+        var sumarLogistica =
+          this.logistica1 +
+          this.logistica2 +
+          this.logistica3 +
+          this.logistica4 +
+          this.logistica5;
+        const formularioLogistica = {
+          nombre: "Logística",
+          datos: sumarLogistica,
+        };
+        this.e6 = 9;
+        this.$store.dispatch("addDiagnostico", formularioLogistica);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarTecnologia() {
+      if (
+        (this.tecnologia1 != "",
+        this.tecnologia2 != "",
+        this.tecnologia3 != "",
+        this.tecnologia4 != "")
+      ) {
+        if (this.tecnologia1 == "Si") {
+          this.tecnologia1 = 10;
+        } else {
+          this.tecnologia1 = 0;
+        }
+        if (this.tecnologia2 == "Si") {
+          this.tecnologia2 = 10;
+        } else {
+          this.tecnologia2 = 0;
+        }
+        if (this.tecnologia3 == "Si") {
+          this.tecnologia3 = 10;
+        } else {
+          this.tecnologia3 = 0;
+        }
+        if (this.tecnologia4 == "Si") {
+          this.tecnologia4 = 10;
+        } else {
+          this.tecnologia4 = 0;
+        }
+        var sumarTecnologia =
+          this.tecnologia1 + this.tecnologia2 + this.tecnologia3 + this.tecnologia4;
+        const formularioTecnologia = {
+          nombre: "Tecnología",
+          datos: sumarTecnologia,
+        };
+        this.e6 = 10;
+        this.$store.dispatch("addDiagnostico", formularioTecnologia);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarControlymedicion() {
+      if (
+        (this.controlymedicion1 != "",
+        this.controlymedicion2 != "",
+        this.controlymedicion3 != "",
+        this.controlymedicion4 != "",
+        this.controlymedicion5 != "",
+        this.controlymedicion6 != "")
+      ) {
+        if (this.controlymedicion1 == "Si") {
+          this.controlymedicion1 = 10;
+        } else {
+          this.controlymedicion1 = 0;
+        }
+        if (this.controlymedicion2 == "Si") {
+          this.controlymedicion2 = 10;
+        } else {
+          this.controlymedicion2 = 0;
+        }
+        if (this.controlymedicion3 == "Si") {
+          this.controlymedicion3 = 10;
+        } else {
+          this.controlymedicion3 = 0;
+        }
+        if (this.controlymedicion4 == "Si") {
+          this.controlymedicion4 = 10;
+        } else {
+          this.controlymedicion4 = 0;
+        }
+        if (this.controlymedicion5 == "Si") {
+          this.controlymedicion5 = 10;
+        } else {
+          this.controlymedicion5 = 0;
+        }
+        if (this.controlymedicion6 == "Si") {
+          this.controlymedicion6 = 10;
+        } else {
+          this.controlymedicion6 = 0;
+        }
+        var sumarControlymedicion =
+          this.controlymedicion1 +
+          this.controlymedicion2 +
+          this.controlymedicion3 +
+          this.controlymedicion4 +
+          this.controlymedicion5 +
+          this.controlymedicion6;
+        const formularioControlymedicion = {
+          nombre: "Control y medición",
+          datos: sumarControlymedicion,
+        };
+        (this.e6 = 11),
+          this.$store.dispatch("addDiagnostico", formularioControlymedicion);
+      } else {
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
+      }
+    },
+    guardarComunicacion() {
+      if (
+        (this.comunicacion1 != "",
+        this.comunicacion2 != "",
+        this.comunicacion3 != "",
+        this.comunicacion4 != "",
+        this.comunicacion5 != "",
+        this.comunicacion6 != "",
+        this.comunicacion7 != "",
+        this.comunicacion8 != "")
+      ) {
+        if (this.comunicacion1 == "Si") {
+          this.comunicacion1 = 10;
+        } else {
+          this.comunicacion1 = 0;
+        }
+        if (this.comunicacion2 == "Si") {
+          this.comunicacion2 = 10;
+        } else {
+          this.comunicacion2 = 0;
+        }
+        if (this.comunicacion3 == "Si") {
+          this.comunicacion3 = 10;
+        } else {
+          this.comunicacion3 = 0;
+        }
+        if (this.comunicacion4 == "Si") {
+          this.comunicacion4 = 10;
+        } else {
+          this.comunicacion4 = 0;
+        }
+        if (this.comunicacion5 == "Si") {
+          this.comunicacion5 = 10;
+        } else {
+          this.comunicacion5 = 0;
+        }
+        if (this.comunicacion6 == "Si") {
+          this.comunicacion6 = 10;
+        } else {
+          this.comunicacion6 = 0;
+        }
+        if (this.comunicacion7 == "Si") {
+          this.comunicacion7 = 10;
+        } else {
+          this.comunicacion7 = 0;
+        }
+        if (this.comunicacion8 == "Si") {
+          this.comunicacion8 = 10;
+        } else {
+          this.comunicacion8 = 0;
+        }
+        var sumarComunicacion =
+          this.comunicacion1 +
+          this.comunicacion2 +
+          this.comunicacion3 +
+          this.comunicacion4 +
+          this.comunicacion5 +
+          this.comunicacion6 +
+          this.comunicacion7 +
+          this.comunicacion8;
+        const formularioComunicacion = {
+          nombre: "Comunicación",
+          datos: sumarComunicacion,
+        };
+        this.$store.dispatch("addDiagnostico", formularioComunicacion);
         this.$router.push("./grafico");
       } else {
-        alert("Todos los campos son requeridos");
-        // (
-        // <v-alert border="left" color="red" type="error">
-        //   Todos los campos son requeridos
-        // </v-alert>;
-        // );
+        Swal.fire(
+          "¡Informacion!",
+          "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
+          "info"
+        );
       }
     },
   },

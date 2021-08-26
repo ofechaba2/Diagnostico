@@ -1199,8 +1199,7 @@ export default {
             this.representante.correo,
             this.representante.contacto,
             this.representante.profesion
-        ]
-          
+        ]  
         };
         this.$store.dispatch("addCaracterizacion", persona);
         this.$router.push("./diagnostico");
@@ -1208,7 +1207,7 @@ export default {
          Swal.fire(
           "¡Informacion!",
           "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
-          "info"
+          "success"
         )
         // alert("Todos los campos son requeridos");  
         

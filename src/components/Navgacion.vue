@@ -16,8 +16,8 @@
 
       <v-list-item link>
         <v-list-item-content>
-          <v-list-item-title class="title">{{$store.state.usuario.nombre}}</v-list-item-title>
-          <v-list-item-subtitle>{{$store.state.usuario.email}}</v-list-item-subtitle>
+          <!-- <v-list-item-title class="title">{{$store.state.usuario.nombre}}</v-list-item-title>
+          <v-list-item-subtitle>{{$store.state.usuario.email}}</v-list-item-subtitle> -->
         </v-list-item-content>
       </v-list-item>
     </v-list>

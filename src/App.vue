@@ -19,8 +19,8 @@
         <v-icon >mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-de manera general y se hace la pregunta en las dos
-    <navegacion></navegacion>
+
+    <!-- <navegacion></navegacion> -->
     <footer />
     <v-main class="light">
       <v-container>
@@ -48,7 +48,7 @@ de manera general y se hace la pregunta en las dos
 </template>
 
 <script>
-import navegacion from "@/components/Navgacion.vue";
+// import navegacion from "@/components/Navgacion.vue";
 
 import firebase from "firebase";
 import "firebase/app";
@@ -62,7 +62,7 @@ export default {
   components: {
     
     // footer,
-    navegacion,
+    // navegacion,
   },
   computed:{
      currentRouteName(){
