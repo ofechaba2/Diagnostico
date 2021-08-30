@@ -6,19 +6,18 @@
         <v-form ref="form">
           <v-container>
            
-            <h1 class="text-center" >
-               <!-- v-if="this.valor == 'Agropecuario'" -->
+            <h1 class="text-center" v-if="this.valor == 'Agropecuario'">
               DIAGNOSTICO EMPRESARIAL-SECTOR AGROPECUARIO
             </h1>
-            <!-- <h1 class="text-center" v-if="this.valor == 'Comercio'">
+            <h1 class="text-center" v-if="this.valor == 'Comercio'">
               DIAGNOSTICO EMPRESARIAL-SECTOR COMERCIO
             </h1>
             <h1 class="text-center" v-if="this.valor == 'Industrial'">
               DIAGNOSTICO EMPRESARIAL-SECTOR INDUSTRIAL
             </h1>
             <h1 class="text-center" v-if="this.valor == 'Servicio'">
-              DIAGNOSTICO EMPRESARIAL-SECTOR SERVICIO -->
-            <!-- </h1> -->
+              DIAGNOSTICO EMPRESARIAL-SECTOR SERVICIO
+            </h1>
             <v-divider class="mx-5" inset vertical></v-divider>
             <v-row>
               <template>
@@ -42,26 +41,31 @@
     </v-flex>
   </v-layout>
 </template>
-
 <script>
-// import HelloWorld from '../components/HelloWorld'
+
 import graficoRadar from "../components/graficoRadar.vue";
 import graficoPie from "../components/graficoPie.vue";
 import formDatos from "../components/formDatos.vue";
 import formResultados from "../components/formResultados.vue";
 
 export default {
-  // valor: global.GsectorEconomia,
-  name: "Home",
+  data:() => ({ 
+  valor: global.GsectorEconomia,
   
+   
+  name: "Home",
+  }),
   
   components: {
     graficoRadar,
     graficoPie,
     formDatos,
     formResultados,
+    
   },
   
+  
 };
+
 
 </script>

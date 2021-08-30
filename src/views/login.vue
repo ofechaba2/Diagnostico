@@ -42,7 +42,7 @@
                         rounded
                         color="pink darken-4"
                         dark
-                        @click="ingresar()"
+                        @click="ingresarLlamar()"
                         >Iniciar Sesión</v-btn
                       >
                       <br />
@@ -238,6 +238,7 @@ export default {
     cargoEmpresa: "",
     telefono: "",
     tipoIndustria: "",
+    result: null,
     
     
 
@@ -285,23 +286,23 @@ export default {
       //   );
       // }
       //eslint-disable-next-line
-       var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-       if (!EMAIL_REGEXP.test(this.correoCreacion)) {
-        this.validaMensaje.push(
-          "La dirección de email " + this.correoCreacion + " está incompleta",
-        )}
+    //    var EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //    if (!EMAIL_REGEXP.test(this.correoCreacion)) {
+    //     this.validaMensaje.push(
+    //       "La dirección de email " + this.correoCreacion + " está incompleta",
+    //     )}
 
-      // if (this.editedIndex <= -1) {
-      //   if (this.claveCreacion.length < 1 || this.claveCreacion.length > 64) {
-      //     this.validaMensaje.push(
-      //       "El password del usuario debe tener entre 1-64 caracteres."
-      //     );
-      //   }
-      // }
-      if (this.validaMensaje.length) {
-        this.valida = 1;
-      }
-      return this.valida;
+    //   // if (this.editedIndex <= -1) {
+    //   //   if (this.claveCreacion.length < 1 || this.claveCreacion.length > 64) {
+    //   //     this.validaMensaje.push(
+    //   //       "El password del usuario debe tener entre 1-64 caracteres."
+    //   //     );
+    //   //   }
+    //   // }
+    //   if (this.validaMensaje.length) {
+    //     this.valida = 1;
+    //   }
+    //   return this.valida;
     },
 
     nuevoUser() {
@@ -310,7 +311,15 @@ export default {
               "¡Error!",
               "Las contraseñas no coinsiden, por favor verifique e intente nuevamente.",
               "warning")
-      }else
+
+      }if (this.claveCreacion.length < 6 ) {
+         Swal.fire(
+              "¡Contraseña Invalida!",
+              "La contraseña debe tener mas de 6 caracteres, por favor verifique e intentelo nuevamente.",
+              "info")                
+      }
+
+      else
        if( 
         this.nombres != "" && 
         this.correoCreacion !="" && 
@@ -342,51 +351,56 @@ export default {
               "¡Felicitaciones!",
               "La cuenta de a creado satisfactoriamente, Se a enviado un un correo de verificacion",
               "success"
-            )
-             
-        
-        
-        
-        }).catch(
+            )        
+        }).catch(() =>{
           Swal.fire(
               "¡Correo Invalido!",
               "Este correo ya esta en uso, por favor verifique e intentelo nuevamente.",
               "info")
-        )                    
+        })                    
       }else{
          Swal.fire(
-              "¡!",
+              "¡Informacion!",
               "Todos los campos son requeridos, Verifique que todos los campos esten completos.",
               "warning")
   
       }
     },
-    
-   
-    
-  async ingresar() {
-      if ( this.email && this.password ) {
-      await firebase.auth().signInWithEmailAndPassword (this.email, this.password)
-        .then(user => {
-        this.$router.push("./caracterizacion");          
-          console.log(user)
-          Swal.fire(
+  
+  async ingresarLlamar(){
+    let me = this;
+    me.result = await  me.ingresar();
+    console.log(me.result)
+    if (me.result == 'resolved') {
+        Swal.fire(
               "¡Felicitaciones!",
               "A iniciado sesion satisfactoriamente",
-              "success");
-        }).catch (
-         Swal.fire(
+              "success");       
+    }
+    else{
+      Swal.fire(
               "¡Error!",
               "La cuenta o la contraseña son invalidas, por favor verifique e intente nuevamente",
               "error")
-        )                    
-      }else{
-        Swal.fire(
-              "¡VERIFIQUE!",
-              "Verifique que los campos esten completos",
-              "info"
-            );
+    }
+  },
+    
+   
+    
+   ingresar() {
+     return new Promise(resolve => {
+
+      if ( this.email && this.password ) {
+       firebase.auth().signInWithEmailAndPassword (this.email, this.password)
+        .then(user => {
+          resolve('resolved');
+          this.$router.push("./caracterizacion");          
+          console.log(user)      
+        }).catch(() => {
+                    resolve('rejected');
+                   });                   
       }
+     })
     },
 
 

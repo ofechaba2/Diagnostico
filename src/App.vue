@@ -13,7 +13,6 @@
       </div>
       <h1>Diagnóstico y Gestión Empresarial</h1>
       <v-spacer></v-spacer>
-      <!-- to.path != '/login' -->
       <v-btn @click="login"  v-if="currentRouteName =='Home'" target="_blank" text>
         <span class="mr-2">Login</span>
         <v-icon >mdi-open-in-new</v-icon>
@@ -50,10 +49,8 @@
 <script>
 // import navegacion from "@/components/Navgacion.vue";
 
-import firebase from "firebase";
 import "firebase/app";
 import "firebase/auth";
-// import firebase from 'firebase/app'
 // import footer from "@/components/footer.vue";
 
 export default {
@@ -66,17 +63,12 @@ export default {
   },
   computed:{
      currentRouteName(){
-       return this.$route.name
-       
+       return this.$route.name 
      },
-     esAdministrador(){
-       
+     esAdministrador(){  
       return this.$store.state.usuario && this.$store.state.usuario.rol == 'ADMIN_ROL';
     },
-
    },
-  
-
   data: () => ({
     estado: false,
     drawer: null,
@@ -86,32 +78,7 @@ export default {
     login(){
         this.$router.push("./login");        
       },
-    inicioSesion() {
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
-.then(() => {
-      
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.estado = true;
-          console.log(this.estado);
-
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          // var uid = user.uid;
-          // ...
-        } else {
-          alert;
-          // console.log(uid);
-          // User is signed out
-          // ...
-        }
-      });
-      })
-    },
     
-  },
-  mounted() {
-    this.inicioSesion();
   },
 }
 </script>

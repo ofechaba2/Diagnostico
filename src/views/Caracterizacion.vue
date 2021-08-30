@@ -1156,10 +1156,8 @@ export default {
     guardar() {
 
       global.GsectorEconomia = this.sectorEconomia;
-      global.Grazonsocial = this.razonsocial;
       global.Gnit = this.nit;
-      global.Gformajuridica = this.formaJuridica;
-      global.Gdepartamento = this.departamento;
+
 
       if (
         this.razonsocial != "" &&
@@ -1208,9 +1206,7 @@ export default {
           "¡Informacion!",
           "Todos los campos son requeridos, por favor verifique e intente nuevamente.",
           "success"
-        )
-        // alert("Todos los campos son requeridos");  
-        
+        )        
       }
     },
   },

@@ -1,6 +1,5 @@
 import firebase from 'firebase'
 
-
 const firebaseConfig = {
     apiKey: "AIzaSyAThxjHGZT3gc68_APyaMkp8DkQWbdFBWY",
     authDomain: "form-131b2.firebaseapp.com",

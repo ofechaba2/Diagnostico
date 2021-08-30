@@ -157,7 +157,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarestrategia()">
           Continuar
         </v-btn>
-        <v-btn text col-3> Atras </v-btn>
+        <!-- <v-btn text col-3> Atras </v-btn> -->
       </div>
     </v-stepper-content>
 
@@ -292,7 +292,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarcapitalhumano()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 1"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 1"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
 
@@ -470,7 +470,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarmercadotecnia()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 2"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 2"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 4" step="4">
@@ -590,7 +590,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarVentas()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 3"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 3"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 5" step="5">
@@ -724,7 +724,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarCompras()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 4"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 4"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 6" step="6">
@@ -916,7 +916,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarFinanzas()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 5"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 5"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 7" step="7">
@@ -1064,7 +1064,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarProduccion()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 6"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 6"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 8" step="8">
@@ -1184,7 +1184,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarLogistica()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 7"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 7"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 9" step="9">
@@ -1288,7 +1288,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarTecnologia()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 8"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 8"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 10" step="10">
@@ -1421,7 +1421,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarControlymedicion()">
           Continuar
         </v-btn>
-        <v-btn @click="e6 = 9"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 9"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
     <v-stepper-step color="deep-purple accent-2" :complete="e6 > 11" step="11">
@@ -1590,7 +1590,7 @@
         <v-btn color="deep-purple accent-2" @click="guardarComunicacion()">
           Ver Resultados
         </v-btn>
-        <v-btn @click="e6 = 10"> Atras </v-btn>
+        <!-- <v-btn @click="e6 = 10"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
   </v-stepper>

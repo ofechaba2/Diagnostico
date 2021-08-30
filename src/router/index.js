@@ -5,7 +5,6 @@ import diagnostico from '../views/Diagnostico.vue'
 import Caracterizacion from '../views/Caracterizacion.vue'
 import grafico from '../views/Grafico.vue'
 import login from '../views/login.vue'
-import Categorias from '../views/Categorias.vue'
 import store from '../store/index'
 
 
@@ -37,14 +36,7 @@ const routes = [{
         name: 'login',
         component: login
     },
-    {
-        path: '/Categorias',
-        name: 'Categorias',
-        component: Categorias
-    }
-
 ]
-
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,

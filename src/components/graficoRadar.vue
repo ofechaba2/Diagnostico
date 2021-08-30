@@ -1,14 +1,11 @@
 <template>
   <div>
-    <!-- <app-grafica :chartdata="chartdata" :options="options"></app-grafica> -->
     <canvas id="myChart"></canvas>
   </div>
 </template>
 
 <script>
-// import axios from "axios";
 import Chart from "chart.js";
-// import firebase from "firebase/app";
 import "firebase/firestore";
 import { db } from "../Db";
 
@@ -25,7 +22,6 @@ export default {
   },
 
   methods: {
-    //se debe dejar el async y el await para axios para que la grafica salga de una vez con los datos
     async selectArticulo() {
       let me = this;
       await db
@@ -69,6 +65,7 @@ export default {
             },
           ],
         },
+        fill: true,
         options: {
           elements: {
             line: {
@@ -76,68 +73,17 @@ export default {
             },
           },
         },
-        //     scales: {
-        //         yAxes: [{
-        //             ticks: {
-        //                 beginAtZero: true
-        //             }
-        //         }]
-        //     }
-        // }
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        
       });
     },
   },
-  /* listar() {
-      let me = this;
-      let header = { headers: { "x-token": this.$store.state.token } };
-      axios
-        .get("articulo", header)
-        .then(function (response) {
-          me.encabezados = response.data.articulo;
-          //console.log(me.encabezados)
-          for (var i = 0; i < 2; i++) {
-              me.chartdata.labels.push(me.encabezados[i].nombre)
-              me.stock.push(me.encabezados[i].stock);
-          }
-         
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        
-  }, */
-
-  /* this.selectArticulo();
-       console.log(this.datos)
-       console.log(this.stock)
-       console.log(this.chartdata); */
-
-  /*      let me = this;
-      let categoriaArray = [];
-      let header = { headers: { "x-token": this.$store.state.token } };
-       axios
-        .get("articulo", header)
-        .then(function (response) {
-          categoriaArray = response.data.articulo;
-          categoriaArray.map(function (x) {
-            me.datos.push(x.nombre);
-            me.stock.push(x.stock)
-          });
-
-          me.chartdata={
-                    labels: me.datos,
-                    datasets: [
-                    {
-                    label: "Articulos",
-                    backgroundColor: "#f87979",
-                    data: me.stock
-                },
-                ],
-            }
-        })
-        .catch(function (error) {
-          console.log(error);
-        }); */
 };
 </script>
 

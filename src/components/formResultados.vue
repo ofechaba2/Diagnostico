@@ -11,12 +11,8 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/firestore";
-  export default {
-    
+  export default {  
     data () {
-      
-
-     
       return {
      
              Diagnostico:[],
@@ -52,12 +48,6 @@ import "firebase/firestore";
           })
         })
       })
-    
-  
-
-
-        
-      
       }
     }
   }

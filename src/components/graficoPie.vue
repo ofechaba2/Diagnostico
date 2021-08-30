@@ -1,14 +1,10 @@
 <template>
   <div >
-    <!-- <app-grafica :chartdata="chartdata" :options="options"></app-grafica> -->
     <canvas id="myChart1"></canvas>
 </div>
 </template>
-
 <script>
-// import axios from "axios";
 import Chart from 'chart.js'
-// import firebase from "firebase/app";
 import "firebase/firestore";
 import { db } from "../Db";
 
@@ -19,25 +15,22 @@ export default {
       stock:[],
       
     };
-  },
-  
-   
+  },  
 mounted() {
   this.selectArticulo()
 },
 
   methods: {
-    //se debe dejar el async y el await para axios para que la grafica salga de una vez con los datos
     async selectArticulo() {
       let me = this;
        await db.collection('articulo')
         .get()
         .then((querySnapshot)=>{
           me.datos=[];
-          me.stock=[];
+          me.nombre=[];
           querySnapshot.forEach((doc)=>{
             me.datos.push(doc.data().datos); 
-            me.stock.push(doc.data().stock);           
+            me.nombre.push(doc.data().nombre);           
           })
         }) 
       let ctx = document.getElementById('myChart1');
@@ -45,10 +38,10 @@ mounted() {
       const myChart = new Chart(ctx, {
           type: 'pie',
           data: {
-              labels: me.datos,
+              labels: me.nombre,
               datasets: [{
                   label: 'Articulos',
-                  data: me.stock,
+                  data: me.datos,
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
@@ -74,68 +67,9 @@ mounted() {
         borderWidth: 3
       }
     }}
-          //     scales: {
-          //         yAxes: [{
-          //             ticks: {
-          //                 beginAtZero: true
-          //             }
-          //         }]
-          //     }
-          // }
       });
     }
   },   
-   /* listar() {
-      let me = this;
-      let header = { headers: { "x-token": this.$store.state.token } };
-      axios
-        .get("articulo", header)
-        .then(function (response) {
-          me.encabezados = response.data.articulo;
-          //console.log(me.encabezados)
-          for (var i = 0; i < 2; i++) {
-              me.chartdata.labels.push(me.encabezados[i].nombre)
-              me.stock.push(me.encabezados[i].stock);
-          }
-         
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        
-  }, */
- 
-       /* this.selectArticulo();
-       console.log(this.datos)
-       console.log(this.stock)
-       console.log(this.chartdata); */
-      
-  /*      let me = this;
-      let categoriaArray = [];
-      let header = { headers: { "x-token": this.$store.state.token } };
-       axios
-        .get("articulo", header)
-        .then(function (response) {
-          categoriaArray = response.data.articulo;
-          categoriaArray.map(function (x) {
-            me.datos.push(x.nombre);
-            me.stock.push(x.stock)
-          });
-
-          me.chartdata={
-                    labels: me.datos,
-                    datasets: [
-                    {
-                    label: "Articulos",
-                    backgroundColor: "#f87979",
-                    data: me.stock
-                },
-                ],
-            }
-        })
-        .catch(function (error) {
-          console.log(error);
-        }); */
 }
 </script>
 

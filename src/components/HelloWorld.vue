@@ -32,7 +32,6 @@
         <h2 class="headline font-weight-bold mb-3">
           Ecosystem
         </h2>
-
         <v-row justify="center">
           <a
             v-for="(eco, i) in ecosystem"
