@@ -11,10 +11,8 @@ Vue.config.productionTip = false;
 
 global.GsectorEconomia = "";
 
-global.Grazonsocial = "";
 global.Gnit = "";
-global.Gformajuridica = "";
-global.Gdepartamento = "";
+
 
 
 // global.banderaDocumento = 0;
