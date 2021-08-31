@@ -3,8 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "start": "node main",
-
+        "start": "node server.js",
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint"
@@ -14,8 +13,10 @@
         "axios": "^0.21.1",
         "chart.js": "^2.9.4",
         "core-js": "^3.6.5",
+        "express": "^4.17.1",
         "firebase": "^8.6.5",
         "git": "^0.1.5",
+        "serve-static": "^1.14.1",
         "sweetalert2": "^11.0.18",
         "vue": "^2.6.11",
         "vue-router": "^3.2.0",
