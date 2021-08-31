@@ -10,7 +10,7 @@
 
 <script>
 import "firebase/firestore";
-import { db } from "../Db";
+import { db } from "../../Db";
 export default {
   data() {
     return {

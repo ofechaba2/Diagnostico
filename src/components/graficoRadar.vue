@@ -7,7 +7,7 @@
 <script>
 import Chart from "chart.js";
 import "firebase/firestore";
-import { db } from "../Db";
+import { db } from "../../Db";
 
 export default {
   data() {

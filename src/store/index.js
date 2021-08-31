@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index'
-import { db } from '../Db';
+import { db } from '../../Db';
 
 // import Swal from "sweetalert2";
 
