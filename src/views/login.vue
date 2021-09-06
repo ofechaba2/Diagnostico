@@ -186,7 +186,7 @@
                             <v-select
                               :items="sectorEconomiaSel"
                               v-model="tipoIndustria"
-                              label="Tipo de Insdustria"
+                              label="Tipo de Industria"
                               required
                             ></v-select>
                           </v-col>

@@ -23,7 +23,7 @@ mounted() {
   methods: {
     async selectArticulo() {
       let me = this;
-       await db.collection('articulo')
+       await db.collection('porcentaje')
         .get()
         .then((querySnapshot)=>{
           me.datos=[];
@@ -40,7 +40,7 @@ mounted() {
           data: {
               labels: me.nombre,
               datasets: [{
-                  label: 'Articulos',
+                  label: 'Porcentaje',
                   data: me.datos,
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
