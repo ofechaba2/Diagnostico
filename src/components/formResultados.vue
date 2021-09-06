@@ -31,7 +31,6 @@ import "firebase/firestore";
   mounted() {
     this.selectArticulo();
   },
-
   methods: {
     selectArticulo() {
       if (!firebase.apps.length) {
@@ -44,7 +43,6 @@ import "firebase/firestore";
           this.Diagnostico.push({
             nombre:doc.data().nombre,
             datos:doc.data().datos,
-            // estado:doc.data().estado,
           })
         })
       })

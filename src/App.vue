@@ -18,7 +18,7 @@
         <v-icon >mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-
+  
     <!-- <navegacion></navegacion> -->
     <footer />
     <v-main class="light">
@@ -51,14 +51,12 @@
 
 import "firebase/app";
 import "firebase/auth";
-// import footer from "@/components/footer.vue";
+
 
 export default {
   name: "App",
 
   components: {
-    
-    // footer,
     // navegacion,
   },
   computed:{

@@ -16,12 +16,8 @@
         </h1>
 
         <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href=""
-            target="_blank"
-          >Formulario</a>
+          Le damos la bienvenida a nuestro sistema de caracterizacion 2wayv, donde podra saber el estado de su empresa
+          
         </p>
       </v-col>
 
@@ -30,7 +26,7 @@
         cols="12"
       >
         <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
+          Opciones =)
         </h2>
         <v-row justify="center">
           <a
@@ -55,16 +51,16 @@
     data: () => ({
       ecosystem: [
         {
-          text: 'vuetify-loader',
-          href: 'https://github.com/vuetifyjs/vuetify-loader',
+          text: 'opcion 1',
+          href: '',
         },
         {
-          text: 'github',
-          href: 'https://github.com/vuetifyjs/vuetify',
+          text: 'opcion 2',
+          href: '',
         },
         {
-          text: 'awesome-vuetify',
-          href: 'https://github.com/vuetifyjs/awesome-vuetify',
+          text: 'opcion 3',
+          href: '',
         },
       ],      
     }),

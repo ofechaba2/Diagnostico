@@ -19,12 +19,6 @@ export default {
       Caracterizacion:[],
 
       headers: [
-        
-        // {
-        //   // text: "UWUWUWUWUWUWUWUW",
-        //   align: "start",
-        //   value: "value",
-        // },
         { text: "Razón Social", value: "razonsocial" },
         { text: "NIT", value: "nit" },
         { text: "Forma Jurídica", value: "formaJuridica" },

@@ -12,7 +12,7 @@ export default new Vuex.Store({
     state: {
         token: null,
         usuario: null,
-        nombre: "josefina"
+        nombre: null
 
     },
     mutations: {
@@ -57,17 +57,7 @@ export default new Vuex.Store({
 
 
         },
-        guardarInicio({ commit }, data) {
-            commit("setUsuario", data)
-        },
-        autoLogin({ commit }) {
-            let token = localStorage.getItem("token");
-            if (token) {
-                commit("setToken", token);
-                //commit("setUsuario", decode(token));
-            }
-            router.push("/");
-        },
+
         salir({ commit }) {
             commit("setToken", null);
             commit("setUsuario", null);

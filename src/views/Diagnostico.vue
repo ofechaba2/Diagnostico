@@ -1590,7 +1590,6 @@
         <v-btn color="deep-purple accent-2" @click="guardarComunicacion()">
           Ver Resultados
         </v-btn>
-        <!-- <v-btn @click="e6 = 10"> Atras </v-btn> -->
       </div>
     </v-stepper-content>
   </v-stepper>
